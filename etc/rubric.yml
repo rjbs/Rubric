@@ -1,0 +1,8 @@
+dsn: |-
+  dbi:SQLite:dbname=rubric.db
+uri_root: |-
+  http://server.name/~rjbs/rubric/rubric.cgi
+css_href: |-
+  /~rjbs/rubric/style/rubric.css
+template_path: |-
+  /Users/rjbs/Sites/rubric/templates

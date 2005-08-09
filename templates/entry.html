@@ -1,0 +1,41 @@
+	<div class='entry'>
+		<div class='uri'>
+			[% IF entry.link %]
+				<a class='title' href='[% entry.link %]'>[% entry.title %]</a>
+			[% ELSE %]
+				[% entry.title %]
+			[% END %]
+			[% UNLESS long_form %]
+			[% IF entry.body %]<a href='[% uri.entry(entry) %]'>(body)</a>[% END %]
+			[% END %]
+			[% IF current_user %]
+			[% IF current_user == entry.user %]
+			<a href="[% uri.edit_entry(entry) %]?then_goto=[% self_url | uri %]">(edit)</a>
+			[% ELSE %]
+			<a href="[% uri.post_entry %]?uri=[% xml_escape(entry.link) %]&title=[% xml_escape(entry.title) %]">(copy)</a>
+			[% END %]
+			[% END %]
+		</div>
+		[% IF entry.description %]
+		<div class='description'>[% entry.description %]</div>
+		[% END %]
+		<div class='created'>
+			[% FOREACH tag = entry.entrytags %]
+			<a class='tag' href='[% uri.entries(user => user, tags => [ tag.tag ]) %]'>[% tag %]</a>
+			[% END %]
+			[% IF ! user %]
+			by <a href='[% uri.entries(user => entry.user) %]'>[% entry.user %]</a>
+			[% END %]
+			(created: [% entry.created.strftime("%Y-%m-%d %H:%M") %])
+		</div>
+		[% IF entry.link.entry_count %]
+		<div class='other_entries'>
+			(<a href='[% uri.entries(urimd5 => entry.link.md5) %]'>[% entry.link.entry_count %] entries</a> for this link)
+		</div>
+		[% END %]
+		[% IF long_form AND entry.body %]
+		<div class='body'>
+		[% entry.body %]
+		</div>
+		[% END %]
+	</div>

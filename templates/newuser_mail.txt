@@ -1,0 +1,11 @@
+To: [% user.email %]
+From: [% email_from %]
+Subject: new user registration
+
+You have created a new Rubric account: [% user %]
+
+Please verify it by following this link:
+	[% uri.verify_user(user) %]
+
+-- 
+Rubric

@@ -1,0 +1,201 @@
+body {
+	background-color: #eee;
+	color: black;
+	margin: 0;
+	font-size: 80%;
+	font-family: sans-serif;
+}
+
+a {
+	color: rgb(0,80,191);
+	text-decoration: none;
+}
+
+a:visited { color: rgb(44,127,113) }
+
+h1 { 
+	background-color: #ddd;
+	padding-left: 1%;
+	margin: 0;
+}
+
+h2 {
+	margin-top: .25em;
+	margin-left: .5em;
+	margin-bottom: 0;
+}
+
+h2.query {
+	margin-bottom: .25em;
+}
+
+h3 {
+	padding-left: 1em;
+	margin-bottom: .25em;
+}
+
+.error {
+	color: #b00;
+}
+
+div.toolbar {
+	text-align: right;
+	background-color: #bbb;
+	margin-top: 0;
+	padding: 0.25em 0.5em;
+}
+
+div.toolbar span.current_user {
+	float: left;
+}
+
+div.delete {
+	padding-left: 1em;
+}
+
+div.search {
+	margin-top: 1%;
+	margin-left: 1em;
+	font-weight: bolder;
+}
+
+div.search form { margin-left: 0 }
+
+div.rss,
+div.expandcollapse {
+	margin-left: 1em;
+}
+
+div.entry {
+	margin-left: 1em;
+	margin-right: 1em;
+	padding: .5em;
+}
+
+div.entry div.uri {
+	font-size: 110%;
+}
+
+a.title {
+	text-decoration: underline;
+}
+
+div.entry div.description {
+	font-style: italic
+}
+
+div.entry div.created,
+div.entry div.tags,
+div.entry div.other_entries {
+	padding-left: 1em;
+}
+
+div.entry.longform h2 {
+	margin-left: 0em;
+}
+
+div.entry.longform div.created {
+	padding-left: 0em;
+}
+
+div.entry.longform div.body {
+	padding: 1em;
+	margin-top: 1em;
+	border: 1px black solid;
+	background-color: #f8f8f8;
+	width: 70%;
+}
+
+div.taglist {
+	float: right;
+	padding-left: .5%;
+	padding-right: .5%;
+	padding-bottom: 1em;
+	background-color: #bbb;
+	border: 1px black solid;
+	-moz-border-radius: 1em;
+	margin: 1%;
+	font-size: 85%;
+}
+
+div.taglist h3 {
+	text-align: center;
+	border-bottom: thin #eee solid;
+	margin-top: 0;
+	padding-right: 0.75em;
+}
+
+div.taglist.related h4 {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-left: 1em;
+}
+
+span.tag_count { float: left; text-align: right; width: 2em; }
+
+div.message {
+	margin-left: 1em;
+	margin-right: 1em;
+	padding: .5em;
+}
+
+form th {
+	text-align: right;
+}
+
+form {
+	margin-left: 1em;
+	margin-right: 1em;
+	padding: .5em;
+}
+
+form td.submit {
+	text-align: right
+}
+
+div.entries {
+	border-bottom: thin black solid;
+}
+
+div.next_page { float: right; padding-right: 1em; }
+div.prev_page { float: left ; padding-left : 1em; }
+
+div.page_num,
+div.page_size { text-align: center }
+
+div.document {
+	font-size: 120%;
+	max-width: 90%;
+	margin-top: 2%;
+	margin-left: 3%;
+	padding-left: 2%;
+	margin-right: 3%;
+	padding-right: 2%;
+	border-bottom: thin black solid;
+	border-top: thin black solid;
+}
+
+div.document p.bookmarklet {
+	margin-left: 1em;
+}
+
+div.document h2 {
+	margin-left: 0;
+}
+
+div.document li {
+	margin-top: 0.5em;
+	font-weight: bold;
+}
+
+div.document li p {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: normal;
+}
+
+div#footer {
+	text-align: center
+}

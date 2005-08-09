@@ -1,0 +1,30 @@
+	<div class='entry longform'>
+		<h2 class='created'>
+			[% entry.created.strftime("%Y-%m-%d %H:%M") %]
+		</h2>
+		<h2 class='uri'>
+			[% IF entry.link %]
+				<a class='title' href='[% entry.link %]'>[% entry.title | html %]</a>
+			[% ELSE %]
+				[% entry.title | html %]
+			[% END %]
+			[% IF current_user == entry.user %]
+			<a href="[% uri.edit_entry(entry) %]?then_goto=[% self_url | uri %]">(edit)</a>
+			[% END %]
+		</h2>
+		[% IF entry.description %]
+		<div class='description'>[% entry.description | html %]</div>
+		[% END %]
+		<div class='created'>
+			[% FOREACH tag = entry.tags %]
+			<a href='[% uri.entries(user => user, tags => [ tag ]) %]'>[% tag %]</a>
+			[% END %]
+			[% "by " _ entry.user UNLESS user %]
+		</div>
+		[% IF entry.body %]
+		<div class='body'>
+		[%# entry.body | html_line_break %]
+		[% body_filter(entry.body) %]
+		</div>
+		[% END %]
+	</div>

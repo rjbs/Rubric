@@ -1,0 +1,7 @@
+<entries>
+	[% IF entries.count %]
+	[% WHILE (entry = entries.next) %]
+		[% PROCESS "entry.api" %]
+	[% END %]
+	[% END %]
+</entries>

@@ -1,0 +1,3 @@
+[% USE uri = Class('Rubric::WebApp::URI') %][% PROCESS "header.api" %]
+[% PROCESS $template %]
+[% PROCESS "footer.api" %]

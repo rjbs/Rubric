@@ -1,0 +1,38 @@
+	<h2>preferences / settings</h2>
+	[% IF email_missing %]
+	<h3 class='error'>You must provide an email address!</h3>
+	[% END %]
+	[% IF email_invalid %]
+	<h3 class='error'>That isn't a valid email address!</h3>
+	[% END %]
+	[% IF password_missing %]
+	<h3 class='error'>You must supply your current password!</h3>
+	[% END %]
+	[% IF password_wrong %]
+	<h3 class='error'>You got your password wrong!</h3>
+	[% END %]
+	[% IF password_mismatch %]
+	<h3 class='error'>Your passwords didn't match!</h3>
+	[% END %]
+	<div class='preferences'>
+		<form id='preferences' action='preferences' method='POST'>
+			<table>
+				<tr>
+					<th>old password</th>
+					<td><input type='password' name='password' /></td>
+				</tr>
+				<tr>
+					<th>new password</th>
+					<td><input type='password' name='password_1' /></td>
+				</tr>
+				<tr>
+					<th>new password (again)</th>
+					<td><input type='password' name='password_2' /></td>
+				</tr>
+				<tr><th>email</th><td><input name='email' value='[% email OR current_user.email %]'/></tr>
+				<tr><td class='submit' colspan='2'>
+					<input type='submit' name='submit' value='submit' />
+				</td></tr>
+			</table>
+		</form>
+	</div>

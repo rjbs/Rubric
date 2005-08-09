@@ -1,0 +1,11 @@
+blib*
+.releaserc
+Makefile
+Makefile.old
+pm_to_blib*
+*.tar.gz
+.lwpcookies
+Rubric-*
+cover_db
+t/db
+t/db/*
