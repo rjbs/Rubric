@@ -1,5 +1,8 @@
 Revision history for Rubric
 
+        2005-08-09
+        moved repository to svn
+
 0.11_02 2005-07-02
         work on unbreaking tags/facets
         rolled back Data::FormValidator use
