@@ -37,7 +37,6 @@ Things you'll have to do:
   2. install the modules
   3. run updatedb.pl (from the location of rubric.cgi/.yml)
   4. update your config
-     (recently new: smtp_server and email_from)
 
 --- OTHER INFORMATION ---
 
