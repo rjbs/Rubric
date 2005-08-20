@@ -8,7 +8,7 @@ Rubric - a notes and bookmarks manager with tagging
 
 version 0.11_02
 
- $Id: Rubric.pm,v 1.37 2005/06/25 01:14:53 rjbs Exp $
+ $Id$
 
 =cut
 

@@ -6,7 +6,7 @@ Rubric::Link - a link (URI) against which entries have been made
 
 =head1 VERSION
 
- $Id: Link.pm,v 1.7 2005/04/01 03:32:44 rjbs Exp $
+ $Id$
 
 =head1 DESCRIPTION
 

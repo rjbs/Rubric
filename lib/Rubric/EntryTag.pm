@@ -6,7 +6,7 @@ Rubric::EntryTag - a tag on an entry
 
 =head1 VERSION
 
- $Id: EntryTag.pm,v 1.4 2005/07/02 21:42:44 rjbs Exp $
+ $Id$
 
 =head1 DESCRIPTION
 

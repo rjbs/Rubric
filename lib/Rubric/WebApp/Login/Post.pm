@@ -14,7 +14,7 @@ Rubric::WebApp::Login::Post - process web login from query parameters
 
 version 0.01
 
- $Id: Post.pm,v 1.2 2004/12/20 13:36:13 rjbs Exp $
+ $Id$
 
 =cut
 

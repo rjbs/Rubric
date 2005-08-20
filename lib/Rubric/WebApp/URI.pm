@@ -6,7 +6,7 @@ Rubric::WebApp::URI - URIs for Rubric web requests
 
 =head1 VERSION
 
- $Id: URI.pm,v 1.18 2005/06/07 02:32:53 rjbs Exp $
+ $Id$
 
 =head1 DESCRIPTION
 

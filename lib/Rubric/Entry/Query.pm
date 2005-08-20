@@ -8,7 +8,7 @@ Rubric::Entry::Query - construct and execute a complex query
 
 version 0.10
 
- $Id: Query.pm,v 1.18 2005/06/07 02:32:53 rjbs Exp $
+ $Id$
 
 =cut
 

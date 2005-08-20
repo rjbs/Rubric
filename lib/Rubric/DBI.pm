@@ -6,7 +6,7 @@ Rubric::DBI - Rubric's subclass of Class::DBI
 
 =head1 VERSION
 
- $Id: DBI.pm,v 1.4 2005/05/30 02:24:25 rjbs Exp $
+ $Id$
 
 =head1 DESCRIPTION
 

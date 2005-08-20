@@ -8,7 +8,7 @@ Rubric::WebApp - the web interface to Rubric
 
 version 0.11_02
 
- $Id: WebApp.pm,v 1.126 2005/07/02 22:13:27 rjbs Exp $
+ $Id$
 
 =cut
 

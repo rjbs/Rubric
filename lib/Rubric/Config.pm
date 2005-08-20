@@ -6,7 +6,7 @@ Rubric::Config - the configuration data for a Rubric
 
 =head1 VERSION
 
- $Id: Config.pm,v 1.22 2005/05/30 22:31:21 rjbs Exp $
+ $Id$
 
 =head1 DESCRIPTION
 

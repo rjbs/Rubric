@@ -12,7 +12,7 @@ Rubric::WebApp::Login::HTTP - process web login from HTTP authentication
 
 version 0.01
 
- $Id: HTTP.pm,v 1.2 2004/12/20 13:36:13 rjbs Exp $
+ $Id$
 
 =cut
 

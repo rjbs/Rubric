@@ -8,7 +8,7 @@ Rubric::DBI::Setup - db initialization routines
 
 version 0.10
 
- $Id: Setup.pm,v 1.8 2005/06/07 02:35:41 rjbs Exp $
+ $Id$
 
 =cut
 

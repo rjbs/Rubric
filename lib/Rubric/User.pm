@@ -6,7 +6,7 @@ Rubric::User - a Rubric user
 
 =head1 VERSION
 
- $Id: User.pm,v 1.32 2005/07/02 21:57:30 rjbs Exp $
+ $Id$
 
 =head1 DESCRIPTION
 
