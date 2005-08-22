@@ -58,7 +58,7 @@ default action is to display entries.
 =cut
 
 use base qw(CGI::Application);
-use CGI::Application::Session;
+use CGI::Application::Plugin::Session;
 use CGI::Carp qw(fatalsToBrowser);
 
 use Digest::MD5 qw(md5_hex);
@@ -115,7 +115,7 @@ paging, and starts processing the request path.
 sub cgiapp_init {
 	my ($self) = @_;
 
-	$self->session_config( COOKIE_PARAMS => { -expires => '+7d' } );
+	$self->session_config( COOKIE_PARAMS => { -expires => '+30d' } );
 	
 	my $login_class = Rubric::Config->login_class;
 	eval "require $login_class";

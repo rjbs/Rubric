@@ -22,11 +22,11 @@ WriteMakefile(
 		'Time::Local'      => 0.00,
 		'Time::Piece'      => 0.00,
 		'YAML'             => 0.00,
-		'CGI::Application::Session'  => 0,
 		'Class::DBI::AbstractSearch' => 0,
     'HTTP::Server::Simple'       => '0.09',
 		'Template::Plugin::Class'    => '0.12',
     'Test::WWW::Mechanize'       => '1.04',
+		'CGI::Application::Plugin::Session' => 0,
 	},
   test => {
     TESTS => join " ", do {
