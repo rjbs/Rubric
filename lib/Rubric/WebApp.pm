@@ -116,6 +116,11 @@ sub cgiapp_init {
   my ($self) = @_;
 
   CGI::Session->name('rubric_session');
+	$self->session_config( COOKIE_PARAMS => { -expires => '+30d' } );
+	
+	my $login_class = Rubric::Config->login_class;
+	eval "require $login_class";
+	$login_class->check_for_login($self);
 
   $self->session_config(
     COOKIE_PARAMS => {
