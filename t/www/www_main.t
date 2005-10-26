@@ -1,10 +1,17 @@
-use Test::More 'no_plan';
+use Test::More;
 use Test::WWW::Mechanize;
 
 use lib 't/lib';
 
 use strict;
 use warnings;
+
+unless ($ENV{RUBRIC_TEST_WWW}) {
+  plan skip_all => "these just don't work yet";
+  exit;
+}
+
+plan 'no_plan';
 
 # Setup Rubric Webserver
 use RubricServer;
@@ -15,7 +22,7 @@ my $root   = "http://localhost:8080/";
 
 ok($pid, 'HTTP Server Started');
 
-END { kill(9, $pid) }
+END { kill(9, $pid) if $pid }
 
 # Begin testing.
 my $mech = Test::WWW::Mechanize->new;

@@ -1,11 +1,11 @@
 #!perl -T
 use Test::More tests => 4;
-use File::Path qw(mkpath);
+use File::Path qw(rmtree mkpath);
 
 use_ok('Rubric::DBI::Setup');
 
-unlink("t/db/rubric.db") if -e "t/db/rubric.db";
-mkpath("t/db") unless -d "t/db/";
+rmtree("t/db");
+mkpath("t/db");
 
 eval { Rubric::DBI::Setup->setup_tables };
 
