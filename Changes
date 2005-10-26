@@ -1,19 +1,14 @@
 Revision history for Rubric
 
-        2005-08-09
+0.12    2005-10-26 (long overdue)
+        some tiny test cleanups that might make tests... pass!
         moved repository to svn
         fixed stupid handling of repost to URIs with one-entry-per-uri config
-        delete unneeded sessions at teardown
-
-0.11_02 2005-07-02
+        delete unneeded sessions at teardown (lousy?)
         work on unbreaking tags/facets
         rolled back Data::FormValidator use
         provide link on related tags to add/remove user constraint
         show related tags even when no user selected
-
-0.11_01 2005-06-09
-        CURRENTLY BROKEN: preference validation
-        CURRENTLY BROKEN: query description
         QUESTIONABLE DESCISION: @-prefix tags don't list in tagboxes
         list user's name for "your tags" if user ne current_user
         begin stubbing out pluggable body rendering
