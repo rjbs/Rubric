@@ -5,7 +5,7 @@
   xmlns="http://purl.org/rss/1.0/">
 
   <channel rdf:about="[% uri.root %]">
-		<title>Rubric[% ": " _ query_description IF query_description %]</title>
+    <title>Rubric[% ": " _ query_description IF query_description %]</title>
     <link>[% uri.root %]</link>
     <description>Rubric</description>
     <dc:language>en-us</dc:language>
@@ -13,15 +13,14 @@
     <items>
       <rdf:Seq>
       [% WHILE (entry = entries.next) -%]
-			[% item = entry.link || uri.entry(entry) %]
-      <rdf:li rdf:resource="[% xml_escape(item) %]"/>
+      <rdf:li rdf:resource="[% xml_escape(uri.entry(entry)) %]"/>
       [% END %]
       </rdf:Seq>
     </items>
   </channel>
 [% CALL entries.reset %]
 [% WHILE (entry = entries.next) %]
-	[% item = entry.link || uri.entry(entry) %]
+  [% item = entry.link || uri.entry(entry) %]
   <item rdf:about="[% xml_escape(uri.entry(entry)) %]">
     <title>[% xml_escape(entry.title) %]</title>
     <link>[% xml_escape(item) %]</link>

@@ -51,6 +51,11 @@ L<http://rjbs.manxome.org/rubric/docs/todo>.
 
 Ricardo SIGNES, C<< <rjbs@cpan.org> >>
 
+=head1 THANKS
+
+...to a lot of people whom I will try to name, in time.  Among these helpful
+people are Ian Langworth, Shawn Sorichetti, John Cappiello, and Dave O'Neill.
+
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or

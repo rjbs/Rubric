@@ -1,5 +1,8 @@
 Revision history for Rubric
 
+0.14    2005-11-05
+        fix a small RSS bug that bugged a large number Firefox users
+
 0.12    2005-10-26 (long overdue)
         some tiny test cleanups that might make tests... pass!
         moved repository to svn
