@@ -38,8 +38,22 @@ my $user = Rubric::User->retrieve($username);
 
 die "couldn't find user for '$username'" unless $user;
 
-$user->email($opt->{email}) if $opt->{email};
-$user->password($opt->{email}) if md5_hex($opt->{email});
+if ($opt->{activate}) {
+  $user->verification_code(undef);
+  print "activated user account\n";
+}
+
+if ($opt->{email}) {
+  $user->email($opt->{email});
+  print "changed email\n";
+}
+
+if ($opt->{password}) {
+  $user->password(md5_hex($opt->{password}));
+  print "changed password\n";
+}
+
+$user->update;
 
 print "username: ", $user->username, "\n";
 print "email   : ", $user->email,    "\n";
