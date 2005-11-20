@@ -1,5 +1,5 @@
 rubric.yml
-bin/adduser.pl
+bin/rubric-user
 bin/dump_yml.pl
 bin/entries.pl
 bin/load_yml.pl

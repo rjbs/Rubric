@@ -1,21 +1,31 @@
+#!perl
+
 use strict;
 use warnings;
+
+use Getopt::Long::Descriptive;
+use Rubric::User;
 use YAML;
-use DBI;
-use Rubric::Config;
 
-my $user = shift @ARGV || $ENV{USER} || die "usage: dump_yml username";
-
-my $dbh = DBI->connect(Rubric::Config->dsn, undef, undef);
-
-my $entries = $dbh->selectall_hashref("
-	SELECT entries.id AS id, uri, title, description, created, modified
-	FROM entries
-	JOIN links ON entries.link=links.id
-	WHERE user=?", 'id', undef, $user
+my ($opt, $usage) = describe_options(
+  "rubric-dump %o <user>",
 );
 
-for (keys %$entries) {
+my $username = $ARGV[0] || $ENV{USER} || die $usage->text;
+
+my $user = Rubric::User->retrieve($username);
+
+die "couldn't find user for username '$username'\n" unless $user;
+
+my $dbh = Rubric::User->db_Main;
+
+my $entries = $user->entries;
+
+my %entry;
+
+while (my $entry = $entries->next) {
+  $entry{ $entry->id } = $entry;
+
 	my $t = $dbh->selectall_arrayref("SELECT tag FROM entrytags WHERE entry=$_");
 	$entries->{$_}{tags} = [ map { @$_ } @$t ];
 }
