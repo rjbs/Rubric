@@ -255,7 +255,8 @@ sub teardown {
   my ($self) = @_;
 
   $self->session->delete unless $self->param('current_user')
-                             or $self->get_current_runmode eq 'login';
+                             or $self->get_current_runmode eq 'login'
+                             or $self->get_current_runmode eq 'post';
 }
 
 =head2 entries
