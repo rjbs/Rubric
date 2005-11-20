@@ -1,4 +1,6 @@
 package Rubric::Link;
+use strict;
+use warnings;
 
 =head1 NAME
 

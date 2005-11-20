@@ -1,4 +1,6 @@
 package Rubric::EntryTag;
+use strict;
+use warnings;
 
 =head1 NAME
 
