@@ -24,6 +24,7 @@ WriteMakefile(
 		'YAML'             => 0.00,
 		'Class::DBI::AbstractSearch' => 0,
     'HTTP::Server::Simple'       => '0.09',
+    'Getopt::Long::Descriptive'  => '0.02',
 		'Template::Plugin::Class'    => '0.12',
     'Test::WWW::Mechanize'       => '1.04',
 		'CGI::Application::Plugin::Session' => 0,
