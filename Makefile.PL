@@ -28,6 +28,16 @@ requires      ('Template::Plugin::Class'    => '0.12');
 requires      ('Test::WWW::Mechanize'       => '1.04');
 requires      ('CGI::Application::Plugin::Session' => 0);
 
+my $tests = join " ", do {
+  my $w;
+  $w = sub {
+    map { -d $_ ? $w->($_) : /\.t\Z/ ? $_ : () } grep { ! /^\./ } <$_[0]/*>
+  };
+  $w->("t");
+};
+
+tests         ($tests);
+
 sign(1);
 
 WriteAll();
