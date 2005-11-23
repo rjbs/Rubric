@@ -27,10 +27,10 @@ BEGIN { use_ok("Rubric::Entry"); }
 
 {
 	my $entry = Rubric::Entry->create({
-		user => 'eb',
-		title => 'poot',
-		created => 0,
-		modified => 1000000000
+		user     => 'eb',
+		title    => 'poot',
+    created  => 1100000000,
+		modified => 1132722700,
 	});
 
 	is($entry->link, undef);
