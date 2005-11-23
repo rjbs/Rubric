@@ -1,42 +1,33 @@
 use strict;
 use warnings;
-use ExtUtils::MakeMaker;
 
-WriteMakefile(
-	NAME                => 'Rubric',
-	AUTHOR              => 'Ricardo SIGNES <rjbs@cpan.org>',
-	VERSION_FROM        => 'lib/Rubric.pm',
-	PL_FILES            => {},
-	PREREQ_PM => {
-		'CGI::Application' => 3.00,
-		'CGI::Carp'        => 0.00,
-		'Class::DBI'       => 0.96,
-		'Config::Auto'     => 0.11,
-		'Date::Span'       => 1.12,
-		'DBD::SQLite'      => 1.08,
-		'Digest::MD5'      => 0.00,
-		'Email::Address'   => 0.00,
-		'Email::Send'      => 0.00,
-		'Encode'           => 2.00,
-		'Template'         => 2.00,
-		'Time::Local'      => 0.00,
-		'Time::Piece'      => 0.00,
-		'YAML'             => 0.00,
-		'Class::DBI::AbstractSearch' => 0,
-    'HTTP::Server::Simple'       => '0.09',
-    'Getopt::Long::Descriptive'  => '0.02',
-		'Template::Plugin::Class'    => '0.12',
-    'Test::WWW::Mechanize'       => '1.04',
-		'CGI::Application::Plugin::Session' => 0,
-	},
-  test => {
-    TESTS => join " ", do {
-      my $w; $w = sub {
-        map { -d $_ ? $w->($_) : /\.t\Z/ ? $_ : () } grep { ! /^\./ } <$_[0]/*>
-      };
-      $w->("t");
-    }
-  },
-	dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-	clean               => { FILES => 'Rubric-*' },
-);
+use inc::Module::Install;
+
+name          ('Rubric');
+author        ('Ricardo SIGNES <rjbs@cpan.org>');
+version_from  ('lib/Rubric.pm');
+
+requires      ('CGI::Application' => 3.00);
+requires      ('CGI::Carp'        => 0.00);
+requires      ('Class::DBI'       => 0.96);
+requires      ('Config::Auto'     => 0.11);
+requires      ('Date::Span'       => 1.12);
+requires      ('DBD::SQLite'      => 1.08);
+requires      ('Digest::MD5'      => 0.00);
+requires      ('Email::Address'   => 0.00);
+requires      ('Email::Send'      => 0.00);
+requires      ('Encode'           => 2.00);
+requires      ('Template'         => 2.00);
+requires      ('Time::Local'      => 0.00);
+requires      ('Time::Piece'      => 0.00);
+requires      ('YAML'             => 0.00);
+requires      ('Class::DBI::AbstractSearch' => 0);
+requires      ('HTTP::Server::Simple'       => '0.09');
+requires      ('Getopt::Long::Descriptive'  => '0.02');
+requires      ('Template::Plugin::Class'    => '0.12');
+requires      ('Test::WWW::Mechanize'       => '1.04');
+requires      ('CGI::Application::Plugin::Session' => 0);
+
+sign(1);
+
+WriteAll();
