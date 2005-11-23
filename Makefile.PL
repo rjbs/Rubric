@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 use inc::Module::Install;
+use File::Find;
 
 name          ('Rubric');
 author        ('Ricardo SIGNES <rjbs@cpan.org>');
@@ -28,15 +29,10 @@ requires      ('Template::Plugin::Class'    => '0.12');
 requires      ('Test::WWW::Mechanize'       => '1.04');
 requires      ('CGI::Application::Plugin::Session' => 0);
 
-my $tests = join " ", do {
-  my $w;
-  $w = sub {
-    map { -d $_ ? $w->($_) : /\.t\Z/ ? $_ : () } grep { ! /^\./ } <$_[0]/*>
-  };
-  $w->("t");
-};
+my $files = '';
+find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
 
-tests         ($tests);
+tests         ($files);
 
 sign(1);
 
