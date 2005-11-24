@@ -393,7 +393,121 @@ END_SQL
 	$dbh->do($_) for split /\n\n/, $sql;
 };
 
-$from{9} = undef;
+$from{9} = sub {
+	my $sql = <<'END_SQL';
+  CREATE TABLE new_users (
+    username    varchar PRIMARY KEY,
+    password    varchar NOT NULL,
+    email       varchar NOT NULL,
+    created     integer NOT NULL,
+    verification_code varchar,
+    reset_code varchar
+  );
+
+	INSERT INTO new_users
+	SELECT username, password, email, created, verification_code, reset_code
+	FROM users;
+
+	DROP TABLE users;
+
+  CREATE TABLE users (
+    username    varchar PRIMARY KEY,
+    password    varchar NOT NULL,
+    email       varchar NOT NULL,
+    created     integer NOT NULL,
+    verification_code varchar,
+    reset_code varchar
+  );
+
+	INSERT INTO users
+	SELECT username, password, email, created, verification_code, reset_code
+	FROM new_users;
+
+	DROP TABLE new_users;
+
+	CREATE TABLE entrytags (
+    id          INTEGER PRIMARY KEY,
+    entry       NOT NULL,
+    tag         NOT NULL,
+    tag_value,
+    UNIQUE(entry, tag)
+	);
+
+  CREATE TABLE new_entries (
+    id          integer PRIMARY KEY,
+    link        integer,
+    user        varchar NOT NULL,
+    title       varchar NOT NULL,
+    created     integer NOT NULL,
+    modified    integer NOT NULL,
+    description varchar,
+    body                TEXT
+  );
+
+  INSERT INTO new_entries
+  SELECT id, link, user, title, created, modified, description, body
+  FROM entries;
+
+  DROP TABLE entries;
+
+  CREATE TABLE entries (
+    id          integer PRIMARY KEY,
+    link        integer,
+    user        varchar NOT NULL,
+    title       varchar NOT NULL,
+    created     integer NOT NULL,
+    modified    integer NOT NULL,
+    description varchar,
+    body                TEXT
+  );
+
+  INSERT INTO entries
+  SELECT id, link, user, title, created, modified, description, body
+  FROM new_entries;
+
+  DROP TABLE new_entries;
+
+  CREATE TABLE new_entrytags (
+    id          INTEGER PRIMARY KEY,
+    entry       integer NOT NULL,
+    tag         varchar NOT NULL,
+    tag_value   varchar,
+    UNIQUE(entry, tag)
+  );
+  
+  INSERT INTO new_entrytags
+  SELECT id, entry, tag, tag_value
+  FROM entrytags;
+
+  DROP TABLE entrytags;
+
+  CREATE TABLE entrytags (
+    id          INTEGER PRIMARY KEY,
+    entry       integer NOT NULL,
+    tag         varchar NOT NULL,
+    tag_value   varchar,
+    UNIQUE(entry, tag)
+  );
+
+  INSERT INTO entrytags
+  SELECT id, entry, tag, tag_value
+  FROM new_entrytags;
+
+  DROP TABLE new_entrytags;
+
+  DROP TABLE rubric;
+
+  CREATE TABLE rubric (
+    schema_version integer NOT NULL
+  );
+
+	UPDATE rubric SET schema_version = 10;
+END_SQL
+
+	$dbh->do($_) for split /\n\n/, $sql;
+};
+
+$from{10} = undef;
 
 sub update_schema {
 	my ($class) = @_;
@@ -436,12 +550,12 @@ CREATE TABLE links (
 );
 
 CREATE TABLE users (
-	username    PRIMARY KEY,
-	password    NOT NULL,
-	email       NOT NULL,
-	created     NOT NULL,
-	verification_code,
-	reset_code
+	username    varchar PRIMARY KEY,
+	password    varchar NOT NULL,
+	email       varchar NOT NULL,
+	created     integer NOT NULL,
+	verification_code varchar,
+	reset_code varchar
 );
 
 CREATE TABLE entries (
@@ -449,22 +563,22 @@ CREATE TABLE entries (
 	link        integer,
 	user        varchar NOT NULL,
 	title       varchar NOT NULL,
-	created             NOT NULL,
-	modified            NOT NULL,
+	created     integer NOT NULL,
+	modified    integer NOT NULL,
 	description varchar,
 	body                TEXT
 );
 
 CREATE TABLE entrytags (
 	id          INTEGER PRIMARY KEY,
-	entry       NOT NULL,
-	tag         NOT NULL,
-  tag_value,
+	entry       integer NOT NULL,
+	tag         varchar NOT NULL,
+  tag_value   varchar,
 	UNIQUE(entry, tag)
 );
 
 CREATE TABLE rubric (
-	schema_version NOT NULL
+	schema_version integer NOT NULL
 );
 
 INSERT INTO rubric (schema_version) VALUES (9);
