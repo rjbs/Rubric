@@ -6,6 +6,7 @@ use File::Find;
 
 name          ('Rubric');
 author        ('Ricardo SIGNES <rjbs@cpan.org>');
+license       ('perl');
 version_from  ('lib/Rubric.pm');
 
 requires      ('CGI::Application' => 3.00);
