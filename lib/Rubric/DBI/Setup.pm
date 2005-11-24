@@ -466,7 +466,7 @@ $from{9} = sub {
     tag_value   varchar,
     UNIQUE(entry, tag)
   );
-  
+
   INSERT INTO new_entrytags
   SELECT id, entry, tag, tag_value
   FROM entrytags;
