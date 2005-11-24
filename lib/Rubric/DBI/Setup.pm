@@ -501,7 +501,7 @@ $from{9} = sub {
     schema_version integer NOT NULL
   );
 
-	UPDATE rubric SET schema_version = 10;
+  INSERT INTO rubric (schema_version) VALUES (10);
 END_SQL
 
 	$dbh->do($_) for split /\n\n/, $sql;
@@ -581,4 +581,4 @@ CREATE TABLE rubric (
 	schema_version integer NOT NULL
 );
 
-INSERT INTO rubric (schema_version) VALUES (9);
+INSERT INTO rubric (schema_version) VALUES (10);
