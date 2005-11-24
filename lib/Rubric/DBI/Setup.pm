@@ -425,14 +425,6 @@ $from{9} = sub {
 
 	DROP TABLE new_users;
 
-	CREATE TABLE entrytags (
-    id          INTEGER PRIMARY KEY,
-    entry       NOT NULL,
-    tag         NOT NULL,
-    tag_value,
-    UNIQUE(entry, tag)
-	);
-
   CREATE TABLE new_entries (
     id          integer PRIMARY KEY,
     link        integer,
