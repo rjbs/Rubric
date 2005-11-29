@@ -14,18 +14,18 @@
 	<div class='loginform'>
 		<form id='loginform' action='[% uri.login %]' method='POST'>
 			<table>
-				<tr><th>username</th><td><input name='user' value='[%user%]'/></tr>
-				<tr><th>password</th><td><input type='password' name='password' /></tr>
+				<tr>
+          <th>username</th><td>[% widget.input(name => 'user', value=> user) %] 
+        </tr>
+				<tr>
+          <th>password</th><td>[% widget.password(name => 'password') %]
+        </tr>
 				<tr><td class='submit' colspan='2'>
 					<input type='submit' name='submit' value='login' />
 				</td></tr>
 			</table>
 			[% IF then_goto %]
-			<input
-				type='hidden'
-				name='then_goto'
-				value="[% xml_escape(then_goto) %]"
-			/>
+      [% widget.hidden(name => then_goto, value => then_goto) %]
 			[% END %]
 		</form>
 	</div>

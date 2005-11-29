@@ -6,13 +6,13 @@ Rubric::WebApp - the web interface to Rubric
 
 =head1 VERSION
 
-version 0.12
+version 0.13_01
 
  $Id$
 
 =cut
 
-our $VERSION = '0.12';
+our $VERSION = '0.13_01';
 
 =head1 SYNOPSIS
 
@@ -254,9 +254,11 @@ users.
 sub teardown {
   my ($self) = @_;
 
-  $self->session->delete unless $self->param('current_user')
-                             or $self->get_current_runmode eq 'login'
-                             or $self->get_current_runmode eq 'post';
+  if (Rubric::Config->purge_anonymous_sessions) {
+    $self->session->delete unless $self->param('current_user')
+                               or $self->get_current_runmode eq 'login'
+                               or $self->get_current_runmode eq 'post';
+  }
 }
 
 =head2 entries

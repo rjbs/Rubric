@@ -49,10 +49,15 @@
         [% END %]
 				<tr>
 					<th>[% accessor %]</th>
-					<td><input name='[% param %]' value="[% 
-					field_value = form.$param.join(" ") OR existing_entry.$accessor.join(" ");
-					xml_escape(field_value);
-					%]" size='75' />
+          [% SET field_value = form.$param.join(" ")
+                            OR existing_entry.$accessor.join(" "); %]
+					<td>[%
+            widget.input(
+              name  => param,
+              value => field_value,
+              attr  => { size => 75 }
+            )
+          %]</td>
 				</tr>
 				[% IF error.$param %]
 				<tr>
@@ -69,9 +74,9 @@
 					<td><textarea name='body' cols='72' rows='10'>[% existing_entry.body %]</textarea></td>
 				</tr>
 				<tr><td class='submit' colspan='2'>
-					<input type='hidden' name='entryid'   value='[%existing_entry.id%]' />
-					<input type='hidden' name='then_goto' value="[% then_goto | uri %]" />
-					<input type='hidden' name='when_done' value='[% when_done %]' />
+          [% widget.hidden(name => 'entryid',   value => existing_entry.id) %]
+          [% widget.hidden(name => 'then_goto', value => then_goto)         %]
+          [% widget.hidden(name => 'when_done', value => when_done)         %]
 					<input type='submit' name='submit' value='save' />
 				</td></tr>
 			</table>

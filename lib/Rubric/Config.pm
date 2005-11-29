@@ -96,6 +96,11 @@ true if registration new users can't register for accounts via the web
 
 true value if users must have an account to view entries
 
+=item * purge_anonymous_sessions
+
+If true, sessions that are not logged in or login attempts will be deleted at
+teardown.
+
 =item * private_tag
 
 A tag which, if attached to an entry, makes it private.  The default value is
@@ -172,6 +177,7 @@ my $default = {
 	max_page_size       => 100,
 	one_entry_per_link  => 1,
 	registration_closed => undef,
+  purge_anonymous_sessions  => undef,
 	skip_newuser_verification => undef,
 };
 sub _default { $default }

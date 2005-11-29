@@ -19,17 +19,21 @@
 			<table>
 				<tr>
 					<th>old password</th>
-					<td><input type='password' name='password' /></td>
+					<td>[% widget.password(name => password) %]</td>
 				</tr>
 				<tr>
 					<th>new password</th>
-					<td><input type='password' name='password_1' /></td>
+					<td>[% widget.password(name => password_1) %]</td>
 				</tr>
 				<tr>
 					<th>new password (again)</th>
-					<td><input type='password' name='password_2' /></td>
+					<td>[% widget.password(name => password_2) %]</td>
 				</tr>
-				<tr><th>email</th><td><input name='email' value='[% email OR current_user.email %]'/></tr>
+				<tr>
+          <th>email</th>
+          [% email = email OR current_user.email %]
+          <td>[% widget.input(name => 'email', value => email) %]</td>
+        </tr>
 				<tr><td class='submit' colspan='2'>
 					<input type='submit' name='submit' value='submit' />
 				</td></tr>

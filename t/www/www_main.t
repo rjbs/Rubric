@@ -31,8 +31,11 @@ $mech->get_ok($root, 'HTTP GET');
 $mech->title_is('Rubric: entries', 'Correct <title>');
 
 { # general information-finding
-  my @tag_links = $mech->find_all_links( url_regex => qr/\A\Q$root\Eentries\/tags/ );
-  is(scalar(@tag_links), 23, 'Count tag entry urls');
+  my @tag_links
+    = $mech->find_all_links( url_regex => qr(\A\Q$root\Eentries/tags) );
+
+  is(scalar(@tag_links), 23, 'Count tag entry urls')
+    or warn join("\n", map { $_->url } @tag_links);
 }
 
 { # test all internal links
@@ -52,9 +55,9 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
     fields => { user => 'jjj', password => 'yellow' }
   );
 
-#  @links = $mech->find_all_links( url_regex => qr/\A\Q$root\Elogout/ );
-#  is(scalar(@links), 1, 'one login link');
+  #@links = $mech->find_all_links( url_regex => qr/\A\Q$root\Elogout/ );
+  #is(scalar(@links), 1, 'one login link');
 
-#  $mech->content_contains("you are: jjj");
+  #$mech->content_contains("you are: jjj");
 
 }

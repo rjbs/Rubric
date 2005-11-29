@@ -51,7 +51,7 @@
 	<div class='search'>
 		<span>search:</span>
 		<form action='[% self_url %]' style='display:inline'>
-			<input name='like' size='60' />
+      [% widget.input(name => 'like', attr => { size => 60 }) %]
 		</form>
 	</div>
 

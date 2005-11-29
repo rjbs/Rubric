@@ -19,6 +19,7 @@ use strict;
 use warnings;
 
 use Carp;
+use HTML::Widget::Factory;
 use Rubric;
 use Rubric::Config;
 use Template;
@@ -41,19 +42,19 @@ this type.  This return value may change in the future.
 my %renderer;
 
 sub register_type {
-	my ($class, $type, $arg) = @_;
-	$renderer{$type} = $arg;
-	$renderer{$type}{renderer} = Template->new({
-		PROCESS => ("template.$arg->{extension}"),
-		INCLUDE_PATH => Rubric::Config->template_path()
-	});
+  my ($class, $type, $arg) = @_;
+  $renderer{$type} = $arg;
+  $renderer{$type}{renderer} = Template->new({
+    PROCESS      => ("template.$arg->{extension}"),
+    INCLUDE_PATH => Rubric::Config->template_path()
+  });
 }
 
 __PACKAGE__->register_type(@$_) for (
-	[ html => { content_type => 'text/html; charset="utf-8"', extension => 'html' } ],
-	[ rss  => { content_type => 'application/rss+xml', extension => 'rss'  } ],
-	[ txt  => { content_type => 'text/plain',          extension => 'txt'  } ],
-	[ api  => { content_type => 'text/xml',            extension => 'api'  } ],
+  [ html => { content_type => 'text/html; charset="utf-8"', extension => 'html' } ],
+  [ rss  => { content_type => 'application/rss+xml', extension => 'rss'  } ],
+  [ txt  => { content_type => 'text/plain',          extension => 'txt'  } ],
+  [ api  => { content_type => 'text/xml',            extension => 'api'  } ],
 );
 
 =head2 process($template, $type, \%stash)
@@ -69,41 +70,42 @@ two-element list.  In scalar context, it returns the output document.
 =cut
 
 my $xml_escape = sub {
-	for (shift) {
-		s/&/&amp;/g;
-		s/</&lt;/g;
-		s/>/&gt;/g;
-		s/"/&quot;/g;
-		s/'/&apos;/g;
-		return $_;
-	}
+  for (shift) {
+    s/&/&amp;/g;
+    s/</&lt;/g;
+    s/>/&gt;/g;
+    s/"/&quot;/g;
+    s/'/&apos;/g;
+    return $_;
+  }
 };
 
 sub _body_filter {
-	my $filters = Template::Filters->new;
-	my $body_filter = $filters->fetch('html_line_break');
+  my $filters = Template::Filters->new;
+  my $body_filter = $filters->fetch('html_line_break');
 }
 
 sub process { 
-	my ($class, $template, $type, $stash) = @_;
-	return unless $renderer{$type};
+  my ($class, $template, $type, $stash) = @_;
+  return unless $renderer{$type};
 
-	if ($template =~ /entr/ and ($type eq 'html' or $type eq 'rss')) {
-		$stash->{body_filter} = $class->_body_filter;
-	}
+  if ($template =~ /entr/ and ($type eq 'html' or $type eq 'rss')) {
+    $stash->{body_filter} = $class->_body_filter;
+  }
 
-	$stash->{xml_escape} = $xml_escape;
-	$stash->{version}    = $Rubric::VERSION;
+  $stash->{xml_escape} = $xml_escape;
+  $stash->{version}    = $Rubric::VERSION;
+  $stash->{widget}     = HTML::Widget::Factory->new;
 
-	$template .= '.' . $renderer{$type}{extension};
-	$renderer{$type}{renderer}->process($template, $stash, \(my $output))
-		or die "Couldn't render template: " . $renderer{$type}{renderer}->error;
+  $template .= '.' . $renderer{$type}{extension};
+  $renderer{$type}{renderer}->process($template, $stash, \(my $output))
+    or die "Couldn't render template: " . $renderer{$type}{renderer}->error;
 
-	die "template produced no content" unless $output;
+  die "template produced no content" unless $output;
 
-	return wantarray
-		? ($renderer{$type}{content_type}, $output)
-		:  $output;
+  return wantarray
+    ? ($renderer{$type}{content_type}, $output)
+    :  $output;
 }
 
 =head1 TODO

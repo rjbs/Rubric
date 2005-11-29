@@ -24,6 +24,7 @@ requires      ('Time::Local'      => 0.00);
 requires      ('Time::Piece'      => 0.00);
 requires      ('YAML'             => 0.00);
 requires      ('Class::DBI::AbstractSearch' => 0);
+requires      ('HTML::Widget::Factory'      => '0.01');
 requires      ('HTTP::Server::Simple'       => '0.09');
 requires      ('Getopt::Long::Descriptive'  => '0.02');
 requires      ('Template::Plugin::Class'    => '0.12');
