@@ -34,6 +34,7 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
   my @tag_links
     = $mech->find_all_links( url_regex => qr(\A\Q$root\Eentries/tags) );
 
+  # wtf wtf wtf?
   is(scalar(@tag_links), 23, 'Count tag entry urls')
     or warn join("\n", map { $_->url } @tag_links);
 }
