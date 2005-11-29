@@ -80,18 +80,9 @@ my $xml_escape = sub {
   }
 };
 
-sub _body_filter {
-  my $filters = Template::Filters->new;
-  my $body_filter = $filters->fetch('html_line_break');
-}
-
 sub process { 
   my ($class, $template, $type, $stash) = @_;
   return unless $renderer{$type};
-
-  if ($template =~ /entr/ and ($type eq 'html' or $type eq 'rss')) {
-    $stash->{body_filter} = $class->_body_filter;
-  }
 
   $stash->{xml_escape} = $xml_escape;
   $stash->{version}    = $Rubric::VERSION;

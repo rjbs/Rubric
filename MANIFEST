@@ -20,6 +20,8 @@ lib/Rubric/Config.pm
 lib/Rubric/DBI.pm
 lib/Rubric/DBI/Setup.pm
 lib/Rubric/Entry.pm
+lib/Rubric/Entry/Formatter.pm
+lib/Rubric/Entry/Formatter/Raw.pm
 lib/Rubric/Entry/Query.pm
 lib/Rubric/EntryTag.pm
 lib/Rubric/Link.pm

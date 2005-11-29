@@ -107,6 +107,20 @@ A tag which, if attached to an entry, makes it private.  The default value is
 C<@private>, and I strongly advise against changing it, since I may change the
 way these "system tags" work in the future.
 
+=item * markup_formatter
+
+This entry, if given, should be a mapping of markup names to formatter plugins.
+For example:
+
+  markup_formatter:
+    kwid: Rubric::Entry::Formatter::Kwid
+    tex:  Rubric::Entry::Formatter::TeX
+
+(No.  Neither of those exist.)
+
+If it is not specified in the config file, an entry for C<_default> is set to
+the built-in, extremely simple entry formatter.
+
 =item * one_entry_per_link
 
 if true, each user can have only one entry per link (default: true)
@@ -175,6 +189,7 @@ my $default = {
 	display_localtime   => 0,
 	entries_query_class => 'Rubric::WebApp::Entries',
 	max_page_size       => 100,
+  markup_formatter    => {},
 	one_entry_per_link  => 1,
 	registration_closed => undef,
   purge_anonymous_sessions  => undef,

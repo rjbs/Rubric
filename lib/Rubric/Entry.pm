@@ -223,6 +223,30 @@ sub tags_from_string {
 	return \%tags;
 }
 
+=head2 C< body_as >
+
+  my $formatted_body = $entry->body_as("html");
+
+This method returns the body of the entry, formatted into the given format.  If
+the entry cannot be rendered into the given format, an exception is thrown.
+
+=cut
+
+sub body_as {
+  my ($self, $format) = @_;
+
+  my $markup;
+  my $tag = Rubric::EntryTags->search({ entry => $self->id, tag => '@markup' });
+
+  $markup = ($tag and $tag->tag_value) ? $tag->tag_value : '_default';
+
+  Rubric::Entry::Formatter->format({
+    text   => $self->body,
+    markup => $markup,
+    format => $format
+  });
+}
+
 ## return retrieve_all'd objects in recent-to-older order
 
 __PACKAGE__->set_sql(RetrieveAll => <<'');
