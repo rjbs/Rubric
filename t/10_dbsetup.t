@@ -1,3 +1,4 @@
+#!perl
 #!perl -T
 use Test::More tests => 4;
 use File::Path qw(rmtree mkpath);

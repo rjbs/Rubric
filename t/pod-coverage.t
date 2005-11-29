@@ -1,3 +1,4 @@
+#!perl
 #!perl -T
 
 use Test::More;

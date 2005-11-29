@@ -20,6 +20,7 @@ Rubric::DBI, which is a Class::DBI class.
 
 use base qw(Rubric::DBI);
 use Encode qw(_utf8_on);
+use Rubric::Entry::Formatter;
 use Time::Piece;
 
 __PACKAGE__->table('entries');
@@ -236,7 +237,7 @@ sub body_as {
   my ($self, $format) = @_;
 
   my $markup;
-  my $tag = Rubric::EntryTags->search({ entry => $self->id, tag => '@markup' });
+  my $tag = Rubric::EntryTag->search({ entry => $self->id, tag => '@markup' });
 
   $markup = ($tag and $tag->tag_value) ? $tag->tag_value : '_default';
 

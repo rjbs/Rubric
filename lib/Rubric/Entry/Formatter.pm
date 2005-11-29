@@ -17,13 +17,10 @@ use warnings;
 
 use Carp ();
 use Rubric::Config;
-use Template::Filters;
 
 =head1 METHODS
 
 =cut
-
-my $filter = Temlate::Filters->new->fetch('html_line_break');
 
 my $markup_formatter = Rubric::Config->markup_formatter;
 
@@ -32,10 +29,10 @@ $markup_formatter->{_default} = 'Rubric::Entry::Formatter::Raw'
 
 sub format {
   my ($class, $arg) = @_;
-  
+
   my $formatter = $markup_formatter->{ $arg->{markup} }
     or Carp::croak "no formatter is registered for $arg->{markup} markup";
-  
+
   eval "require $formatter" or Carp::croak $@;
 
   my $formatter_code = $formatter->can("as_$arg->{format}")

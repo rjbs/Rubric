@@ -21,17 +21,17 @@ use Template::Filters;
 
 =cut
 
-my $filter = Temlate::Filters->new->fetch('html_line_break');
+my $filter = Template::Filters->new->fetch('html_line_break');
 
 sub as_html {
   my ($class, $arg) = @_;
-  return $filter->($arg->{body});
+  return $filter->($arg->{text});
 }
 
 sub as_text {
   my ($class, $arg) = @_;
 
-  return $arg->{body};
+  return $arg->{text};
 }
 
 =head1 TODO
