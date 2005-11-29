@@ -38,8 +38,15 @@ BEGIN { use_ok("Rubric::User"); }
 	my $entry = $user->quick_entry({
 		title => "Quick Entry!!",
 		link  => "http://www.quick.com/",
-		tags  => "quick entry test"
+		tags  => " quick entry test"
 	});
+  
+  is($entry->title, 'Quick Entry!!', "got title we wanted");
+  is_deeply(
+    [ sort $entry->tags ],
+    [ sort qw(quick entry test) ],
+    "got the tags we entered",
+  );
 }
 
 {
