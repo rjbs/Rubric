@@ -1,8 +1,8 @@
-package Rubric::Entry::Formatter::Raw;
+package Rubric::Entry::Formatter::HTMLEscape;
 
 =head1 NAME
 
-Rubric::Entry::Formatter::Raw - format entries by formatting nearly not at all
+Rubric::Entry::Formatter::HTMLEscape - format into HTML by escaping entities
 
 =head1 VERSION
 
@@ -10,7 +10,11 @@ Rubric::Entry::Formatter::Raw - format entries by formatting nearly not at all
 
 =head1 DESCRIPTION
 
-This is the default formatter
+This formatter only handles formatting to HTML, and outputs the original
+content with HTML-unsafe characters escaped and paragraphs broken.
+
+This is equivalent to filtering with Template::Filters' C<html> and
+C<html_para> filters.
 
 =cut
 
@@ -23,17 +27,20 @@ use Template::Filters;
 
 =cut
 
-my $filter = Template::Filters->new->fetch('html_line_break');
+my $filter;
+{
+  my $filters = Template::Filters->new;
+  my $html = $filters->fetch('html');
+  my $para = $filters->fetc('html_para');
+
+  $filter = sub {
+    $para->( $html->($_[0]) );
+  }
+}
 
 sub as_html {
   my ($class, $arg) = @_;
   return $filter->($arg->{text});
-}
-
-sub as_text {
-  my ($class, $arg) = @_;
-
-  return $arg->{text};
 }
 
 =head1 TODO

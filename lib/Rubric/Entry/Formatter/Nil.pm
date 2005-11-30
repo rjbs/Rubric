@@ -1,8 +1,8 @@
-package Rubric::Entry::Formatter::Raw;
+package Rubric::Entry::Formatter::Nil;
 
 =head1 NAME
 
-Rubric::Entry::Formatter::Raw - format entries by formatting nearly not at all
+Rubric::Entry::Formatter::Nil - format entries by formatting nearly not at all
 
 =head1 VERSION
 
@@ -10,7 +10,9 @@ Rubric::Entry::Formatter::Raw - format entries by formatting nearly not at all
 
 =head1 DESCRIPTION
 
-This is the default formatter
+This is the default formatter.  The only formatting it performs is done by
+Template::Filters' C<html_para> filter.  Paragraph breaks will be
+retained from plaintext into HTML, but nothing else will be done.
 
 =cut
 
@@ -23,7 +25,7 @@ use Template::Filters;
 
 =cut
 
-my $filter = Template::Filters->new->fetch('html_line_break');
+my $filter = Template::Filters->new->fetch('html_para');
 
 sub as_html {
   my ($class, $arg) = @_;

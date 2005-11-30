@@ -6,10 +6,10 @@ use lib 't/lib';
 use strict;
 use warnings;
 
-unless ($ENV{RUBRIC_TEST_WWW}) {
-  plan skip_all => "these just don't work yet";
-  exit;
-}
+# unless ($ENV{RUBRIC_TEST_WWW}) {
+#   plan skip_all => "these just don't work yet";
+#   exit;
+# }
 
 plan 'no_plan';
 
