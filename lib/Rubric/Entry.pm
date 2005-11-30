@@ -237,7 +237,8 @@ sub body_as {
   my ($self, $format) = @_;
 
   my $markup;
-  my $tag = Rubric::EntryTag->search({ entry => $self->id, tag => '@markup' });
+  my ($tag)
+    = Rubric::EntryTag->search({ entry => $self->id, tag => '@markup' });
 
   $markup = ($tag and $tag->tag_value) ? $tag->tag_value : '_default';
 
