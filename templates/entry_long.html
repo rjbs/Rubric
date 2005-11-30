@@ -16,14 +16,20 @@
 		<div class='description'>[% entry.description | html %]</div>
 		[% END %]
 		<div class='created'>
-			[% FOREACH tag = entry.tags %]
-			<a href='[% uri.entries(user => user, tags => [ tag ]) %]'>[% tag %]</a>
+			[% FOREACH tag = entry.entrytags %]
+			<a href='[% uri.entries(user => user, tags => [ tag.tag ]) %]'
+      >[% tag.tag %]</a>[% IF tag.tag_value %]:<a href='[% uri.entries(user => user, tags => [ tag ]) %]'>[% tag.tag_value %]</a>
+      [% END %]
 			[% END %]
 			[% "by " _ entry.user UNLESS user %]
 		</div>
 		[% IF entry.body %]
 		<div class='body'>
-		[% entry.body_as('html') %]
+		[% TRY %]
+      [% entry.body_as('html') %]
+    [% CATCH %]
+      Error formatting body!
+    [% END %]
 		</div>
 		[% END %]
 	</div>
