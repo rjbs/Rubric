@@ -21,7 +21,9 @@
 		[% END %]
 		<div class='created'>
 			[% FOREACH tag = entry.entrytags %]
-			<a class='tag' href='[% uri.entries(user => user, tags => [ tag.tag ]) %]'>[% tag %]</a>
+			<a href='[% uri.entries(user => user, tags => [ tag.tag ]) %]'
+      >[% tag.tag %]</a>[% IF tag.tag_value %]:<a href='[% uri.entries(user => user, tags => [ tag ]) %]'>[% tag.tag_value %]</a>
+      [% END %]
 			[% END %]
 			[% IF ! user %]
 			by <a href='[% uri.entries(user => entry.user) %]'>[% entry.user %]</a>
