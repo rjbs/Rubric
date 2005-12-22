@@ -106,9 +106,8 @@ sub redirect_root {
 
 =head2 cgiapp_init
 
-This method is called during CGI::Application's initialization.  It finds (or
-creates) a CGI::Session, checks for a login, checks for updates to result-set
-paging, and starts processing the request path. 
+This method is called during CGI::Application's initialization.  It sets up the
+session configuration.
 
 =cut
 
@@ -123,6 +122,18 @@ sub cgiapp_init {
       -name    => 'rubric_session'
     }
   );
+}
+
+=head2 cgiapp_prerun
+
+This method is called before the selected runmode.  It checks for a login,
+checks for updates to result-set paging, and starts processing the request
+path. 
+
+=cut
+
+sub cgiapp_prerun {
+  my ($self) = @_;
   
   my $login_class = Rubric::Config->login_class;
   eval "require $login_class";
