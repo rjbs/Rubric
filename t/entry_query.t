@@ -2,16 +2,22 @@
 #!perl -T
 
 use Test::More 'no_plan';
+use Time::Piece ();
 
 BEGIN { use_ok("Rubric::Entry"); }
 
+
 {
+  my $now = Time::Piece->new(time);
+  my $last_month = $now  -  86400 * 365;
+  my $next_week  = $now  +  86400 *   7;
+
 	my $entries = Rubric::Entry->query({
 		user => Rubric::User->retrieve('eb'),
 		tags => { 'news' => undef },
-		created_after => '2004-12-15',
-		created_on    => '2005',
-		created_before=> '2006-01',
+		created_after  => $last_month->strftime('%Y-%m'),
+		created_on     => $now->strftime('%Y'),
+		created_before => $next_week->strftime('%Y-%m-%d'),
 		has_link => 1,
 		has_body => 0
 	});
