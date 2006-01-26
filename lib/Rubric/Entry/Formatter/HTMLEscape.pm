@@ -31,7 +31,7 @@ my $filter;
 {
   my $filters = Template::Filters->new;
   my $html = $filters->fetch('html');
-  my $para = $filters->fetc('html_para');
+  my $para = $filters->fetch('html_para');
 
   $filter = sub {
     $para->( $html->($_[0]) );

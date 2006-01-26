@@ -1,5 +1,15 @@
 package Rubric::CLI;
 
+=head1 NAME
+
+Rubric::CLI - the Rubric command line interface
+
+=head1 VERSION
+
+ $Id$
+
+=cut
+
 use strict;
 use warnings;
 
@@ -19,9 +29,26 @@ for (@plugins) {
   $plugin{$command} = $_;
 }
 
+=head1 METHODS
+
+=head2 C< commands >
+
+This returns the commands currently provided by Rubric::CLI plugins.
+
+=cut
+
 sub commands {
   keys %plugin;
 }
+
+=head2 C< plugin_for >
+
+  my $plugin = Rubric::CLI->plugin_for($command);
+
+This method requires and returns the plugin (module) for the given command.  If
+no plugin implements the command, it returns false.
+
+=cut
 
 sub plugin_for {
   my ($self, $command) = @_;
