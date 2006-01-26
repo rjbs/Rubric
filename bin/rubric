@@ -1,0 +1,31 @@
+#!perl
+
+use strict;
+use warnings;
+
+use Module::Pluggable search_path => qw(Rubric::CLI::Command);
+use UNIVERSAL::moniker;
+use UNIVERSAL::require;
+
+my @plugins = main->plugins;
+
+our %plugin;
+for (@plugins) {
+  my $command = lc $_->moniker;
+
+  die "two plugins exist for command $command: $_ and $plugin{$command}\n"
+    if exists $plugin{$command};
+  
+  $plugin{$command} = $_;
+}
+
+my $command = shift @ARGV;
+
+unless ($command and exists $plugin{$command}) {
+  die "usage: rubric [command]\n"
+    . "  consult 'rubric commands' for a listing\n";
+}
+
+my $plugin = $plugin{$command};
+$plugin->require or die $@;
+$plugin->execute;
