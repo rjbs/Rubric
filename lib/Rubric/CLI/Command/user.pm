@@ -10,8 +10,12 @@ Rubric::CLI::Command::user - Rubric user management commands
 
 =cut
 
+use strict;
+use warnings;
+
+use base qw(Rubric::CLI::Command);
+
 use Digest::MD5 qw(md5_hex);
-use Getopt::Long::Descriptive ();
 use Rubric::User;
 
 sub describe_options {

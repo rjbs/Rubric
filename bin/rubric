@@ -3,29 +3,17 @@
 use strict;
 use warnings;
 
-use Module::Pluggable search_path => qw(Rubric::CLI::Command);
-use UNIVERSAL::moniker;
-use UNIVERSAL::require;
+use Rubric::CLI;
 
-my @plugins = main->plugins;
-
-our %plugin;
-for (@plugins) {
-  my $command = lc $_->moniker;
-
-  die "two plugins exist for command $command: $_ and $plugin{$command}\n"
-    if exists $plugin{$command};
-  
-  $plugin{$command} = $_;
+sub usage {
+  return <<END_USAGE;
+usage: rubric [command] [options]
+  try "rubric commands" for a list of commands
+END_USAGE
 }
 
-my $command = shift @ARGV;
+my $command = shift @ARGV or die usage;
 
-unless ($command and exists $plugin{$command}) {
-  die "usage: rubric [command]\n"
-    . "  consult 'rubric commands' for a listing\n";
-}
+my $plugin = Rubric::CLI->plugin_for($command) or die usage;
 
-my $plugin = $plugin{$command};
-$plugin->require or die $@;
 $plugin->execute;
