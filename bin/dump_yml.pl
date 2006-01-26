@@ -13,21 +13,32 @@ my ($opt, $usage) = describe_options(
 
 my $username = $ARGV[0] || $ENV{USER} || die $usage->text;
 
-my $user = Rubric::User->retrieve($username);
+die "couldn't find user for username '$username'\n"
+  unless my $user = Rubric::User->retrieve($username);
 
-die "couldn't find user for username '$username'\n" unless $user;
+sub entry_to_hash {
+  my ($entry) = @_;
+
+  my $hash = {};
+  for (qw(id link title description created modified body)) {
+    $hash->{$_} = "" . $entry->$_ if $entry->$_;
+  }
+
+  for my $entrytag ($entry->entrytags) {
+    $hash->{tags}->{ $entrytag->tag } = $entrytag->tag_value;
+  }
+
+  return $hash;
+}
 
 my $dbh = Rubric::User->db_Main;
 
-my $entries = $user->entries;
+my $entry_iterator = $user->entries;
 
-my %entry;
+my @entries;
 
-while (my $entry = $entries->next) {
-  $entry{ $entry->id } = $entry;
-
-	my $t = $dbh->selectall_arrayref("SELECT tag FROM entrytags WHERE entry=$_");
-	$entries->{$_}{tags} = [ map { @$_ } @$t ];
+while (my $entry = $entry_iterator->next) {
+  push @entries, entry_to_hash($entry);
 }
 
-print YAML::Dump([ values %$entries ]);
+print YAML::Dump(\@entries);
