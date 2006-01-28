@@ -1,10 +1,8 @@
 bin/dump_yml.pl
 bin/entries.pl
 bin/load_yml.pl
-bin/makedb.pl
-bin/rubric-user
+bin/rubric
 bin/rubric.cgi
-bin/updatedb.pl
 Changes
 etc/rubric.yml
 inc/Module/Install.pm
