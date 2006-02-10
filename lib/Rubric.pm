@@ -8,13 +8,13 @@ Rubric - a notes and bookmarks manager with tagging
 
 =head1 VERSION
 
-version 0.13_01
+version 0.13_02
 
  $Id$
 
 =cut
 
-our $VERSION = '0.13_01';
+our $VERSION = '0.13_02';
 
 =head1 DESCRIPTION
 
@@ -63,7 +63,8 @@ through the web interface at L<http://rt.cpan.org>. I will be notified, and
 then you'll automatically be notified of progress on your bug as I make
 changes.
 
-You can also find some support on the #rubric channel on Freenode IRC.
+You can also find some useful people on the #rubric channel on Freenode IRC or
+on the mailing list: L<http://www.listbox.com/subscribe/?listname=rubric>
 
 =head1 SEE ALSO
 
@@ -73,7 +74,7 @@ You can also find some support on the #rubric channel on Freenode IRC.
 
 one of my original inspirations
 
-=item * L<http://pubweb.nwu.edu/~zps869/nv.html>
+=item * L<http://pubweb.northwestern.edu/~zps869/nv.html>
 
 Notational Velocity, another of my inspirations
 
@@ -89,7 +90,7 @@ a social bookmarks system, written in PHP
 
 =head1 COPYRIGHT
 
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
+Copyright 2004-2006 Ricardo SIGNES.  This program is free software;  you can
 redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
