@@ -46,6 +46,14 @@ my $markup_formatter = Rubric::Config->markup_formatter;
 $markup_formatter->{_default} = 'Rubric::Entry::Formatter::Nil'
   unless $markup_formatter->{_default};
 
+sub _load_formatter {
+  my ($class, $formatter) = @_;
+
+  return 1 if eval { $formatter->can('as_text'); };
+  return 1 if eval qq{require $formatter;};
+  return 0;
+}
+
 sub format {
   my ($class, $arg) = @_;
   my $config = {}; # extra configuration for formatter code
@@ -59,7 +67,8 @@ sub format {
       unless $formatter = delete $config->{class};
   }
 
-  eval "require $formatter" or Carp::croak $@;
+  $class->_load_formatter($formatter)
+    or Carp::croak "couldn't load formatter '$formatter': $@";
 
   my $formatter_code = $formatter->can("as_$arg->{format}")
     or Carp::croak "$formatter does not implement formatting to $arg->{format}";

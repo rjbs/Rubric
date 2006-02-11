@@ -40,7 +40,12 @@ my $filter;
 
 sub as_html {
   my ($class, $arg) = @_;
+  return '' unless $arg->{text};
   return $filter->($arg->{text});
+}
+
+sub as_text {
+  (shift)->as_html(@_);
 }
 
 =head1 TODO

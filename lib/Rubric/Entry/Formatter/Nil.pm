@@ -29,12 +29,13 @@ my $filter = Template::Filters->new->fetch('html_para');
 
 sub as_html {
   my ($class, $arg) = @_;
+  return '' unless $arg->{text};
   return $filter->($arg->{text});
 }
 
 sub as_text {
   my ($class, $arg) = @_;
-
+  return '' unless $arg->{text};
   return $arg->{text};
 }
 

@@ -17,7 +17,7 @@ BEGIN { use_ok("Rubric::Link"); }
 
 	is_deeply(
 		$link->tags_counted,
-		[ [ qw(blog 3) ]],
+		[ [ qw(@markup 1) ], [ qw(blog 3) ] ],
 		"tags counted"
 	);
 
