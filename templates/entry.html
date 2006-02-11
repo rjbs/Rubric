@@ -26,7 +26,7 @@
       [% widget.link(
         href => uri.entries(user => user, tags => [ tag.tag ]),
         text => tag.tag
-      ) %][% IF tag.tag_value %]:[% widget.link(
+      ) | trim %][% IF tag.tag_value %]:[% widget.link(
         href => uri.entries(user => user, tags => [ tag ]),
         text => tag.tag_value
       ) %][% END %]
