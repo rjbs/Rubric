@@ -9,7 +9,6 @@ inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/Fetch.pm
-inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
@@ -21,6 +20,7 @@ lib/Rubric/DBI/Setup.pm
 lib/Rubric/Entry.pm
 lib/Rubric/Entry/Formatter.pm
 lib/Rubric/Entry/Formatter/HTMLEscape.pm
+lib/Rubric/Entry/Formatter/Markdown.pm
 lib/Rubric/Entry/Formatter/Nil.pm
 lib/Rubric/Entry/Query.pm
 lib/Rubric/EntryTag.pm
