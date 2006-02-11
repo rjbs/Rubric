@@ -58,6 +58,5 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
     is(scalar(@links), 1, 'one logout link');
   } else {
     diag "we're not logged in!? the content is: " . $mech->content;
-    use Data::Dumper; print Dumper($mech);
   }
 }
