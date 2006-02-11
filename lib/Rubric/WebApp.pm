@@ -306,7 +306,8 @@ sub entry {
          or  $entry->user ne $self->param('current_user'));
 
   $self->template('entry_long' => {
-    entry => $self->param('entry'),
+    entry     => $self->param('entry'),
+    self_url  => $self->query->self_url(),
     long_form => 1
   });
 }

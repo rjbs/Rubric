@@ -20,7 +20,6 @@ lib/Rubric/DBI/Setup.pm
 lib/Rubric/Entry.pm
 lib/Rubric/Entry/Formatter.pm
 lib/Rubric/Entry/Formatter/HTMLEscape.pm
-lib/Rubric/Entry/Formatter/Markdown.pm
 lib/Rubric/Entry/Formatter/Nil.pm
 lib/Rubric/Entry/Query.pm
 lib/Rubric/EntryTag.pm
