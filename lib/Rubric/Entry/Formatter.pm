@@ -48,16 +48,23 @@ $markup_formatter->{_default} = 'Rubric::Entry::Formatter::Nil'
 
 sub format {
   my ($class, $arg) = @_;
+  my $config = {}; # extra configuration for formatter code
 
-  my $formatter = $markup_formatter->{ $arg->{markup} }
-    or Carp::croak "no formatter is registered for $arg->{markup} markup";
+  Carp::croak "no formatter is registered for $arg->{markup} markup"
+    unless my $formatter = $markup_formatter->{ $arg->{markup} };
+
+  if (ref $formatter) {
+    $config = $formatter;
+    Carp::croak "formatter config for $arg->{markup} includes no class"
+      unless $formatter = delete $config->{class};
+  }
 
   eval "require $formatter" or Carp::croak $@;
 
   my $formatter_code = $formatter->can("as_$arg->{format}")
     or Carp::croak "$formatter does not implement formatting to $arg->{format}";
 
-  $formatter_code->($formatter, $arg);
+  $formatter_code->($formatter, $arg, $config);
 }
 
 =head1 WRITING FORMATTERS
