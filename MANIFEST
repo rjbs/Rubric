@@ -49,6 +49,7 @@ t/20_testdata.t
 t/config_custom.t
 t/config_default.t
 t/entry.t
+t/entry_format.t
 t/entry_query.t
 t/lib/RubricServer.pm
 t/link.t
