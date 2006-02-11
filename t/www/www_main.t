@@ -17,12 +17,8 @@ plan 'no_plan';
 use RubricServer;
 
 my $server = RubricServer->new;
-my $pid    = $server->background;
-my $root   = "http://localhost:8080/";
 
-ok($pid, 'HTTP Server Started');
-
-END { kill(9, $pid) if $pid }
+my $root = $server->started_ok("start up my web server");
 
 # Begin testing.
 my $mech = Test::WWW::Mechanize->new;

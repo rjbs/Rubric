@@ -3,7 +3,7 @@ package RubricServer;
 use strict;
 use warnings;
 
-use base 'HTTP::Server::Simple::CGI';
+use base qw(Test::HTTP::Server::Simple HTTP::Server::Simple::CGI);
 use Rubric::WebApp;
 
 sub print_banner {
