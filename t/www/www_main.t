@@ -28,20 +28,20 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
 
 { # general information-finding
   my @tag_links
-    = $mech->find_all_links( url_regex => qr(\A\Q$root\Eentries/tags) );
+    = $mech->find_all_links( url_regex => qr(\A\Q$root\E/entries/tags) );
 
   # wtf wtf wtf?
-  is(scalar(@tag_links), 23, 'Count tag entry urls')
+  is(scalar(@tag_links), 25, 'Count tag entry urls')
     or warn join("\n", map { $_->url } @tag_links);
 }
 
 { # test all internal links
-  my @links = $mech->find_all_links( url_regex => qr/\A\Q$root/);
+  my @links = $mech->find_all_links( url_regex => qr(\A\Q$root));
   $mech->link_status_is(\@links, 200, "the internal links are status 200");
 }
 
 { # login/logout
-  my @links = $mech->find_all_links( url_regex => qr/\A\Q$root\Elogin/ );
+  my @links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/login) );
   is(scalar(@links), 1, 'one login link');
 
   $mech->follow_link_ok({ text => "login" }, "follow login link");
@@ -52,7 +52,7 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
     fields => { user => 'jjj', password => 'yellow' }
   );
 
-  #@links = $mech->find_all_links( url_regex => qr/\A\Q$root\Elogout/ );
+  #@links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/logout) );
   #is(scalar(@links), 1, 'one login link');
 
   #$mech->content_contains("you are: jjj");
