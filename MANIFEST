@@ -15,6 +15,11 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Rubric.pm
 lib/Rubric/Config.pm
+lib/Rubric/CLI.pm
+lib/Rubric/CLI/Command/commands.pm
+lib/Rubric/CLI/Command/db.pm
+lib/Rubric/CLI/Command/user.pm
+lib/Rubric/CLI/Command.pm
 lib/Rubric/DBI.pm
 lib/Rubric/DBI/Setup.pm
 lib/Rubric/Entry.pm
