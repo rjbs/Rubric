@@ -52,9 +52,12 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
     fields => { user => 'jjj', password => 'yellow' }
   );
 
-  #@links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/logout) );
-  #is(scalar(@links), 1, 'one login link');
-
-  #$mech->content_contains("you are: jjj");
-
+  # XXX: this seems like a redirect_ok problem..? -- rjbs, 2006-02-11
+  if ($mech->content_contains("you are: jjj", "you are logged in")) {
+    @links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/logout) );
+    is(scalar(@links), 1, 'one logout link');
+  } else {
+    diag "we're not logged in!? the content is: " . $mech->content;
+    use Data::Dumper; print Dumper($mech);
+  }
 }
