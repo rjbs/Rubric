@@ -28,7 +28,7 @@ for my $user (Rubric::User->retrieve_all) {
 		$user->add_to_entries({
 			link  => 2,
 			title => "rjbs' journal",
-			created  => time - int(rand(5000000)),
+			created  => time - int(rand(86_400 * 7)), # a week, for "recent tags"
 			modified => time,
 		})->add_to_tags({tag => 'blog'}),
     "entry: { link 2, user $user }"

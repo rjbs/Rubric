@@ -31,8 +31,11 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
     = $mech->find_all_links( url_regex => qr(\A\Q$root\E/entries/tags) );
 
   # wtf wtf wtf?
-  is(scalar(@tag_links), 25, 'Count tag entry urls')
-    or warn join("\n", map { $_->url } @tag_links);
+  my $tag_link_count = @tag_links;
+  is($tag_link_count, 26, 'Count tag entry urls');
+
+  open my $wtf_file, ">", "$tag_link_count\_links.html";
+  print {$wtf_file} $mech->content;
 }
 
 { # test all internal links
@@ -52,11 +55,8 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
     fields => { user => 'jjj', password => 'yellow' }
   );
 
-  # XXX: this seems like a redirect_ok problem..? -- rjbs, 2006-02-11
-  if ($mech->content_contains("you are: jjj", "you are logged in")) {
-    @links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/logout) );
-    is(scalar(@links), 1, 'one logout link');
-  } else {
-    diag "we're not logged in!? the content is: " . $mech->content;
-  }
+  $mech->content_contains("you are: jjj", "you are logged in");
+
+  @links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/logout) );
+  is(scalar(@links), 1, 'one logout link');
 }
