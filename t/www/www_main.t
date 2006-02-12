@@ -30,12 +30,7 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
   my @tag_links
     = $mech->find_all_links( url_regex => qr(\A\Q$root\E/entries/tags) );
 
-  # wtf wtf wtf?
-  my $tag_link_count = @tag_links;
-  is($tag_link_count, 26, 'Count tag entry urls');
-
-  open my $wtf_file, ">", "$tag_link_count\_links.html";
-  print {$wtf_file} $mech->content;
+  is(@tag_links, 26, 'Count tag entry urls');
 }
 
 { # test all internal links
