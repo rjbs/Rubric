@@ -27,11 +27,11 @@ isa_ok($entry, 'Rubric::Entry');
 }
 
 # so let's create a body
-my $boilerplate = 'This is a test body.';
+my $boilerplate = 'This is <i>a</i> test body.';
 $entry->body($boilerplate);
 $entry->update;
 
-{
+{ # test the default formatter (Nil)
   my $body = $entry->body;
   is($body, $boilerplate, "we have the body we just stored");
 
@@ -39,11 +39,36 @@ $entry->update;
   like(
     $html,
     qr{<p>\s*$boilerplate\s*</p>},
-    'the body is normally htmlified'
+    'the body is normally htmlified (Nil)'
   );
 
   my $text = $entry->body_as('text');
-  is($text, $boilerplate, "the text is returned normally");
+  is($text, $boilerplate, "the text is returned normally (Nil)");
+}
+
+{ # change the default formatter to HTMLEscape
+  Rubric::Config->markup_formatter->{_default}
+    = 'Rubric::Entry::Formatter::HTMLEscape';
+
+  my $body = $entry->body;
+  is($body, $boilerplate, "we have the body we just stored");
+
+  my $html_escaped = $boilerplate;
+  $html_escaped =~ s/</&lt;/g;
+  $html_escaped =~ s/>/&gt;/g;
+
+  my $html = $entry->body_as('html');
+  like(
+    $html,
+    qr{<p>\s*$html_escaped\s*</p>},
+    'the body is normally htmlified (HTMLEscape)'
+  );
+
+  my $text = $entry->body_as('text');
+  is($text, $html_escaped, "the text is returned html escaped (HTMLEscape)");
+
+  # remove the override of the built-in default
+  delete Rubric::Config->markup_formatter->{_default};
 }
 
 { # now let's try with a custom formatter

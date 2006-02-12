@@ -27,11 +27,11 @@ use Template::Filters;
 
 =cut
 
-my $filter;
+my ($filter, $html, $para);
 {
   my $filters = Template::Filters->new;
-  my $html = $filters->fetch('html');
-  my $para = $filters->fetch('html_para');
+  $html = $filters->fetch('html');
+  $para = $filters->fetch('html_para');
 
   $filter = sub {
     $para->( $html->($_[0]) );
@@ -45,7 +45,9 @@ sub as_html {
 }
 
 sub as_text {
-  (shift)->as_html(@_);
+  my ($class, $arg) = @_;
+  return '' unless $arg->{text};
+  return $html->($arg->{text});
 }
 
 =head1 TODO

@@ -44,8 +44,11 @@ This method returns a connection to the Rubric database.
 =cut
 
 my $dbh;
+
 sub dbh {
-	return $dbh ||= DBI->connect(
+	return $dbh if $dbh;
+
+  return $dbh = DBI->connect(
 		Rubric::Config->dsn,
 		Rubric::Config->db_user,
 		Rubric::Config->db_pass
