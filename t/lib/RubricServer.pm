@@ -14,8 +14,30 @@ sub print_banner {
 sub handle_request {
   my ($self, $cgi) = @_;
 
-  print "HTTP/1.0 200 OK\r\n";
-  return Rubric::WebApp->new->run;
-}
+  my $output = eval {
+    local $ENV{CGI_APP_RETURN_ONLY} = 1;
+    Rubric::WebApp->new(QUERY => $cgi)->run;
+  };
+
+  if (my $error = $@) {
+    print "HTTP/1.0 500\r\n";
+    print "Content-type: text/plain\r\n\r\n";
+    print $error;
+    return;
+  }
+
+  my ($header, $body) = split /\r\n\r\n/, $output, 2;
+
+  my %header = map { split /:\s*/, $_, 2 } split /\r\n/, $header;
+
+  my $status = delete $header{Status} || "200 OK";
+  $header{'Content-Type'} ||= 'text/plain';
+
+  print "HTTP/1.0 $status\r\n";
+  print "$_: $header{$_}\r\n" for keys %header;
+  print "\r\n";
+
+  print $body || "$status\r\n";
+} 
 
 1;
