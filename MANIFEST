@@ -51,7 +51,8 @@ t/config_default.t
 t/entry.t
 t/entry_format.t
 t/entry_query.t
-t/lib/RubricServer.pm
+t/lib/Rubric/Test/Server.pm
+t/lib/Rubric/Test/DBSetup.pm
 t/link.t
 t/pod-coverage.t
 t/pod.t

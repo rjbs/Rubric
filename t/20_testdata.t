@@ -1,9 +1,14 @@
 #!perl
 #!perl -T
+use strict;
+use warnings;
+
 use Test::More tests => 15;
 
-use_ok('Rubric::Link');
-use_ok('Rubric::User');
+BEGIN {
+  use_ok('Rubric::Link');
+  use_ok('Rubric::User');
+}
 
 use Digest::MD5 qw(md5_hex);
 
@@ -13,7 +18,12 @@ my @uris = (
 	'http://rjbs.manxome.org/bryar/'
 );
 
-ok(Rubric::Link->find_or_create({ uri => URI->new($_)->canonical }), "added uri") for @uris;
+for (@uris) {
+  ok(
+    Rubric::Link->find_or_create({ uri => URI->new($_)->canonical }),
+    "added uri"
+  );
+}
 
 my @users = (
 	{ username => 'jjj',      email => 'jjj@bugle.bz',  password => md5_hex('yellow')  },

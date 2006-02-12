@@ -1,4 +1,4 @@
-package RubricServer;
+package Rubric::Test::Server;
 
 use strict;
 use warnings;

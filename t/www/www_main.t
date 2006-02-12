@@ -14,9 +14,9 @@ use warnings;
 plan 'no_plan';
 
 # Setup Rubric Webserver
-use RubricServer;
+use Rubric::Test::Server;
 
-my $server = RubricServer->new;
+my $server = Rubric::Test::Server->new;
 
 my $root = $server->started_ok("start up my web server");
 
