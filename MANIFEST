@@ -56,6 +56,7 @@ t/link.t
 t/pod-coverage.t
 t/pod.t
 t/renderer.t
+t/tagstrings.t
 t/user.t
 t/www/www_main.t
 templates/account_created.html
