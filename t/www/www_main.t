@@ -38,7 +38,7 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
   $mech->link_status_is(\@links, 200, "the internal links are status 200");
 }
 
-{ # login/logout
+for my $iteration (1 .. 2) { # login/logout
   my @links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/login) );
   is(scalar(@links), 1, 'one login link');
 
@@ -52,6 +52,21 @@ $mech->title_is('Rubric: entries', 'Correct <title>');
 
   $mech->content_contains("you are: jjj", "you are logged in");
 
+  last if $iteration == 2;
+
   @links = $mech->find_all_links( url_regex => qr(\A\Q$root\E/logout) );
   is(scalar(@links), 1, 'one logout link');
+
+  $mech->follow_link_ok({ n => 1, url_regex => qr(\A\Q$root\E/logout) });
+}
+
+{ # entry deletion
+  $mech->follow_link_ok({ text => '(edit)', n => 1 });
+
+  $mech->content_contains("revise entry");
+
+  $mech->follow_link_ok({ text => 'delete this entry', n => 1 });
+
+  # XXX: better test that we're back at the root uri
+  $mech->content_contains("entries");
 }
