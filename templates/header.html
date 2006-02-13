@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 	<title>Rubric[% ": " _ query_description IF query_description %]</title>
+  [% IF uri.stylesheet %]
 	<link href='[% uri.stylesheet %]' rel='stylesheet' type='text/css' />
+  [% END %]
 	<link rel="alternate" type="application/rss+xml" title="RSS"
 		href='[% uri.entries(user => user, tags => tags, has_link => has_link,
 	has_body => has_body, format => "rss" ) %]' />

@@ -1003,7 +1003,10 @@ sub doc {
   my ($self) = @_;
 
   $self->get_doc;
-  $self->template("docs/" . $self->param('doc_page'));
+  my $output = eval { $self->template("docs/" . $self->param('doc_page')); };
+
+  # XXX: this should instead redirect to a 404-page
+  return $output ? $output : $self->redirect_root("no such document");
 }
 
 =head2 get_doc

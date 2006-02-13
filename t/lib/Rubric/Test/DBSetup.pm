@@ -11,13 +11,16 @@ our @EXPORT = qw(init_test_db_ok load_test_data_ok);
 use Test::More;
 
 use Digest::MD5 qw(md5_hex);
+use File::Basename;
+use File::Copy;
+use File::Spec;
 use File::Path qw(rmtree mkpath);
 use Rubric::DBI::Setup;
 use YAML;
 
 sub init_test_db_ok {
-  rmtree("t/db");
   mkpath("t/db");
+  unlink("t/db/rubric.db");
 
   eval { Rubric::DBI::Setup->setup_tables; };
   if ($@) {
@@ -30,6 +33,17 @@ sub init_test_db_ok {
 sub load_test_data_ok {
   my ($filename) = @_;
   return unless -r $filename;
+
+  my $basename = fileparse($filename, '.yml');
+  my $cached_db = "t/db/$basename.db";
+
+  if (-e $cached_db) {
+    return ok(
+      (copy $cached_db => 't/db/rubric.db'),
+      "restored $basename dataset from cache"
+    );
+  }
+
   my $data = YAML::LoadFile($filename);
 
   eval {
@@ -39,6 +53,7 @@ sub load_test_data_ok {
   if ($@) {
     fail "couldn't load test data in $filename: $@";
   } else {
+    copy 't/db/rubric.db' => $cached_db;
     pass "loaded test data in $filename";
   }
 }
@@ -48,8 +63,6 @@ sub _load_users {
 
   for my $username (keys %$user) {
     my $user = $user->{ $username };
-
-    #Rubric::User->db_Main->trace(2);
 
     Rubric::User->create({
       username => $username,
