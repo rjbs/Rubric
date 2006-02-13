@@ -24,7 +24,7 @@
   <item rdf:about="[% xml_escape(uri.entry(entry)) %]">
     <title>[% xml_escape(entry.title) %]</title>
     <link>[% xml_escape(item) %]</link>
-    <description>[% IF entry.description %][% "<p><em>" _ entry.description _ "</em></p>" | html %][% END %][% entry.body | html_line_break | html %]</description>
+    <description>[% IF entry.description %][% "<p><em>" _ entry.description _ "</em></p>" | html %][% END %][% entry.body_as('html') | html %]</description>
     <dc:date>[% entry.created.datetime %]-05:00</dc:date>
     <dc:creator>[% entry.user %]</dc:creator>
   </item>
