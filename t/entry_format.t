@@ -3,6 +3,7 @@
 
 use Test::More 'no_plan';
 
+BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 BEGIN { use_ok("Rubric::Entry"); }
 
 # XXX: ugly, relies on guts -- rjbs, 2006-02-11

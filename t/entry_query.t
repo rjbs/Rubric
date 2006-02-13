@@ -4,6 +4,7 @@
 use Test::More 'no_plan';
 use Time::Piece ();
 
+BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 BEGIN { use_ok("Rubric::Entry"); }
 
 

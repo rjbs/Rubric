@@ -5,7 +5,9 @@ use warnings;
 
 use lib 't/lib';
 
-use Test::More tests => 4;
+use Test::More tests => 5;
+
+BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 
 BEGIN { use_ok('Rubric::Test::DBSetup') };
 

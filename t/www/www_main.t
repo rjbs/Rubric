@@ -1,17 +1,14 @@
-use Test::More;
-use Test::WWW::Mechanize;
-
-use lib 't/lib';
+#!perl
+#!perl -T
 
 use strict;
 use warnings;
 
-# unless ($ENV{RUBRIC_TEST_WWW}) {
-#   plan skip_all => "these just don't work yet";
-#   exit;
-# }
+use Test::More 'no_plan';
+use Test::WWW::Mechanize;
 
-plan 'no_plan';
+use lib 't/lib';
+BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 
 # Setup Rubric Webserver
 use Rubric::Test::Server;

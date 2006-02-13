@@ -43,9 +43,9 @@ META.yml
 README
 rubric.yml
 style/rubric.css
-t/00_load.t
-t/10_dbsetup.t
-t/20_testdata.t
+t/00-load.t
+t/10-dbsetup.t
+t/20-testdata.t
 t/config_custom.t
 t/config_default.t
 t/entry.t
