@@ -15,7 +15,7 @@ use lib 't/lib';
 
 use Rubric::Test::DBSetup;
 
-Rubric::Test::DBSetup::load_test_data('t/dataset/basic.yml');
+load_test_data_ok('t/dataset/basic.yml');
 
 __END__
 

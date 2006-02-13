@@ -9,7 +9,7 @@ use Test::More tests => 4;
 
 BEGIN { use_ok('Rubric::Test::DBSetup') };
 
-ok(Rubric::Test::DBSetup::init_test_db, "setup Rubric tables");
+init_test_db_ok;
 
 cmp_ok(Rubric::DBI::Setup->determine_version, '==', 10, "got current schema");
 
