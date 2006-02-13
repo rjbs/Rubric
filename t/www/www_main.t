@@ -66,7 +66,31 @@ for my $iteration (1 .. 2) { # login/logout
   );
 }
 
+$mech->get_ok("$root/~jjj", "go to user page with ~ notation");
+$mech->title_is("Rubric: jjj's entries", "and we're on the right page");
+
+$mech->get_ok("$root/~jjj/blog", "go to user page with ~ notation with tag");
+$mech->title_is(
+  "Rubric: jjj's entries filed under { blog }",
+  "and we're on the right page"
+);
+
+$mech->get_ok("$root/huggalugga", "get a bogus url");
+$mech->title_is("Rubric: entries", "we're redirected to root");
+
+{ # entry view
+  $mech->get_ok($root, "go back to the root");
+  $mech->follow_link_ok(
+    { text => '(body)', n => 1 },
+    'follow a "view entry body" link',
+  );
+
+  # XXX: add tests that do something useful -- rjbs, 2006-02-12
+}
+
 { # entry deletion
+  $mech->get_ok($root, "go back to the root");
+
   $mech->follow_link_ok(
     { text => '(edit)', n => 1 },
     'follow an "edit entry" link',

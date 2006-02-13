@@ -16,6 +16,7 @@ entries:
     created_variance: 604800
     tags: blog
     users: [ jjj, eb, mxlptlyk ]
+    body: "This is the journal of the author of Rubric."
   - uri: "http:/www.cnn.com/"
     title: "CNN: This is CNN"
     tags: news

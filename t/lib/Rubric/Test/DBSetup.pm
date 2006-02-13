@@ -39,7 +39,7 @@ sub load_test_data_ok {
   if ($@) {
     fail "couldn't load test data in $filename: $@";
   } else {
-    pass "loaded test data in $filename: $@";
+    pass "loaded test data in $filename";
   }
 }
 
