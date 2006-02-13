@@ -106,3 +106,19 @@ $mech->title_is("Rubric: entries", "we're redirected to root");
   # XXX: better test that we're back at the root uri
   $mech->content_contains("entries", "and it sends us back to the root");
 }
+
+{ # entry posting
+  $mech->get_ok("$root/post", "go to the new entry page");
+  $mech->content_contains("new entry", "we're on the 'new entry' page");
+
+  $mech->submit_form(
+    form_number => 1,
+    fields => {
+      uri   => 'http://www.bugle.bz',
+      title => 'The Daily Bugle',
+      tags  => 'work news journalism',
+    }
+  );
+
+  $mech->content_contains("The Daily Bugle", "our posted entry is there");
+}

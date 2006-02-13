@@ -5,6 +5,11 @@ use Test::More 'no_plan';
 BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 BEGIN { use_ok("Rubric::Link"); }
 
+use lib 't/lib';
+use Rubric::Test::DBSetup;
+init_test_db_ok;
+load_test_data_ok('t/dataset/basic.yml');
+
 {
 	my ($link)
     = Rubric::Link->search({ uri => 'http://rjbs.manxome.org/journal/'});
@@ -19,7 +24,7 @@ BEGIN { use_ok("Rubric::Link"); }
 
 	is_deeply(
 		$link->tags_counted,
-		[ [ qw(@markup 1) ], [ qw(blog 3) ] ],
+		[ [ qw(blog 3) ] ],
 		"tags counted"
 	);
 

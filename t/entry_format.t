@@ -8,7 +8,8 @@ BEGIN { use_ok("Rubric::Entry"); }
 # XXX: ugly, relies on guts -- rjbs, 2006-02-11
 Rubric::Config->markup_formatter->{test} = 'Rubric::Entry::Formatter::TEST';
 
-my $entry = Rubric::Entry->retrieve(1);
+# pick one with no body
+my ($entry) = Rubric::Entry->search(body => undef);
 isa_ok($entry, 'Rubric::Entry');
 
 { # when we start, there is no body

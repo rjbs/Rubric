@@ -7,6 +7,11 @@ use Time::Piece ();
 BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 BEGIN { use_ok("Rubric::Entry"); }
 
+use lib 't/lib';
+use Rubric::Test::DBSetup;
+init_test_db_ok;
+load_test_data_ok('t/dataset/basic.yml');
+
 
 {
   my $now = Time::Piece->new(time);
