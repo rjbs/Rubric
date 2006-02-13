@@ -7,7 +7,6 @@ BEGIN { use_ok("Rubric::Link"); }
 
 use lib 't/lib';
 use Rubric::Test::DBSetup;
-init_test_db_ok;
 load_test_data_ok('t/dataset/basic.yml');
 
 {

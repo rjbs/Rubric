@@ -13,7 +13,6 @@ BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 # setup the database a-fresh!
 use Rubric::Test::DBSetup;
 
-init_test_db_ok;
 load_test_data_ok('t/dataset/basic.yml');
 
 # Setup Rubric Webserver

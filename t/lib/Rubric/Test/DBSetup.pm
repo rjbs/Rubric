@@ -44,6 +44,8 @@ sub load_test_data_ok {
     );
   }
 
+  init_test_db_ok;
+  
   my $data = YAML::LoadFile($filename);
 
   eval {
