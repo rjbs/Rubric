@@ -55,8 +55,9 @@ sub _load_entry {
     my $user_entry = $user->quick_entry({
       uri   => $entry->{uri},
       title => $entry->{title},
-      tags  => $entry->{tags},
       body  => $entry->{body},
+      tags  => $entry->{tags},
+      description => $entry->{description},
     });
 
     if ($entry->{created}) {
