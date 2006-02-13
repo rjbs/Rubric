@@ -6,11 +6,13 @@ use Test::More 'no_plan';
 BEGIN { use_ok("Rubric::Link"); }
 
 {
-	my $link = Rubric::Link->retrieve(2);
+	my ($link)
+    = Rubric::Link->search({ uri => 'http://rjbs.manxome.org/journal/'});
+
 	isa_ok($link, 'Rubric::Link');
 	is(
 		$link,
-		"http://rjbs.manxome.org/bryar/",
+		"http://rjbs.manxome.org/journal/",
 		"proper stringification"
 	);
 	cmp_ok($link->entry_count, '>', 0, "some entries for this link");

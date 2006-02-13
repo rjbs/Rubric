@@ -28,7 +28,7 @@ BEGIN { use_ok("Rubric::Entry"); }
 
 {
 	my $entries = Rubric::Entry->query({
-		urimd5 => 'c927a368c7605aace0447f8f7061a145',
+		urimd5 => '3c57773b70f9678ed974b5eca73e2137',
 		tags   => {}, # empty tags list imposes no constriant
 	});
 
@@ -38,7 +38,7 @@ BEGIN { use_ok("Rubric::Entry"); }
 
 {
 	my $entries = Rubric::Entry->query({
-		urimd5 => 'c927a368c7605aace0447f8f7061a145',
+		urimd5 => '3c57773b70f9678ed974b5eca73e2137',
 		tags   => {}, # empty tags list imposes no constriant
 		first_only => 1,
 	});
