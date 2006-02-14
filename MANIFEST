@@ -4,7 +4,6 @@ bin/load_yml.pl
 bin/rubric
 bin/rubric.cgi
 Changes
-etc/rubric.yml
 inc/Module/Install.pm  
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
@@ -43,6 +42,10 @@ META.yml
 README
 rubric.yml
 style/rubric.css
+t/lib/Rubric/Test/Server.pm
+t/lib/Rubric/Test/DBSetup.pm
+t/config/rubric.yml
+t/dataset/basic.yml
 t/00-load.t
 t/10-dbsetup.t
 t/20-testdata.t
@@ -51,8 +54,6 @@ t/config_default.t
 t/entry.t
 t/entry_format.t
 t/entry_query.t
-t/lib/Rubric/Test/Server.pm
-t/lib/Rubric/Test/DBSetup.pm
 t/link.t
 t/pod-coverage.t
 t/pod.t
