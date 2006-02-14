@@ -122,6 +122,10 @@ sub cgiapp_init {
       -name    => 'rubric_session'
     }
   );
+
+  my $login_class = Rubric::Config->login_class;
+  eval "require $login_class";
+  $login_class->check_for_login($self);
 }
 
 =head2 cgiapp_prerun
@@ -135,10 +139,6 @@ path.
 sub cgiapp_prerun {
   my ($self) = @_;
   
-  my $login_class = Rubric::Config->login_class;
-  eval "require $login_class";
-  $login_class->check_for_login($self);
-
   $self->check_pager_data;
 
   my @path = split '/', $self->query->path_info;
@@ -398,7 +398,7 @@ object, then redirects the user to the root of the Rubric site.
 
 sub logout {
   my ($self) = @_;
-  $self->session->param('current_user', undef);
+  $self->session->clear('current_user');
   $self->param('current_user', undef);
 
   return $self->redirect_root("Logged out...");
