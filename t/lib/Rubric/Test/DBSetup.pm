@@ -11,7 +11,6 @@ our @EXPORT = qw(init_test_db_ok load_test_data_ok);
 use Test::More;
 
 use Digest::MD5 qw(md5_hex);
-use File::Basename;
 use File::Copy;
 use File::Spec;
 use File::Path qw(rmtree mkpath);
@@ -30,17 +29,39 @@ sub init_test_db_ok {
   }
 }
 
+sub _cache_db    { "t/db/$_[0].db"; }
+sub _have_cached { return -r _cache_db($_[0]); }
+
+sub tests_for_dataset {
+  my ($dataset_name) = @_;
+
+  my $tests = 1; # to copy to/from the cache
+  # just copy the cached, if we can
+  return $tests if _have_cached($dataset_name);
+
+  # otherwise, let's figure this out...
+  $tests += 1; # to initialize the database
+
+  my $filename = "t/dataset/$dataset_name.yml";
+  my $data = YAML::LoadFile($filename);
+
+  for my $user (@{ $data->{users} }) {
+    $tests += 1; # to load the user
+    $tests += @{ $user->{entries} };
+  }
+}
+
 sub load_test_data_ok {
-  my ($filename) = @_;
-  return unless -r $filename;
+  my ($dataset_name) = @_;
+  my $filename = "t/dataset/$dataset_name.yml";
+  die "$filename doesn't exist or isn't readable" unless -r $filename;
 
-  my $basename = fileparse($filename, '.yml');
-  my $cached_db = "t/db/$basename.db";
+  my $cached_db = _cache_db($dataset_name);
 
-  if (-e $cached_db) {
+  if (_have_cached($dataset_name)) {
     return ok(
       (copy $cached_db => 't/db/rubric.db'),
-      "restored $basename dataset from cache"
+      "restored $dataset_name dataset from cache"
     );
   }
 
@@ -50,7 +71,6 @@ sub load_test_data_ok {
 
   eval {
     _load_users($data->{users});
-    _load_entry($_) for @{ $data->{entries} };
   };
   if ($@) {
     fail "couldn't load test data in $filename: $@";
@@ -66,45 +86,49 @@ sub _load_users {
   for my $username (keys %$user) {
     my $user = $user->{ $username };
 
-    Rubric::User->create({
+    my $user_obj = Rubric::User->create({
       username => $username,
       password => md5_hex($user->{password}),
       email    => $user->{email},
     });
+
+    isa_ok($user_obj, 'Rubric::User', "created user ($username)");
+    _load_entry($user_obj, $_) for @{ $user->{entries} };
   }
 }
 
 sub _load_entry {
-  my ($entry) = @_;
+  my ($user, $entry) = @_;
 
-  for my $username (@{ $entry->{users} }) {
-    my $user = Rubric::User->retrieve($username);
+  my $user_entry = $user->quick_entry({
+    uri   => $entry->{uri},
+    title => $entry->{title},
+    body  => $entry->{body},
+    tags  => $entry->{tags},
+    description => $entry->{description},
+  });
 
-    my $user_entry = $user->quick_entry({
-      uri   => $entry->{uri},
-      title => $entry->{title},
-      body  => $entry->{body},
-      tags  => $entry->{tags},
-      description => $entry->{description},
-    });
+  if ($entry->{created}) {
+    my $now = ($entry->{created} eq 'now');
+    my $ctime = $now ? time : $entry->{created};
 
-    if ($entry->{created}) {
-      my $now = ($entry->{created} eq 'now');
-      my $ctime = $now ? time : $entry->{created};
-
-      if (my $var = $entry->{created_variance}) {
-        if ($now) {
-          $ctime -= int(rand($var));
-        } else {
-          $ctime += int(rand($var/2 + 1)) - $var / 2;
-        }
+    if (my $var = $entry->{created_variance}) {
+      if ($now) {
+        $ctime -= int(rand($var));
+      } else {
+        $ctime += int(rand($var/2 + 1)) - $var / 2;
       }
-
-      $user_entry->created($ctime);
-      $user_entry->update;
     }
 
+    $user_entry->created($ctime);
+    $user_entry->update;
   }
+
+  isa_ok(
+    $user_entry,
+    'Rubric::Entry',
+    (sprintf "entry (%u) for user (%s)", $user_entry->id, $user->username),
+  );
 }
 
 1;

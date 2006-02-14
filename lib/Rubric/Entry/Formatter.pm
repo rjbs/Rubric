@@ -41,11 +41,6 @@ C<markup_formatter>.
 
 =cut
 
-my $markup_formatter = Rubric::Config->markup_formatter;
-
-$markup_formatter->{_default} = 'Rubric::Entry::Formatter::Nil'
-  unless $markup_formatter->{_default};
-
 sub _load_formatter {
   my ($class, $formatter) = @_;
 
@@ -54,12 +49,24 @@ sub _load_formatter {
   return 0;
 }
 
+sub _formatter_for {
+  my ($class, $markup) = @_;
+
+  my $markup_formatter = Rubric::Config->markup_formatter;
+  $markup_formatter->{_default} = 'Rubric::Entry::Formatter::Nil'
+    unless $markup_formatter->{_default};
+
+  Carp::croak "no formatter is registered for $markup markup"
+    unless my $formatter = $markup_formatter->{ $markup };
+
+  return $formatter;
+}
+
 sub format {
   my ($class, $arg) = @_;
   my $config = {}; # extra configuration for formatter code
 
-  Carp::croak "no formatter is registered for $arg->{markup} markup"
-    unless my $formatter = $markup_formatter->{ $arg->{markup} };
+  my $formatter = $class->_formatter_for($arg->{markup});
 
   if (ref $formatter) {
     $config = $formatter;

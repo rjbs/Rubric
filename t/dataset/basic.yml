@@ -3,36 +3,46 @@ users:
   jjj:
     email: jjj@bugle.bz
     password: yellow
+    entries:
+      - uri: "http://rjbs.manxome.org/journal/"
+        title: "rjbs' journal"
+        created: now
+        created_variance: 604800
+        tags: blog
   eb:
     email: ed@brock.name
     password: black
+    entries:
+      - uri: "http://rjbs.manxome.org/journal/"
+        title: "rjbs' journal"
+        created: now
+        created_variance: 604800
+        tags: blog
+        user: eb
+      - uri: "http:/www.cnn.com/"
+        title: "CNN: This is CNN"
+        tags: news
+        users: eb
+      - uri: "http://news.bbc.co.uk/"
+        title: "BBC News"
+        tags: "news bbc"
+        users: eb
   mxlptlyk:
     email: mr.m@5th.dim
     password: kyltplxm
-entries:
-  - uri: "http://rjbs.manxome.org/journal/"
-    title: "rjbs' journal"
-    created: now
-    created_variance: 604800
-    tags: blog
-    users: [ jjj, eb, mxlptlyk ]
-    body: "This is the journal of the author of Rubric."
-  - uri: "http:/www.cnn.com/"
-    title: "CNN: This is CNN"
-    tags: news
-    users: [ eb ]
-  - uri: "http://news.bbc.co.uk/"
-    title: "BBC News"
-    tags: "news bbc"
-    users: [ eb ]
-  - uri: "http://www.dccomics.com/"
-    title: "DC Comics"
-    description: "they print lies!"
-    tags: "news lies comics"
-    users: [ mxlptlyk ]
-  - title: "secret plans!"
-    body: >
-      First, I'm going to need a French
-      poodle and a three-foot salami...
-    tags: plans @private
-    users: [ mxlptlyk ]
+    entries:
+      - uri: "http://rjbs.manxome.org/journal/"
+        title: "rjbs' journal"
+        created: now
+        created_variance: 604800
+        tags: blog
+        body: "This is the journal of the author of Rubric."
+      - uri: "http://www.dccomics.com/"
+        title: "DC Comics"
+        description: "they print lies!"
+        tags: "news lies comics"
+      - title: "secret plans!"
+        body: >
+          First, I'm going to need a French
+          poodle and a three-foot salami...
+        tags: plans @private
