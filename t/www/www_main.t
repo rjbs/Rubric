@@ -79,6 +79,7 @@ $mech->title_is("Rubric: entries", "we're redirected to root");
 
 { # entry view
   $mech->get_ok($root, "go back to the root");
+
   $mech->follow_link_ok(
     { text => '(body)', n => 1 },
     'follow a "view entry body" link',
@@ -88,7 +89,7 @@ $mech->title_is("Rubric: entries", "we're redirected to root");
 }
 
 { # entry deletion
-  $mech->get_ok($root, "go back to the root");
+  $mech->get_ok("$root/~jjj", "go back to our entries");
 
   $mech->follow_link_ok(
     { text => '(edit)', n => 1 },

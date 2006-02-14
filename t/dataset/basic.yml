@@ -9,6 +9,7 @@ users:
         created: now
         created_variance: 604800
         tags: blog
+        body: "This is the journal of the author of Rubric."
   eb:
     email: ed@brock.name
     password: black
@@ -18,15 +19,13 @@ users:
         created: now
         created_variance: 604800
         tags: blog
-        user: eb
+        body: "This is the journal of the author of Rubric."
       - uri: "http:/www.cnn.com/"
         title: "CNN: This is CNN"
         tags: news
-        users: eb
       - uri: "http://news.bbc.co.uk/"
         title: "BBC News"
         tags: "news bbc"
-        users: eb
   mxlptlyk:
     email: mr.m@5th.dim
     password: kyltplxm
