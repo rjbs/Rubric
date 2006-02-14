@@ -56,8 +56,10 @@ t/lib/Rubric/Test/DBSetup.pm
 t/link.t
 t/pod-coverage.t
 t/pod.t
+t/privacy.t
 t/renderer.t
 t/tagstrings.t
+t/uri.t
 t/user.t
 t/www/www_main.t
 templates/account_created.html

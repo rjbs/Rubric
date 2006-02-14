@@ -91,6 +91,7 @@ SELECT tag, COUNT(*) as count
 FROM   entrytags
 WHERE entry IN (SELECT id FROM entries WHERE created > ? LIMIT 100)
   AND tag NOT LIKE '@%%'
+  AND entry NOT IN (SELECT entry FROM entrytags WHERE tag = '@private')
 GROUP BY tag
 ORDER BY count DESC
 LIMIT 50

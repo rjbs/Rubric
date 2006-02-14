@@ -68,6 +68,9 @@ sub related_tags {
 	my ($self, $tags) = @_;
 	return unless $tags and my @tags = @$tags;
 
+  # or maybe we should throw an exception? -- rjbs, 2006-02-13
+  return [] if grep { $_ eq '@private' } @tags;
+
 	my $query = q|
 	SELECT DISTINCT tag FROM entrytags
 	WHERE
@@ -75,9 +78,9 @@ sub related_tags {
     AND tag NOT LIKE '@%'
 	  AND | .
 		join ' AND ',
-		map { "entry IN (SELECT entry FROM entrytags WHERE tag=$_)" }
-		map { $self->db_Main->quote($_) }
-		@tags;
+      map { "entry IN (SELECT entry FROM entrytags WHERE tag=$_)" }
+      map { $self->db_Main->quote($_) }
+      @tags;
 
 	$self->db_Main->selectcol_arrayref($query, undef);
 }
@@ -94,6 +97,9 @@ sub related_tags_counted {
   return unless $tags;
   $tags = [ keys %$tags ] if ref $tags eq 'HASH';
 	return unless my @tags = @$tags;
+
+  # or maybe we should throw an exception? -- rjbs, 2006-02-13
+  return [] if grep { $_ eq '@private' } @tags;
 
 	my $query = q|
 		SELECT DISTINCT tag, COUNT(*) AS count

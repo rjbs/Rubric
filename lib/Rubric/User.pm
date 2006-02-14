@@ -101,7 +101,7 @@ sub tags_counted {
 	return $tags;
 }
 
-=head3 related_tags(\@tags)
+=head3 related_tags(\@tags, \%context)
 
 This method returns a reference to an array of tags related to all the given
 tags.  Tags are related if they occur together on entries.  
@@ -109,9 +109,13 @@ tags.  Tags are related if they occur together on entries.
 =cut
 
 sub related_tags {
-	my ($self, $tags) = @_;
+	my ($self, $tags, $context) = @_;
   $tags = [ keys %$tags ] if ref $tags eq 'HASH';
 	return unless $tags and my @tags = @$tags;
+
+  # or an exception?
+  return [] if  (grep { $_ eq '@private' } @$tags)
+         and (($context->{user}||'') ne $self->username);
 
 	my $query = q|
 	SELECT DISTINCT tag FROM entrytags
@@ -127,7 +131,7 @@ sub related_tags {
 	$self->db_Main->selectcol_arrayref($query, undef, $self->username);
 }
 
-=head3 related_tags_counted(\@tags)
+=head3 related_tags_counted(\@tags, \%context)
 
 This is the obvious conjunction of C<related_tags> and C<tags_counted>.  It
 returns an arrayref of arrayrefs, each a pair of tag/occurance values.
@@ -135,10 +139,14 @@ returns an arrayref of arrayrefs, each a pair of tag/occurance values.
 =cut
 
 sub related_tags_counted {
-	my ($self, $tags) = @_;
+	my ($self, $tags, $context) = @_;
   return unless $tags;
   $tags = [ keys %$tags ] if ref $tags eq 'HASH';
 	return unless my @tags = @$tags;
+
+  # or an exception?
+  return [] if  (grep { $_ eq '@private' } @$tags)
+         and (($context->{user}||'') ne $self->username);
 
 	my $query = q|
 		SELECT DISTINCT tag, COUNT(*) AS count
