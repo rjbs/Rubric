@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 use base qw(Exporter);
-our @EXPORT = qw(init_test_db_ok load_test_data_ok);
+our @EXPORT = qw(init_test_db_ok load_test_data_ok tests_for_dataset);
 
 use Test::More;
 
@@ -45,10 +45,12 @@ sub tests_for_dataset {
   my $filename = "t/dataset/$dataset_name.yml";
   my $data = YAML::LoadFile($filename);
 
-  for my $user (@{ $data->{users} }) {
+  for my $user (values %{ $data->{users} }) {
     $tests += 1; # to load the user
     $tests += @{ $user->{entries} };
   }
+
+  return $tests;
 }
 
 sub load_test_data_ok {

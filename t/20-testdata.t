@@ -2,18 +2,13 @@
 use strict;
 use warnings;
 
-use Test::More 'no_plan';
-
-BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
-
-BEGIN {
-  use_ok('Rubric::Link');
-  use_ok('Rubric::User');
-}
-
+use Test::More;
 use Digest::MD5 qw(md5_hex);
-use lib 't/lib';
+use Rubric::Config 't/config/rubric.yml'; 
 
+use lib 't/lib';
 use Rubric::Test::DBSetup;
+
+plan tests => tests_for_dataset('basic');
 
 load_test_data_ok('basic');
