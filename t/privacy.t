@@ -11,7 +11,7 @@ BEGIN { use_ok("Rubric::User"); }
 
 use lib 't/lib';
 use Rubric::Test::DBSetup;
-load_test_data_ok('t/dataset/basic.yml');
+load_test_data_ok('basic');
 
 # entrytag->related_tags
 { # global entrytag query
