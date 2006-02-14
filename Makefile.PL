@@ -39,4 +39,5 @@ tests         ($files);
 
 sign(1);
 
+auto_install;
 WriteAll();
