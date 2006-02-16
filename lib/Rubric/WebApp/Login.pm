@@ -91,7 +91,7 @@ is a valid username.
 
 sub valid_username {
 	my ($self, $username) = @_;
-	$username =~ /^\w+$/;
+	$username =~ /^[\pL\d_]+$/;
 }
 
 =head2 get_login_user($username)

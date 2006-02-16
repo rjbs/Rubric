@@ -212,10 +212,10 @@ sub tags_from_string {
 	               split /(?:\+|\s)+/, $tagstring;
 
 	die "invalid characters in tagstring" 
-		if grep { defined $_ and $_ !~ /\A[@\w\d:.*][-\w\d:.*]*\z/ } keys %tags;
+		if grep { defined $_ and $_ !~ /\A[@\pL\d_:.*][-\pL\d_:.*]*\z/ } keys %tags;
 
 	die "invalid characters in tagstring" 
-		if grep { defined $_ and $_ !~ /\A[-\w\d:.*]*\z/ } values %tags;
+		if grep { defined $_ and $_ !~ /\A[-\pL\d:_.*]*\z/ } values %tags;
 
 	return \%tags;
 }

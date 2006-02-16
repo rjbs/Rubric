@@ -206,7 +206,7 @@ sub template {
   $stash->{page} = $self->param('page');
 
   my $type = $self->query->param('format');
-     $type = 'html' unless $type and $type =~ /^\w+$/;
+     $type = 'html' unless $type and $type =~ /^[\pL\d_]+$/;
 
   my ($content_type, $output) =
     Rubric::Renderer->process($template, $type, $stash);
@@ -605,7 +605,7 @@ sub validate_newuser_form {
   my ($self, $newuser) = @_;
   my %errors;
 
-  if ($newuser->{username} and $newuser->{username} !~ /^[\w\d.]+$/) {
+  if ($newuser->{username} and $newuser->{username} !~ /^[\pL\d_.]+$/) {
     undef $newuser->{username};
     $errors{username_invalid} = 1;
   } elsif (Rubric::User->retrieve($newuser->{username})) {
@@ -1019,8 +1019,8 @@ sub get_doc {
   my ($self) = @_;
 
   my $doc_page = $self->next_path_part;
-  return $doc_page =~ /^\w+$/ ? $self->param(doc_page => $doc_page)
-                              : ();
+  return $doc_page =~ /^[\pL\d_]+$/ ? $self->param(doc_page => $doc_page)
+                                    : ();
 }
 
 =head1 TODO
