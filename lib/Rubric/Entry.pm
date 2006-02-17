@@ -39,7 +39,7 @@ __PACKAGE__->table('entries');
 =cut
 
 __PACKAGE__->columns(
-	All => qw(id link user title description body created modified)
+  All => qw(id link user title description body created modified)
 );
 
 =head1 RELATIONSHIPS
@@ -97,11 +97,11 @@ ORDER BY count DESC
 LIMIT 50
 
 sub recent_tags_counted {
-	my ($class) = @_;
-	my $sth = $class->sql_recent_tags_counted;
-	$sth->execute(time - (86400 * 7));
-	my $result = $sth->fetchall_arrayref;
-	return $result;
+  my ($class) = @_;
+  my $sth = $class->sql_recent_tags_counted;
+  $sth->execute(time - (86400 * 7));
+  my $result = $sth->fetchall_arrayref;
+  return $result;
 }
 
 =head1 INFLATIONS
@@ -116,10 +116,10 @@ inflated to Time::Piece objects.
 =cut
 
 __PACKAGE__->has_a(
-	$_ => 'Time::Piece',
-	deflate => 'epoch',
-	inflate => Rubric::Config->display_localtime ? sub { localtime($_[0]) }
-	                                             : sub { gmtime($_[0]) }
+  $_ => 'Time::Piece',
+  deflate => 'epoch',
+  inflate => Rubric::Config->display_localtime ? sub { localtime($_[0]) }
+                                               : sub { gmtime($_[0]) }
 ) for qw(created modified);
 
 __PACKAGE__->add_trigger(before_create => \&_default_title);
@@ -128,19 +128,19 @@ __PACKAGE__->add_trigger(before_create => \&_create_times);
 __PACKAGE__->add_trigger(before_update => \&_update_times);
 
 sub _default_title {
-	my $self = shift;
-	$self->title('(default)') unless $self->{title}
+  my $self = shift;
+  $self->title('(default)') unless $self->{title}
 }
 
 sub _create_times {
-	my $self = shift;
-	$self->created(scalar gmtime) unless defined $self->{created};
-	$self->modified(scalar gmtime) unless defined $self->{modified};
+  my $self = shift;
+  $self->created(scalar gmtime) unless defined $self->{created};
+  $self->modified(scalar gmtime) unless defined $self->{modified};
 }
 
 sub _update_times {
-	my $self = shift;
-	$self->modified(scalar gmtime);
+  my $self = shift;
+  $self->modified(scalar gmtime);
 }
 
 =head1 METHODS
@@ -166,9 +166,9 @@ the result of running it.  (Either a list or an Iterator is returned.)
 =cut
 
 sub query {
-	my $self = shift;
-	require Rubric::Entry::Query;
-	Rubric::Entry::Query->query(@_);
+  my $self = shift;
+  require Rubric::Entry::Query;
+  Rubric::Entry::Query->query(@_);
 }
 
 =head2 set_new_tags(\%tags)
@@ -178,9 +178,9 @@ This method replaces all entry's current tags with the new set of tags.
 =cut
 
 sub set_new_tags {
-	my ($self, $tags) = @_;
-	$self->entrytags->delete_all;
-	$self->update;
+  my ($self, $tags) = @_;
+  $self->entrytags->delete_all;
+  $self->update;
 
   while (my ($tag, $value) = each %$tags) {
     $self->add_to_tags({ tag => $tag, tag_value => $value });
@@ -199,25 +199,25 @@ used, but not as the first character.
 =cut
 
 sub tags_from_string {
-	my ($class, $tagstring) = @_;
+  my ($class, $tagstring) = @_;
 
   return {} unless $tagstring and $tagstring =~ /\S/;
 
-	_utf8_on($tagstring);
+  _utf8_on($tagstring);
 
   # remove leading and trailing spaces
   $tagstring =~ s/\A\s*//;
 
-	my %tags = map { (index($_, ':') > 0) ? split(/:/, $_, 2) : ($_ => undef) }
-	               split /(?:\+|\s)+/, $tagstring;
+  my %tags = map { (index($_, ':') > 0) ? split(/:/, $_, 2) : ($_ => undef) }
+                 split /(?:\+|\s)+/, $tagstring;
 
-	die "invalid characters in tagstring" 
-		if grep { defined $_ and $_ !~ /\A[@\pL\d_:.*][-\pL\d_:.*]*\z/ } keys %tags;
+  die "invalid characters in tagstring" 
+    if grep { defined $_ and $_ !~ /\A[@\pL\d_:.*][-\pL\d_:.*]*\z/ } keys %tags;
 
-	die "invalid characters in tagstring" 
-		if grep { defined $_ and $_ !~ /\A[-\pL\d:_.*]*\z/ } values %tags;
+  die "invalid characters in tagstring" 
+    if grep { defined $_ and $_ !~ /\A[-\pL\d:_.*]*\z/ } values %tags;
 
-	return \%tags;
+  return \%tags;
 }
 
 =head2 C< body_as >
