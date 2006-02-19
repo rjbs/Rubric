@@ -199,3 +199,12 @@ div.document li p {
 div#footer {
 	text-align: center
 }
+
+div[class~="markup:md"] pre {
+  color: #000;
+  padding: .5em 1.5em;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: #ddd;
+  border: thin black dashed;
+}
