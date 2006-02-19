@@ -229,7 +229,7 @@ the entry cannot be rendered into the given format, an exception is thrown.
 
 =cut
 
-sub _markup {
+sub markup {
   my ($self) = @_;
 
   my ($tag)
@@ -241,7 +241,7 @@ sub _markup {
 sub body_as {
   my ($self, $format) = @_;
 
-  my $markup = $self->_markup;
+  my $markup = $self->markup;
 
   Rubric::Entry::Formatter->format({
     text   => $self->body,
