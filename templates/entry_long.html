@@ -24,7 +24,7 @@
 			[% "by " _ entry.user UNLESS user %]
 		</div>
 		[% IF entry.body %]
-		<div class='body markup:[% entry._markup %]'>
+		<div class='body markup:[% entry.markup %]'>
 		[% TRY %]
       [% entry.body_as('html') %]
     [% CATCH %]
