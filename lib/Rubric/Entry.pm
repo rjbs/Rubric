@@ -229,14 +229,19 @@ the entry cannot be rendered into the given format, an exception is thrown.
 
 =cut
 
-sub body_as {
-  my ($self, $format) = @_;
+sub _markup {
+  my ($self) = @_;
 
-  my $markup;
   my ($tag)
     = Rubric::EntryTag->search({ entry => $self->id, tag => '@markup' });
 
-  $markup = ($tag and $tag->tag_value) ? $tag->tag_value : '_default';
+  return ($tag and $tag->tag_value) ? $tag->tag_value : '_default';
+}
+
+sub body_as {
+  my ($self, $format) = @_;
+
+  my $markup = $self->_markup;
 
   Rubric::Entry::Formatter->format({
     text   => $self->body,
