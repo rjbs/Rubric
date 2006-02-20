@@ -1,27 +1,35 @@
 	<div class='entry longform'>
-		<h2 class='created'>
-			[% entry.created.strftime("%Y-%m-%d %H:%M") %]
-		</h2>
 		<h2 class='uri'>
 			[% IF entry.link %]
 				<a class='title' href='[% entry.link %]'>[% entry.title | html %]</a>
 			[% ELSE %]
 				[% entry.title | html %]
 			[% END %]
-			[% IF current_user == entry.user %]
-			<a href="[% uri.edit_entry(entry) %]?then_goto=[% self_url | uri %]">(edit)</a>
-			[% END %]
+      [% IF current_user == entry.user %]
+      <a href="[% uri.edit_entry(entry) %]?then_goto=[% self_url | uri %]">(edit)</a>
+      [% END %]
 		</h2>
 		[% IF entry.description %]
 		<div class='description'>[% entry.description | html %]</div>
 		[% END %]
+    <div class='created'>
+			created [% entry.created.strftime("%Y-%m-%d %H:%M") %]
+			[% UNLESS user %]
+			by <a href='[% uri.entries(user => entry.user) %]'>[% entry.user %]</a>
+      [% END %]
+    </div>
+    [% IF entry.created != entry.modified %]
+    <div class='created'>
+			last modified [% entry.modified.strftime("%Y-%m-%d %H:%M") %]
+    </div>
+    [% END %]
 		<div class='tags'>
+      tagged with:
 			[% FOREACH tag = entry.entrytags %]
 			<a href='[% uri.entries(user => user, tags => [ tag.tag ]) %]'
       >[% tag.tag %]</a>[% IF tag.tag_value %]:<a href='[% uri.entries(user => user, tags => [ tag ]) %]'>[% tag.tag_value %]</a>
       [% END %]
 			[% END %]
-			[% "by " _ entry.user UNLESS user %]
 		</div>
 		[% IF entry.body %]
 		<div class='body markup:[% entry.markup %]'>
