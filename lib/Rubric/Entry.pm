@@ -187,10 +187,12 @@ sub set_new_tags {
   }
 }
 
-=head2 tags_from_string($taglist)
+=head2 tags_from_string
+
+  my $tags = Rubric::Entry->tags_from_string($string);
 
 This (class) method takes a string of tags, delimited by whitespace, and
-returns an array of the tags, dropping invalid tags.
+returns an array of the tags, throwing an exception if it finds invalid tags.
 
 Valid tags (shouldn't this be documented somewhere else instead?) may contain
 letters, numbers, underscores, colons, dots, and asterisks.  Hyphens me be
@@ -220,12 +222,10 @@ sub tags_from_string {
   return \%tags;
 }
 
-=head2 C< body_as >
+=head2 C< markup >
 
-  my $formatted_body = $entry->body_as("html");
-
-This method returns the body of the entry, formatted into the given format.  If
-the entry cannot be rendered into the given format, an exception is thrown.
+This method returns the value of the entry's @markup tag, or C<_default> if
+there is no such tag.
 
 =cut
 
@@ -237,6 +237,16 @@ sub markup {
 
   return ($tag and $tag->tag_value) ? $tag->tag_value : '_default';
 }
+
+
+=head2 C< body_as >
+
+  my $formatted_body = $entry->body_as("html");
+
+This method returns the body of the entry, formatted into the given format.  If
+the entry cannot be rendered into the given format, an exception is thrown.
+
+=cut
 
 sub body_as {
   my ($self, $format) = @_;

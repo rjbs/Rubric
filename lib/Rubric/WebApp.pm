@@ -251,7 +251,13 @@ sub _default_handler {
 sub _entries_shortcut {
   my ($self, $user) = @_;
   my $path = $self->param('path');
-  unshift @$path, 'user', $user, 'tags';
+
+  # If there the number of elements in the path is odd, the first one is tags;
+  # otherwise, it's a normal query; this may or may not be safe, in the end.  I
+  # guess we'll find out. -- rjbs, 2006-02-20
+  unshift @$path, 'tags' if @$path % 2;
+  unshift @$path, 'user', $user;
+
   $self->entries;
 }
 
@@ -523,7 +529,6 @@ sub validate_prefs {
   };
   
   my $results = Data::FormValidator->check($prefs, $profile);
-
 }
 
 =end future
