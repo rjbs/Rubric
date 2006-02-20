@@ -58,6 +58,10 @@ sub _private_constraint {
 		"id NOT IN (SELECT entry FROM entrytags WHERE tag=$priv_tag))";
 }
 
+sub _nolist_constraint {
+	return q{id NOT IN (SELECT entry FROM entrytags WHERE tag='@nolist')};
+}
+
 sub query {
 	my ($self, $arg, $context) = @_;
 	$context ||= {};
@@ -65,6 +69,7 @@ sub query {
 	my @constraints = map { $self->get_constraint($_, $arg->{$_}) } keys %$arg;
 	@constraints = ("1 = 0") if grep { not defined } @constraints;
 	
+  push @constraints, $self->_nolist_constraint;
 	push @constraints, $self->_private_constraint($context->{user})
 		if exists $context->{user};
 	
