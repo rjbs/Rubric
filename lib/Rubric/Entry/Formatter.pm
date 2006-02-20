@@ -69,7 +69,7 @@ sub format {
   my $formatter = $class->_formatter_for($arg->{markup});
 
   if (ref $formatter) {
-    $config = $formatter;
+    $config = { %$formatter };
     Carp::croak "formatter config for $arg->{markup} includes no class"
       unless $formatter = delete $config->{class};
   }
