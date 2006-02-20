@@ -45,7 +45,6 @@ MANIFEST			This list of files
 META.yml
 README
 Rubric-0.13_02.tar.gz
-rubric.yml
 style/rubric.css
 t/00-load.t
 t/10-dbsetup.t
@@ -54,8 +53,6 @@ t/config/rubric.yml
 t/config_custom.t
 t/config_default.t
 t/dataset/basic.yml
-t/db/basic.db
-t/db/rubric.db
 t/entry.t
 t/entry_format.t
 t/entry_query.t
