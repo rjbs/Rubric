@@ -26,8 +26,8 @@
 	&nbsp;</div>
 	[% END %]
   <br />
-  [% IF user %]
-  <h4><a href='[% uri.entries(tags => tags) %]'>just your entries</a></h4>
+  [% IF (user && (user == current_user)) %]
+  <h4><a href='[% uri.entries(tags => tags) %]'>for all users</a></h4>
   [% ELSE %]
   <h4><a href='[% uri.entries(user => current_user, tags => tags) %]'>for you</a></h4>
   [% END %]
