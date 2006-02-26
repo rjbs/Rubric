@@ -32,6 +32,8 @@ requires('Test::HTTP::Server::Simple' => '0.02');
 requires('Test::WWW::Mechanize'       => '1.04');
 requires('CGI::Application::Plugin::Session' => 0);
 
+install_script('bin/rubric');
+
 my $files = '';
 find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
 
