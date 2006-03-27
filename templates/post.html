@@ -71,7 +71,9 @@
 				</td></tr>
 				<tr>
 					<th style='vertical-align:top'>body</th>
-					<td><textarea name='body' cols='72' rows='10'>[% existing_entry.body %]</textarea></td>
+					<td><textarea name='body' cols='72' rows='10'>[%
+          form.body OR existing_entry.body
+          %]</textarea></td>
 				</tr>
 				<tr><td class='submit' colspan='2'>
           [% widget.hidden(name => 'entryid',   value => existing_entry.id) %]
