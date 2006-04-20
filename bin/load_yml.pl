@@ -9,16 +9,17 @@ my $yaml;
 my $links = YAML::Load($yaml);
 
 foreach (@$links) {
-	my $link = Rubric::Link->find_or_create({uri => $_->{href}});
+	my $link = Rubric::Link->find_or_create({uri => $_->{link}});
+  $link ||= '';
 	my $entry = $user->add_to_entries({
 		link  => $link,
-		title => $_->{description},
-		description => $_->{extended},
+		title => $_->{title},
+		description => $_->{description},
 		body     => $_->{body},
-		created  => $_->{created} || $_->{datetime},
-		modified => $_->{modified} || $_->{datetime},
+		created  => $_->{created},
+		modified => $_->{modified},
 	});
-	$entry->add_to_tags({tag => $_}) for @{$_->{tags}};
+	$entry->add_to_tags({tag => $_}) for keys %{$_->{tags}};
 }
 
 $user->update;

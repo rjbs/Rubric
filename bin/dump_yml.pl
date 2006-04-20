@@ -24,6 +24,12 @@ sub entry_to_hash {
     $hash->{$_} = "" . $entry->$_ if $entry->$_;
   }
 
+  my $time_piece;
+  for (qw(created modified)) {
+    $time_piece = Time::Piece->strptime($hash->{$_}, "%a %b %d %T %Y");
+    $hash->{$_} = $time_piece->epoch;
+  }
+
   for my $entrytag ($entry->entrytags) {
     $hash->{tags}->{ $entrytag->tag } = $entrytag->tag_value;
   }
