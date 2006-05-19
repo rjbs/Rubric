@@ -39,7 +39,5 @@ find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
 
 tests         ($files);
 
-sign(1);
-
 auto_install;
 WriteAll();
