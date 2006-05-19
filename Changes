@@ -1,10 +1,10 @@
 Revision history for Rubric
 
-0.16    2005-11-??
-        updates to some scripts
 
-0.14    2005-11-05
+0.140   2006-05-18
+        new version numbering, new release schedule: less stable, more often
         fix a small RSS bug that bugged a large number Firefox users
+        lots of forgotten changes
 
 0.12    2005-10-26 (long overdue)
         some tiny test cleanups that might make tests... pass!
