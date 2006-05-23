@@ -993,7 +993,7 @@ sub delete {
   $self->param('entry')->delete;
 
   my $goto = $self->query->param('then_goto')
-           || Rubric::WebApp::URI->entries({ user => $user }); 
+           || Rubric::WebApp::URI->entries({ username => $user }); 
 
   return $self->redirect( $goto, "Deleted..." );
 }

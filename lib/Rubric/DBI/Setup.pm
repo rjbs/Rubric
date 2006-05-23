@@ -502,7 +502,46 @@ END_SQL
 	$dbh->do($_) for split /\n\n/, $sql;
 };
 
-$from{10} = undef;
+$from{10} = sub{
+	my $sql = <<'END_SQL';
+  CREATE TABLE new_entries (
+    id          integer PRIMARY KEY,
+    link        integer,
+    username    varchar NOT NULL,
+    title       varchar NOT NULL,
+    created     integer NOT NULL,
+    modified    integer NOT NULL,
+    description varchar,
+    body                TEXT
+  );
+
+  INSERT INTO new_entries 
+    SELECT id, link, user, title, created, modified, description, body FROM entries;
+  
+  DROP TABLE entries;
+  
+  CREATE TABLE entries (
+    id          integer PRIMARY KEY,
+    link        integer,
+    username    varchar NOT NULL,
+    title       varchar NOT NULL,
+    created     integer NOT NULL,
+    modified    integer NOT NULL,
+    description varchar,
+    body                TEXT
+  );
+
+  INSERT INTO entries 
+    SELECT id, link, user, title, created, modified, description, body FROM new_entries;
+
+  DROP TABLE new_entries;
+
+  UPDATE rubric SET schema_version = 11;
+END_SQL
+
+	$dbh->do($_) for split /\n\n/, $sql;
+};
+$from{11} = undef;
 
 sub update_schema {
 	my ($class) = @_;
@@ -556,7 +595,7 @@ CREATE TABLE users (
 CREATE TABLE entries (
 	id          integer PRIMARY KEY,
 	link        integer,
-	user        varchar NOT NULL,
+	username    varchar NOT NULL,
 	title       varchar NOT NULL,
 	created     integer NOT NULL,
 	modified    integer NOT NULL,
@@ -576,4 +615,4 @@ CREATE TABLE rubric (
 	schema_version integer NOT NULL
 );
 
-INSERT INTO rubric (schema_version) VALUES (10);
+INSERT INTO rubric (schema_version) VALUES (11);

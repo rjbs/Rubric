@@ -29,7 +29,7 @@ __PACKAGE__->table('entries');
 
  id          - a unique identifier
  link        - the link to which the entry refers
- user        - the user who made the entry
+ username    - the user who made the entry
  title       - the title of the link's destination
  description - a short description of the entry
  body        - a long body of text for the entry
@@ -39,7 +39,7 @@ __PACKAGE__->table('entries');
 =cut
 
 __PACKAGE__->columns(
-  All => qw(id link user title description body created modified)
+  All => qw(id link username title description body created modified)
 );
 
 =head1 RELATIONSHIPS
@@ -60,13 +60,13 @@ The uri attribute returns the URI of the entry's link.
 
 sub uri { my ($self) = @_; return unless $self->link; $self->link->uri; }
 
-=head2 user
+=head2 username
 
 The user attribute returns a Rubric::User.
 
 =cut
 
-__PACKAGE__->has_a(user => 'Rubric::User');
+__PACKAGE__->has_a(username => 'Rubric::User');
 
 =head2 tags
 
@@ -258,6 +258,14 @@ sub body_as {
     markup => $markup,
     format => $format
   });
+}
+
+sub accessor_name {
+  my ($class, $field) = @_;
+
+  return 'user' if $field eq 'username';
+
+  return $field;
 }
 
 ## return retrieve_all'd objects in recent-to-older order

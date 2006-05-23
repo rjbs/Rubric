@@ -54,7 +54,7 @@ sub _private_constraint {
 	
 	$user = Rubric::Entry->db_Main->quote($user);
 	return
-		"((user = $user) OR " .
+		"((username = $user) OR " .
 		"id NOT IN (SELECT entry FROM entrytags WHERE tag=$priv_tag))";
 }
 
@@ -128,7 +128,7 @@ the user.
 sub constraint_for_user {
 	my ($self, $user) = @_;
 	return undef unless $user;
-	return "user = " . Rubric::Entry->db_Main->quote($user);
+	return "username = " . Rubric::Entry->db_Main->quote($user);
 }
 
 =head3 constraint_for_tags($tags)

@@ -18,7 +18,7 @@ BEGIN { use_ok("Rubric::Entry"); }
 }
 
 {
-	my $entry = Rubric::Entry->create({ user => 'jjj' });
+	my $entry = Rubric::Entry->create({ username => 'jjj' });
 	my $tags = Rubric::Entry->tags_from_string("test more simple");
 	$entry->set_new_tags($tags);
 
@@ -28,7 +28,7 @@ BEGIN { use_ok("Rubric::Entry"); }
 
 {
 	my $entry = Rubric::Entry->create({
-		user     => 'eb',
+		username     => 'eb',
 		title    => 'poot',
     created  => 1100000000,
 		modified => 1132722700,

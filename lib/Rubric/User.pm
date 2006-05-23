@@ -65,7 +65,7 @@ colation order.
 __PACKAGE__->set_sql(tags => <<'' );
 SELECT DISTINCT tag
 FROM entrytags
-WHERE entry IN (SELECT id FROM entries WHERE user = ?)
+WHERE entry IN (SELECT id FROM entries WHERE username = ?)
   AND tag NOT LIKE '@%%'
 ORDER BY tag
 
@@ -88,7 +88,7 @@ by tag name.
 __PACKAGE__->set_sql(tags_counted => <<'' );
 SELECT DISTINCT tag, COUNT(*) AS count
 FROM entrytags
-WHERE entry IN (SELECT id FROM entries WHERE user = ?)
+WHERE entry IN (SELECT id FROM entries WHERE username = ?)
   AND tag NOT LIKE '@%%'
 GROUP BY tag
 ORDER BY tag
@@ -119,7 +119,7 @@ sub related_tags {
 
 	my $query = q|
 	SELECT DISTINCT tag FROM entrytags
-	WHERE entry IN (SELECT id FROM entries WHERE user = ?)
+	WHERE entry IN (SELECT id FROM entries WHERE username = ?)
     AND tag NOT IN (| . join(',',map { $self->db_Main->quote($_) } @tags) . q|)
     AND tag NOT LIKE '@%'
 	  AND | .
@@ -151,7 +151,7 @@ sub related_tags_counted {
 	my $query = q|
 		SELECT DISTINCT tag, COUNT(*) AS count
 		FROM entrytags
-		WHERE entry IN (SELECT id FROM entries WHERE user = ?)
+		WHERE entry IN (SELECT id FROM entries WHERE username = ?)
     AND tag NOT IN (| . join(',',map { $self->db_Main->quote($_) } @tags) . q|)
 		AND tag NOT LIKE '@%'
     AND | .
@@ -219,8 +219,8 @@ sub quick_entry {
 	my $new_entry = $entry->{entryid}
 		? Rubric::Entry->retrieve($entry->{entryid})
 		: $link
-			? Rubric::Entry->find_or_create({ link => $link, user => $self })
-			: Rubric::Entry->create({ user => $self });
+			? Rubric::Entry->find_or_create({ link => $link, username => $self })
+			: Rubric::Entry->create({ username => $self });
 
 	$new_entry->link($link);
 	$new_entry->title($entry->{title});
