@@ -532,7 +532,7 @@ $from{10} = sub{
   );
 
   INSERT INTO entries 
-    SELECT id, link, user, title, created, modified, description, body FROM new_entries;
+    SELECT id, link, username, title, created, modified, description, body FROM new_entries;
 
   DROP TABLE new_entries;
 
