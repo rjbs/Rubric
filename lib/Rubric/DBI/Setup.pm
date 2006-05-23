@@ -502,7 +502,7 @@ END_SQL
 	$dbh->do($_) for split /\n\n/, $sql;
 };
 
-$from{10} = sub{
+$from{10} = sub {
 	my $sql = <<'END_SQL';
   CREATE TABLE new_entries (
     id          integer PRIMARY KEY,
@@ -516,7 +516,8 @@ $from{10} = sub{
   );
 
   INSERT INTO new_entries 
-    SELECT id, link, user, title, created, modified, description, body FROM entries;
+    SELECT id, link, user, title, created, modified, description, body
+      FROM entries;
   
   DROP TABLE entries;
   
@@ -532,7 +533,8 @@ $from{10} = sub{
   );
 
   INSERT INTO entries 
-    SELECT id, link, username, title, created, modified, description, body FROM new_entries;
+    SELECT id, link, username, title, created, modified, description, body
+      FROM new_entries;
 
   DROP TABLE new_entries;
 
@@ -541,6 +543,7 @@ END_SQL
 
 	$dbh->do($_) for split /\n\n/, $sql;
 };
+
 $from{11} = undef;
 
 sub update_schema {

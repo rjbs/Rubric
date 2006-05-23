@@ -15,7 +15,7 @@ all_pod_coverage_ok(
       'describe_options',
       'as_html',
       'as_text',
-      'accessor_name',
+      'accessor_name_for',
     ]
   },
 );

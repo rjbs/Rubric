@@ -260,7 +260,7 @@ sub body_as {
   });
 }
 
-sub accessor_name {
+sub accessor_name_for {
   my ($class, $field) = @_;
 
   return 'user' if $field eq 'username';

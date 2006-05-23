@@ -36,9 +36,9 @@ sub execute {
   my ($class) = @_;
   my ($opt, $usage) = $class->describe_options;
 
-  if ($opt->{mode} eq 'super') {
+  if ($opt->{mode} eq 'setup') {
     Rubric::DBI::Setup->setup_tables;
-  } elsif ($opt->{update} eq 'update') {
+  } elsif ($opt->{mode} eq 'update') {
     Rubric::DBI::Setup->update_schema;
   }
 }
