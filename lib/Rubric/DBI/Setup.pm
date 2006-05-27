@@ -515,12 +515,12 @@ $from{10} = sub {
     body                TEXT
   );
 
-  INSERT INTO new_entries 
+  INSERT INTO new_entries (id, link, username, title, created, modified, description, body)
     SELECT id, link, user, title, created, modified, description, body
       FROM entries;
-  
+
   DROP TABLE entries;
-  
+
   CREATE TABLE entries (
     id          integer PRIMARY KEY,
     link        integer,
@@ -541,7 +541,7 @@ $from{10} = sub {
   UPDATE rubric SET schema_version = 11;
 END_SQL
 
-	$dbh->do($_) for split /\n\n/, $sql;
+  $dbh->do($_) for split /\n\n/, $sql;
 };
 
 $from{11} = undef;

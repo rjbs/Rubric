@@ -52,6 +52,14 @@ the username to be used by Rubric::DBI to connect to the Rubric's database
 
 the password to be used by Rubric::DBI to connect to the Rubric's database
 
+=item * dbi_trace_level
+
+level of debug output for DBI 
+
+=item * dbi_trace_file
+
+Where to send DBI debug output if dbi_trace_level
+
 =item * uri_root
 
 the absolute URI for the root of the Rubric::WebApp install
@@ -177,6 +185,8 @@ my $default = {
 	db_user     => undef,
 	db_pass     => undef,
 	dsn         => undef,
+	dbi_trace_level => 0,
+	dbi_trace_file  => undef,
 	email_from  => undef,
 	login_class => 'Rubric::WebApp::Login::Post',
 	smtp_server => undef,

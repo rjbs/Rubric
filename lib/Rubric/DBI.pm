@@ -22,6 +22,8 @@ use base qw(Class::DBI);
 
 use Class::DBI::AbstractSearch;
 
+DBI->trace(Rubric::Config->dbi_trace_level, Rubric::Config->dbi_trace_file);
+
 my $dsn = Rubric::Config->dsn;
 my $db_user = Rubric::Config->db_user;
 my $db_pass = Rubric::Config->db_pass;
