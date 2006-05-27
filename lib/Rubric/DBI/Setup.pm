@@ -63,10 +63,28 @@ This method builds the tables in the database, if needed.
 
 sub setup_tables {
 	my ($class) = @_;
+
 	local $/ = "\n\n";
-	$class->dbh->do($_) for <DATA>;
+  $class->dbh->do( $class->specialize_sql($_) ) for <DATA>;
 }
 
+=head2 specialize_sql
+
+attempts to convert the given sql syntax to the given DBD Driver's
+
+=cut
+
+sub specialize_sql {
+  my ($class, $query) = @_;
+  
+  my $db_type = $class->determine_db_type;
+  
+  if ($db_type eq 'Pg') { 
+    $query =~ s/(id\s*)integer/$1SERIAL/i;
+  }
+  
+  return $query;
+}
 
 =head2 determine_version
 
@@ -109,6 +127,23 @@ sub determine_version {
 	return 1 if $class->_columns("SELECT * FROM links LIMIT 1") == 2;
 
 	return;
+}
+
+=head2 determine_db_type
+
+Returns the type of db being used, based on the DSN's DBD driver.
+SQLite and Pg support only right now.
+
+=cut
+
+sub determine_db_type {
+	my ($class) = @_;
+  
+  Rubric::Config->dsn =~ /dbi:([^:]+):/;
+  
+  my $db_type = $1;
+
+  return $db_type;
 }
 
 =head2 update_schema
@@ -548,6 +583,7 @@ $from{11} = undef;
 
 sub update_schema {
 	my ($class) = @_;
+  
 	while ($_ = $class->determine_version) {
 		die "no update path from schema version $_" unless exists $from{$_};
 		last unless defined $from{$_};
