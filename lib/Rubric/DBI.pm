@@ -32,7 +32,7 @@ __PACKAGE__->connection(
 	$dsn,
 	$db_user,
 	$db_pass,
-	#{ AutoCommit => 0 }
+	{ AutoCommit => 1 }
 );
 
 =head1 METHODS
