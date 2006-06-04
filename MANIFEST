@@ -22,6 +22,7 @@ lib/Rubric/CLI.pm
 lib/Rubric/CLI/Command.pm
 lib/Rubric/CLI/Command/commands.pm
 lib/Rubric/CLI/Command/db.pm
+lib/Rubric/CLI/Command/linkcheck.pm
 lib/Rubric/CLI/Command/user.pm
 lib/Rubric/Config.pm
 lib/Rubric/DBI.pm
