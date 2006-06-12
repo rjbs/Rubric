@@ -40,11 +40,11 @@ sub _parse_abstract {
   return $result || "(unknown)";
 } 
 
-sub execute {
-  my ($class) = @_;
+sub run {
+  my ($self) = @_;
 
-  for my $command (sort Rubric::CLI->commands) {
-    my $abstract = _parse_abstract(Rubric::CLI->plugin_for($command));
+  for my $command (sort $self->app->commands) {
+    my $abstract = _parse_abstract($self->app->plugin_for($command));
     printf "%10s: %s\n", $command, $abstract;
   }
 }

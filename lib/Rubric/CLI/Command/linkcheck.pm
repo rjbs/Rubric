@@ -17,18 +17,8 @@ use warnings;
 use LWP::Simple ();
 use Rubric::DBI::Setup;
 
-sub describe_options {
-  my ($opt, $usage) = Getopt::Long::Descriptive::describe_options(
-    "rubric linkcheck %o",
-    # options...
-  );
-
-  return ($opt, $usage);
-}
-
-sub execute {
-  my ($class) = @_;
-  my ($opt, $usage) = $class->describe_options;
+sub run {
+  my ($self, $opt, $args) = @_;
 
   my $links = Rubric::Link->retrieve_all;
 

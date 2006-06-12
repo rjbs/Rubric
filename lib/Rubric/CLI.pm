@@ -13,20 +13,27 @@ Rubric::CLI - the Rubric command line interface
 use strict;
 use warnings;
 
+use Getopt::Long::Descriptive;
 use Module::Pluggable search_path => qw(Rubric::CLI::Command);
 use UNIVERSAL::moniker;
 use UNIVERSAL::require;
 
-my @plugins = __PACKAGE__->plugins;
+sub new {
+  my ($class) = @_;
 
-my %plugin;
-for (@plugins) {
-  my $command = lc $_->moniker;
+  my @plugins = __PACKAGE__->plugins;
 
-  die "two plugins exist for command $command: $_ and $plugin{$command}\n"
-    if exists $plugin{$command};
-  
-  $plugin{$command} = $_;
+  my %plugin;
+  for (@plugins) {
+    my $command = lc $_->moniker;
+
+    die "two plugins exist for command $command: $_ and $plugin{$command}\n"
+      if exists $plugin{$command};
+
+    $plugin{$command} = $_;
+  }
+
+  bless { plugin => \%plugin } => $class;
 }
 
 =head1 METHODS
@@ -38,7 +45,8 @@ This returns the commands currently provided by Rubric::CLI plugins.
 =cut
 
 sub commands {
-  keys %plugin;
+  my ($self) = @_;
+  keys %{ $self->{plugin} };
 }
 
 =head2 C< plugin_for >
@@ -52,12 +60,50 @@ no plugin implements the command, it returns false.
 
 sub plugin_for {
   my ($self, $command) = @_;
-  return unless exists $plugin{ $command };
+  return unless exists $self->{plugin}{ $command };
 
-  my $plugin = $plugin{ $command };
+  my $plugin = $self->{plugin}{ $command };
   $plugin->require or die $@;
 
   return $plugin;
+}
+
+sub get_command {
+  my ($self) = @_;
+
+  my $command = shift @ARGV;
+     $command = 'commands' unless defined $command;
+
+  return $command;
+}
+
+sub run {
+  my ($self) = @_;
+
+  # 1. figure out first-level dispatch
+  my $command = $self->get_command;
+
+  # 2. find its plugin
+  #    or else call default plugin
+  #    which is help by default..?
+  my $plugin = $self->plugin_for($command);
+     $plugin = $self->plugin_for('commands') unless $command;
+
+  # 3. use GLD with plugin's usage_desc and opt_spec
+  #    this stores the $usage object in the current object
+  my ($opt, $usage) = Getopt::Long::Descriptive::describe_options(
+    $plugin->usage_desc,
+    $plugin->opt_spec,
+  );
+
+  my $args = [ @ARGV ];
+
+  # 4. call plugin's run method, pass in opts
+  my $cmd = $plugin->new({ app => $self, usage => $usage });
+
+  $cmd->validate_args($opt, $args);
+
+  $cmd->run($opt, $args);
 }
 
 1;

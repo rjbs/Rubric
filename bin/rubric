@@ -5,15 +5,4 @@ use warnings;
 
 use Rubric::CLI;
 
-sub usage {
-  return <<END_USAGE;
-usage: rubric [command] [options]
-  try "rubric commands" for a list of commands
-END_USAGE
-}
-
-my $command = shift @ARGV or die usage;
-
-my $plugin = Rubric::CLI->plugin_for($command) or die usage;
-
-$plugin->execute;
+Rubric::CLI->new->run;

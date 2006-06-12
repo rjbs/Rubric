@@ -18,26 +18,27 @@ use base qw(Rubric::CLI::Command);
 use Digest::MD5 qw(md5_hex);
 use Rubric::User;
 
-sub describe_options {
-  my ($opt, $usage) = Getopt::Long::Descriptive::describe_options(
-    "rubric user %o [username]",
+sub usage_desc { "rubric user %o [username]" }
+
+sub opt_spec {
+  return (
     [ "new-user|n",        "add a user (requires --email and --pass)" ],
     [ "activate|a",        "activate an existing user"                ],
     [ "password|pass|p=s", "set user's password"                      ],
     [ "email|e=s",         "set user's email address"                 ],
   );
-
-  die $usage->text unless @ARGV == 1;
-
-  return ($opt, $usage);
 }
 
-sub execute {
-  my ($class) = @_;
+sub validate_args {
+  my ($self, $opt, $args) = @_;
 
-  my ($opt, $usage) = $class->describe_options;
+  die $self->usage->text unless @$args == 1;
+}
 
-  my $username = $ARGV[0];
+sub run {
+  my ($self, $opt, $args) = @_;
+
+  my $username = $args->[0];
 
   die "--new-user and --activate are mutually exclusive"
     if $opt->{new_user} and $opt->{activate};
