@@ -14,17 +14,20 @@ use strict;
 use warnings;
 
 use Getopt::Long::Descriptive;
-use Module::Pluggable search_path => qw(Rubric::CLI::Command);
+use Module::Pluggable::Object;
 use UNIVERSAL::moniker;
 use UNIVERSAL::require;
 
-sub new {
+sub plugins {
   my ($class) = @_;
+  $class = ref $class if ref $class;
 
-  my @plugins = __PACKAGE__->plugins;
+  my $finder = Module::Pluggable::Object->new(
+    search_path => "$class\::Command",
+  );
 
   my %plugin;
-  for (@plugins) {
+  for ($finder->plugins) {
     my $command = lc $_->moniker;
 
     die "two plugins exist for command $command: $_ and $plugin{$command}\n"
@@ -33,7 +36,15 @@ sub new {
     $plugin{$command} = $_;
   }
 
-  bless { plugin => \%plugin } => $class;
+  return \%plugin;
+}
+
+sub new {
+  my ($class) = @_;
+
+  my $plugin = $class->plugins;
+
+  bless { plugin => $plugin } => $class;
 }
 
 =head1 METHODS
