@@ -23,7 +23,16 @@ module:
 use strict;
 use warnings;
 
-use base 'App::Config';
+use base qw(Class::Accessor);
+use Config::Auto;
+use YAML;
+
+my $config_filename = $ENV{RUBRIC_CONFIG_FILE} || 'rubric.yml';
+
+sub import {
+	my ($class) = shift;
+	$config_filename = shift if @_;
+}
 
 =head1 SETTINGS
 
@@ -146,35 +155,76 @@ more are requested, this many will be displayed.
 
 =back
 
+=head1 METHODS
+
+These methods are used by the setting accessors, internally:
+
+=head2 _read_config
+
+This method returns the config data, if loaded.  If it hasn't already been
+loaded, it finds and parses the configuration file, then returns the data.
+
 =cut
 
-sub _template {
-  return {
-    css_href    => undef,
-    db_user     => undef,
-    db_pass     => undef,
-    dsn         => undef,
-    dbi_trace_level => 0,
-    dbi_trace_file  => undef,
-    email_from  => undef,
-    login_class => 'Rubric::WebApp::Login::Post',
-    smtp_server => undef,
-    uri_root    => '',
-    private_tag => '@private',
-    private_system => undef,
-    template_path  => undef,
-    allowed_schemes     => undef,
-    default_page_size   => 25,
-    display_localtime   => 0,
-    entries_query_class => 'Rubric::WebApp::Entries',
-    max_page_size       => 100,
-    markup_formatter    => {},
-    one_entry_per_link  => 1,
-    registration_closed => undef,
-    purge_anonymous_sessions  => undef,
-    skip_newuser_verification => undef,
-  };
+my $config;
+sub _read_config {
+	return $config if $config;
+
+	my $config_file = Config::Auto::find_file($config_filename);
+	$config = YAML::LoadFile($config_file);
+}
+
+=head2 _default
+
+This method returns the default configuration has a hashref.
+
+=cut
+
+my $default = {
+	css_href    => undef,
+	db_user     => undef,
+	db_pass     => undef,
+	dsn         => undef,
+	dbi_trace_level => 0,
+	dbi_trace_file  => undef,
+	email_from  => undef,
+	login_class => 'Rubric::WebApp::Login::Post',
+	smtp_server => undef,
+	uri_root    => '',
+	private_tag => '@private',
+	private_system => undef,
+	template_path  => undef,
+	allowed_schemes     => undef,
+	default_page_size   => 25,
+	display_localtime   => 0,
+	entries_query_class => 'Rubric::WebApp::Entries',
+	max_page_size       => 100,
+  markup_formatter    => {},
+	one_entry_per_link  => 1,
+	registration_closed => undef,
+  purge_anonymous_sessions  => undef,
+	skip_newuser_verification => undef,
 };
+sub _default { $default }
+
+=head2 make_ro_accessor
+
+Rubric::Config isa Class::Accessor, and uses this sub to build its setting
+accessors.  For a given field, it returns the value of that field in the
+configuration, if it exists.  Otherwise, it returns the default for that field.
+
+=cut
+
+sub make_ro_accessor {
+	my ($class, $field) = @_;
+	sub {
+		exists $class->_read_config->{$field}
+			? $class->_read_config->{$field}
+			: $class->_default->{$field}
+	}
+}
+
+__PACKAGE__->mk_ro_accessors(keys %$default);
 
 =head1 AUTHOR
 
