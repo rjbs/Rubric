@@ -1,7 +1,6 @@
 #!perl -T
 
 use Test::More 'no_plan';
-use Data::Dump::Streamer;
 
 BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }
 BEGIN { use_ok("Rubric::Entry"); }
@@ -51,7 +50,6 @@ $entry->update;
 { # change the default formatter to HTMLEscape
   Rubric::Config->markup_formatter->{_default}
     = 'Rubric::Entry::Formatter::HTMLEscape';
-  Dump(Rubric::Config->markup_formatter);
 
   my $body = $entry->body;
   is($body, $boilerplate, "we have the body we just stored");
