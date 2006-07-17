@@ -10,9 +10,9 @@ use YAML;
 
 my $config = YAML::LoadFile("etc/rubric.yml");
 
-for (keys %{Rubric::Config->_template}) {
+for (keys %{Rubric::Config->_default}) {
 	my $expected = exists $config->{$_} ? $config->{$_}
-	                                   : Rubric::Config->_template->{$_};
-	is_deeply(Rubric::Config->$_, $expected, "value of $_");
+	                                   : Rubric::Config->_default->{$_};
+	is(Rubric::Config->$_, $expected, "value of $_");
 }
 
