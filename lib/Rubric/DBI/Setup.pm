@@ -108,7 +108,7 @@ sub determine_version {
 		if ($version == 6) {
 			# some schemata are broken, and claim 6 on 7
 			eval { $class->dbh->selectall_array("SELECT verification_code FROM users"); };
-			if ($@) { warn "your db schema label is incorrect; run updatedb"; return 7; }
+			if ($@) { warn "your db schema label is incorrect; run rubric db -u"; return 7; }
 			else    { return 6; }
 		} else {
 			return $version;

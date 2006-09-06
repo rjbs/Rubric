@@ -23,7 +23,7 @@ Things you'll have to do to use it:
   3. put the templates somewhere
   4. create a location in which to put rubric.db
   5. update rubric.yml
-  6. from the location of rubric.yml, run makedb to generate rubric.db
+  6. in the dir with rubric.yml, run "rubric db --setup" to generate rubric.db
   7. set rubric.db +rw by the httpd user; set its location +rwx
   8. create a user object for yourself (via the web or with adduser.pl)
   9. (optional) set up .htaccess to prevent access to db, yml, and templates
@@ -35,7 +35,7 @@ Things you'll have to do:
 
   1. install the new templates (and probably the css)
   2. install the modules
-  3. run updatedb.pl (from the location of rubric.cgi/.yml)
+  3. run rubric db --update (from the location of rubric.cgi/.yml)
   4. update your config
 
 --- OTHER INFORMATION ---

@@ -1,5 +1,8 @@
 Revision history for Rubric
 
+0.142   2006-09-05
+        update install instructions
+
 0.141   2006-09-02
         freshen Module::Install
 
