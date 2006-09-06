@@ -1,0 +1,39 @@
+<div class='document'>
+<p>
+  Rubric can store and organize your bookmarks for you, filling in for your
+  browser's bookmarks feature.  Since you won't be using "Add Bookmark"
+  anymore, you'll need a new, convenient way to bookmark pages.  Bookmarklets
+  like these will help:
+</p>
+
+[% IF current_user %]
+<p class='bookmarklet'>
+  <a href='[% uri.entries(user => current_user) %]'>my rubric</a>
+</p>
+[% END %]
+
+<p class='bookmarklet'>
+  <a href="javascript:location.href='[% uri.post_entry %]?uri='+escape(location.href)+'&title='+encodeURIComponent(document.title)+'&when_done=go_back'">
+    post to rubric
+  </a>
+</p>
+
+<p class='bookmarklet'>
+  <a href="javascript:void(open('[% uri.post_entry %]?uri='+escape(location.href)+'&title='+encodeURIComponent(document.title)+'&when_done=close','Rubric','toolbar=no,width=700,height=325,scrollbars'));">
+    post to rubric
+  </a> (pop up)
+</p>
+
+<p>
+	You can drag them to your browser's bookmark bar (if it has one) or put them
+	in its bookmark menu.
+</p>
+
+<p>
+  The "post to rubric" link should be explained a bit.  It uses JavaScript to
+  redirect you to this Rubric's posting link; this means you'll need to be
+  logged in.  It passes a the URI and title of your current page to the form,
+  and also a "when_done" parameter that, here, tells Rubric to send you back to
+  the bookmarked page when you're done.
+</p>
+</div>

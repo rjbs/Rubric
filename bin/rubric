@@ -1,0 +1,8 @@
+#!perl
+
+use strict;
+use warnings;
+
+use Rubric::CLI;
+
+Rubric::CLI->new->run;

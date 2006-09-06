@@ -1,0 +1,152 @@
+<div class='document'>
+<h2>milestones</h2>
+<h3>0.10</h3>
+<ul>
+	<li>added searching (like, body_like, desc_like params) and search field</li>
+	<li>improved Unicode support; Unicode in titles and tags should now work</li>
+	<li>added English descriptions of queries</li>
+	<li>improved redirection after actions (edit, post, etc)</li>
+	<li>improved RSS output</li>
+	<li>added support for private entries (using a special tag)</li>
+</ul>
+
+<h3>0.08</h3>
+<ul>
+	<li>
+		URIs like /~username/taglist now provide a faster way to get at simple
+		queries
+	</li>
+	<li>
+		When a post is edited, it redirects the user to his previous query when
+		the revision is submitted.
+	</li>
+	<li>More things are now configurable:
+		<ul>
+			<li>Multiple entries per URI can now be made (if so configured).</li>
+			<li>The database username and password can be specified.</li>
+			<li>
+				The default and maximum number of entries per page can be changed.
+			</li>
+		</ul>
+	</li>
+	<li>The query-altering "related tags" links should now be easier to use.</li>
+	<li>Some primitive (and fairly ugly) taglist filtering was added.</li>
+	<li>The entries page now provides links to switch to or from long form.</li>
+	<li>
+		Entries provide a link to a listing of other entries for their URI, if more
+		than one exists.
+	</li>
+	<li>
+		Links to view unknown entries, or to edit entries that the user doesn't
+		own, produce better error messages.
+	</li>
+	<li>Invalid entries produce better error messages.</li>
+	<li>Numerous bugs were fixed.  (Consult the changelog for details.)</li>
+</ul>
+
+<h3>0.06</h3>
+<ul>
+	<li>A few annoying bugs were fixed.</li>
+</ul>
+
+<h3>0.05</h3>
+<ul>
+	<li>regression testing
+	<p>
+		Regression tests will be written.  (Current coverage is around 30%, and
+		that's largely due to POD coveage.)
+	</p>
+	</li>
+</ul>
+
+<h3>0.04</h3>
+<ul>
+	<li>automatic user creation
+		<p>
+			It should be possible to create users automatically upon login attempt.
+			When coupled with HTTP authorization, this should allow intranet users to
+			begin using a local Rubric seamlessly.
+		</p>
+	</li>
+
+	<li>refactored EntriesQuery
+		<p>
+			Rubric::WebApp::EntriesQuery should only parse URIs and send result sets
+			to the pager.  (A renaming may be in order, too.)  Another module should
+			take natural parameters and produce result sets.  It should be able to
+			return errors on invalid queries and empty sets.  (Future revisions
+			should turn a query into English for display on error or as a title.)
+		</p>
+	</li>
+
+	<li>display user's tags on his post form</li>
+	<li>a clearer notice on empty result sets</li>
+</ul>
+
+</p>
+<h3>0.03</h3>
+<ul>
+	<li>subclassable login
+		<p>
+			Rubric now includes a class (Rubric::WebApp::Login) that defines logic
+			for accepting logins; subclasses for login via HTTP and via posted form
+			data are also included.  This change should make intranet Rubrics easier
+			to implement.
+		</p>
+	</li>
+
+	<li>new query builder and /entries handler
+		<p>
+			There was an 0.03 milestone to allow querying by date and time ranges.
+			To implement this, a new query builder was written to replace
+			Rubric::Entry-&gt;by_tag.  Right now it's got its web bits and SQL bits
+			all intertwined, but that will be fixed.  The /user and /tag run modes
+			were eliminated as such.
+	</li>
+
+	<li>fatals to browser
+		<p>Rubric now sends fatal error messages to the end user.  This won't
+		persist forever, but it will continue until Rubric is more mature and less
+		likely to fail during normal use.</p>
+	</li>
+</ul>
+
+<h3>0.02</h3>
+<p>Release 0.02 fixed a HTTP header bug.</p>
+
+<h3>0.01</h3>
+<ul>
+	<li>a new database can be built</li>
+
+	<li>an old database can always be upgraded</li>
+
+	<li>new users can register accounts
+		<p>New accounts are verified via email.  Registration can be disabled.</p>
+	</li>
+
+	<li>users can change their email apress and password</li>
+
+	<li>users can create, delete, and edit their entries
+		<p>
+			Entries have a title and tags.  They might have a link, description, and
+			a long text body.  A user only has one entry per link.
+		</p>
+	</li>
+
+	<li>users can copy the entries of other users</li>
+
+	<li>entries can be queried by user or tag
+		<p>
+			Anyone can search for entries based on the user who created them or the
+			assigned tags.
+		</p>
+	</li>
+
+	<li>search results are available via rss
+		<p>
+			Any search that can be performed via the normal HTML interface can be
+			retrieved as RSS.  The RSS links are announced on the HTML results.
+		</p>
+	</li>
+	</ul>
+</div>

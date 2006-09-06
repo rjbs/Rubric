@@ -1,0 +1,13 @@
+	<entry
+		uri='[% xml_escape(entry.link) %]'
+		title='[% xml_escape(entry.title) %]'
+		user='[% entry.user %]'
+		description='[% xml_escape(entry.description) %]'
+		created='[% entry.created.strftime("%Y-%m-%d %H:%S") %]'
+		modified='[% entry.modified.strftime("%Y-%m-%d %H:%S") %]'
+	>
+	[% FOREACH tag = entry.tags %]
+	<tag>[% tag %]</tag>
+	[% END %]
+	[% entry.description %]
+	</entry>

@@ -1,0 +1,32 @@
+	<h2>new user registration</h2>
+	[% IF username_taken %]
+	<h3 class='error'>That username is taken!</h3>
+	[% END %]
+	[% IF username_invalid %]
+	<h3 class='error'>That isn't a valid username!</h3>
+	[% END %]
+	[% IF email_invalid %]
+	<h3 class='error'>That isn't a valid email address!</h3>
+	[% END %]
+	[% IF password_mismatch %]
+	<h3 class='error'>Your passwords didn't match!</h3>
+	[% END %]
+	<div class='newuser'>
+		<form id='newuser' action='newuser' method='POST'>
+			<table>
+				<tr><th>username</th><td><input name='username' /></tr>
+				<tr>
+					<th>password</th>
+					<td><input type='password' name='password_1' /></td>
+				</tr>
+				<tr>
+					<th>password (again)</th>
+					<td><input type='password' name='password_2' /></td>
+				</tr>
+				<tr><th>email</th><td><input name='email' /></tr>
+				<tr><td class='submit' colspan='2'>
+					<input type='submit' name='submit' value='submit' />
+				</td></tr>
+			</table>
+		</form>
+	</div>
