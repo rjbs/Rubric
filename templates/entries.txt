@@ -1,0 +1,12 @@
+[%- MACRO maybe(name, text) "  " _ name _ ": " _ text _ "\n" IF text -%]
+[%- WHILE (entry = entries.next) -%]
+[% entry.title %]
+[%
+	maybe("link", entry.link       );
+	maybe("desc", entry.description);
+	maybe("body", entry.body       );
+-%]
+  time: [% entry.created.datetime %]
+  user: [% entry.user             %]
+  tags: [% entry.tags.join(' ')   %]
+[% END -%]

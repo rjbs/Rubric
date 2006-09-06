@@ -1,0 +1,35 @@
+	<h2>login</h2>
+	[% IF note %]
+	<div class='message'>
+		[% note %]
+	</div>
+	[% END %]
+	[% IF user %]
+	[% IF user_pending %]
+	<h3 class='error'>You haven't verified your account.  Check your mail.</h3>
+	[% ELSE %]
+	<h3 class='error'>That username/password combination doesn't match.</h3>
+	[% END %]
+	[% END %]
+	<div class='loginform'>
+		<form id='loginform' action='[% uri.login %]' method='POST'>
+			<table>
+				<tr>
+          <th>username</th><td>[% widget.input(name => 'user', value=> user) %] 
+        </tr>
+				<tr>
+          <th>password</th><td>[% widget.password(name => 'password') %]
+        </tr>
+				<tr><td class='submit' colspan='2'>
+					<input type='submit' name='submit' value='login' />
+				</td></tr>
+			</table>
+			[% IF then_goto %]
+      [% widget.hidden(name => "then_goto", value => then_goto) %]
+			[% END %]
+		</form>
+	</div>
+	<p>
+		If you've forgotten your password, you may <a href='[% uri.reset_password
+		%]'>request that it be reset</a>.
+	</p>

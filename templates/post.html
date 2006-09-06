@@ -1,0 +1,86 @@
+	[% PROCESS "user_tags.html" reason = "post" %]
+
+	<script type='text/javascript'>
+		function addTag2(tagToAdd) {
+			tagInput = document.getElementsByName('tags')[0];
+			var tags = [];
+			if (tagInput.value) tags = tagInput.value.split(/\s+/);
+			for (i in tags) { if (tags[i] == tagToAdd) return; }
+			tags = tags.concat(tagToAdd).sort();
+			tagInput.value = tags.join(" ");
+		}
+	</script>
+
+	<div class='taglist link'>
+	<h3>link's tags</h3>
+	[% FOREACH tag = existing_link.tags_counted %]
+	<div class='tag'>
+		<span class='tag_count'>[% tag.1 %]</span>
+		&nbsp;
+		<a href='javascript:addTag2("[% tag.0 %]")'>
+			[% tag.0 %]
+		</a>
+		&nbsp;
+	</div>
+	[% END %]
+	</div>
+
+	[% IF existing_entry.created %]
+	<h2>revise entry</h2>
+	<h3>originally created: [% existing_entry.created %]</h3>
+	[% IF existing_entry.created != existing_entry.modified %]
+	<h3>last modified: [% existing_entry.modified %]</h3>
+	[% END %]
+	<div class='delete'>
+		<a href="[% uri.delete_entry(existing_entry) %]?then_goto=[% then_goto | uri %]">delete this entry</a>
+	</div>
+	[% ELSE %]
+	<h2>new entry</h2>
+	[% END %]
+	<div class='entryform'>
+		<form id='entryform' action="[% xml_escape(uri.post_entry) %]" method='POST'>
+			<table>
+      [%# Yup.  This is really, really ugly. %]
+			[% FOREACH param = [ "uri", "title", "description", "tags" ] %]
+        [% IF param == "tags" %]
+          [% accessor = "entrytags" %]
+        [% ELSE %]
+          [% accessor = param %]
+        [% END %]
+				<tr>
+					<th>[% accessor %]</th>
+          [% SET field_value = form.$param.join(" ")
+                            OR existing_entry.$accessor.join(" "); %]
+					<td>[%
+            widget.input(
+              name  => param,
+              value => field_value,
+              attr  => { size => 75 }
+            )
+          %]</td>
+				</tr>
+				[% IF error.$param %]
+				<tr>
+					<th></th>
+					<td class='error'>[% error.$param %]</td>
+				</tr>
+				[% END %]
+			[% END %]
+				<tr><td class='submit' colspan='2'>
+					<input type='submit' name='submit' value='save' />
+				</td></tr>
+				<tr>
+					<th style='vertical-align:top'>body</th>
+					<td><textarea name='body' cols='72' rows='10'>[%
+          form.body OR existing_entry.body
+          %]</textarea></td>
+				</tr>
+				<tr><td class='submit' colspan='2'>
+          [% widget.hidden(name => 'entryid',   value => existing_entry.id) %]
+          [% widget.hidden(name => 'then_goto', value => then_goto)         %]
+          [% widget.hidden(name => 'when_done', value => when_done)         %]
+					<input type='submit' name='submit' value='save' />
+				</td></tr>
+			</table>
+		</form>
+	</div>

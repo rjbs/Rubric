@@ -1,0 +1,11 @@
+To: [% user.email %]
+From: [% email_from %]
+Subject: rubric password reset request
+
+You (or someone else) has requested that your Rubric password be reset.  To
+confirm this request and reset your password, follow this link:
+
+	[% uri.reset_password(user => user, reset_code => user.reset_code) %]
+
+-- 
+Rubric
