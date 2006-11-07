@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 package Rubric::WebApp::Entries;
 
 =head1 NAME
@@ -24,9 +27,6 @@ on the results.
 
 use Date::Span;
 use Digest::MD5 qw(md5_hex);
-
-use strict;
-use warnings;
 
 use Rubric::Config;
 use Rubric::Entry;
@@ -124,7 +124,7 @@ value of C<$param>.  If no clause can be generated, it returns undef.
 sub get_arg {
 	my ($self, $param, $value) = @_;
 
-	return undef unless my $code = $self->can("arg_for_$param");
+	return unless my $code = $self->can("arg_for_$param");
 	$code->($self, $value);
 }
 
@@ -142,8 +142,8 @@ Given a username, this method returns the associated Rubric::User object.
 
 sub arg_for_user {
 	my ($self, $user) = @_;
-	return undef unless $user;
-	return Rubric::User->retrieve($user) || undef;
+	return unless $user;
+	return Rubric::User->retrieve($user) || ();
 }
 
 =head3 arg_for_tags($tagstring)
@@ -233,7 +233,7 @@ md5sum.
 
 sub arg_for_urimd5 {
 	my ($self, $md5) = @_;
-	return undef unless $md5 =~ /\A[a-z0-9]{32}\Z/i;
+	return unless $md5 =~ /\A[a-z0-9]{32}\Z/i;
 	return $md5;
 }
 
@@ -247,6 +247,7 @@ They return the passed string unchanged.
 
 ## more date-arg handling code
 {
+  ## no critic (ProhibitNoStrict)
 	no strict 'refs';
 	for my $field (qw(created modified)) {
 		for my $prep (qw(after before on)) {

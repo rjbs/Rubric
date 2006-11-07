@@ -45,7 +45,11 @@ sub _load_formatter {
   my ($class, $formatter) = @_;
 
   return 1 if eval { $formatter->can('as_text'); };
-  return 1 if eval qq{require $formatter;};
+
+  ## no critic (StringyEval)
+  return 1 if eval qq{require $formatter};
+  ## use critic
+
   return 0;
 }
 

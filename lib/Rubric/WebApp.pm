@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 package Rubric::WebApp;
 
 =head1 NAME
@@ -6,13 +9,13 @@ Rubric::WebApp - the web interface to Rubric
 
 =head1 VERSION
 
-version 0.140
+version 0.141
 
  $Id$
 
 =cut
 
-our $VERSION = '0.140';
+our $VERSION = '0.141';
 
 =head1 SYNOPSIS
 
@@ -63,9 +66,6 @@ use CGI::Carp qw(fatalsToBrowser);
 
 use Digest::MD5 qw(md5_hex);
 use Encode qw(decode_utf8);
-
-use strict;
-use warnings;
 
 use Email::Address;
 use Email::Send;
@@ -124,7 +124,10 @@ sub cgiapp_init {
   );
 
   my $login_class = Rubric::Config->login_class;
+
+  ## no critic (StringyEval)
   eval "require $login_class";
+  ## use critic
   $login_class->check_for_login($self);
 }
 
@@ -289,7 +292,9 @@ sub entries {
   my ($self) = @_;
 
   my $entries_class = Rubric::Config->entries_query_class;
+  ## no critic (StringyEval)
   die $@ unless eval "require $entries_class";
+  ## use critic
   $entries_class->entries($self);
 }
 

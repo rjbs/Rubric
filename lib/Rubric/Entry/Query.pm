@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 package Rubric::Entry::Query;
 
 =head1 NAME
@@ -23,9 +26,6 @@ performs that query, and returns the rendered report on the results.
 
 use Date::Span;
 use Digest::MD5 qw(md5_hex);
-
-use strict;
-use warnings;
 
 use Rubric::Config;
 
@@ -73,6 +73,7 @@ sub query {
 	push @constraints, $self->_private_constraint($context->{user})
 		if exists $context->{user};
 	
+  ## no critic (ConditionalDeclarations)
 	my $order_by = "$context->{order_by} DESC"
 		if $context->{order_by}||'' =~ /\A(?:created|modified)\Z/;
 
@@ -91,6 +92,7 @@ passed value of C<$param>.  If no clause can be generated, it returns undef.
 sub get_constraint {
 	my ($self, $param, $value) = @_;
 
+  ## no critic (ReturnUndef)
 	return undef unless my $code = $self->can("constraint_for_$param");
 	$code->($self, $value);
 }
@@ -127,6 +129,7 @@ the user.
 
 sub constraint_for_user {
 	my ($self, $user) = @_;
+  ## no critic (ReturnUndef)
 	return undef unless $user;
 	return "username = " . Rubric::Entry->db_Main->quote($user);
 }
@@ -146,7 +149,9 @@ given tags.
 sub constraint_for_tags {
 	my ($self, $tags) = @_;
 
+  ## no critic (ReturnUndef)
 	return undef unless $tags and ref $tags eq 'HASH';
+  ## use critic
 	return unless %$tags;
 
   my @snippets;
@@ -164,7 +169,10 @@ sub constraint_for_tags {
 sub constraint_for_exact_tags {
 	my ($self, $tags) = @_;
 
+  ## no critic (ReturnUndef)
 	return undef unless $tags and ref $tags eq 'HASH';
+  ## use critic
+
   my $count = keys %$tags;
 
 	# XXX determine which one is faster
@@ -249,7 +257,10 @@ md5sum.
 
 sub constraint_for_urimd5 {
 	my ($self, $md5) = @_;
+  ## no critic (ReturnUndef)
 	return undef unless my ($link) = Rubric::Link->search({ md5 => $md5 });
+  ## use critic
+
 	return "link = " . $link->id;
 }
 
@@ -284,12 +295,16 @@ sub _unit_from_string {
 }
 
 {
+  ## no critic (NoStrict)
 	no strict 'refs';
 	for my $field (qw(created modified)) {
 		for my $prep (qw(after before on)) {
 			*{"constraint_for_${field}_${prep}"} = sub {
 				my ($self, $datetime) = @_;
+        ## no critic (ReturnUndef)
 				return undef unless my @time = _unit_from_string($datetime);
+        ## use critic
+
 				my ($start,$end) = range_from_unit(@time);
 				return
 					( $prep eq 'after'  ? "$field > $end"

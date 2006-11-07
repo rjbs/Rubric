@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 package Rubric::DBI::Setup;
 
 =head1 NAME
@@ -26,9 +29,6 @@ our $VERSION = '0.10';
 
 
 =cut
-
-use strict;
-use warnings;
 
 use DBI;
 use Rubric::Config;
@@ -107,9 +107,14 @@ sub determine_version {
 	if ($version) {
 		if ($version == 6) {
 			# some schemata are broken, and claim 6 on 7
-			eval { $class->dbh->selectall_array("SELECT verification_code FROM users"); };
-			if ($@) { warn "your db schema label is incorrect; run rubric db -u"; return 7; }
-			else    { return 6; }
+			eval {
+        $class->dbh->selectall_array("SELECT verification_code FROM users");
+      };
+			if ($@) {
+        warn "your db schema label is incorrect; run rubric db -u"; return 7;
+      } else {
+        return 6;
+      }
 		} else {
 			return $version;
 		}
