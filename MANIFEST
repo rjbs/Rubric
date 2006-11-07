@@ -104,3 +104,4 @@ templates/template.txt
 templates/toolbar.html
 templates/user_tags.html
 templates/verified.html
+t/perl-critic.t
