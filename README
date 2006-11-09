@@ -22,7 +22,7 @@ Things you'll have to do to use it:
      (start with the rubric.yml in etc/)
   3. put the templates somewhere
   4. create a location in which to put rubric.db
-  5. update rubric.yml
+  5. update rubric.yml (if you require verification, set email_from)
   6. in the dir with rubric.yml, run "rubric db --setup" to generate rubric.db
   7. set rubric.db +rw by the httpd user; set its location +rwx
   8. create a user object for yourself (via the web or with adduser.pl)
