@@ -7,7 +7,7 @@ Rubric::CLI::Command::linkcheck - check validity of links in the database
 
 =head1 VERSION
 
- $Id: /my/cs/projects/rubric/trunk/lib/Rubric/CLI/Command/db.pm 21614 2006-05-23T16:33:47.947111Z jcap  $
+ $Id$
 
 =cut
 
