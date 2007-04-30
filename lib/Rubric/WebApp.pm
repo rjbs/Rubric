@@ -79,6 +79,8 @@ use Rubric::Entry;
 use Rubric::Renderer;
 use Rubric::WebApp::URI;
 
+use String::Truncate qw(elide);
+
 =head1 METHODS
 
 =head2 redirect($uri, $message)
@@ -412,8 +414,14 @@ sub calendar {
   my ($month, $year) = (localtime)[4,5];
   $month++;
   $year += 1900;
-  my $calendar = HTML::CalendarMonth->new( month => $month, year => $year, full_days => 1);
-  $calendar->item($calendar->year, $calendar->month)->attr(style=> 'background-color: #EEEEEE');
+  my $calendar = HTML::CalendarMonth->new(
+    month => $month,
+    year  => $year,
+    full_days => 1
+  );
+  $calendar->item($calendar->year, $calendar->month)->attr(
+    style => 'background-color: #EEEEEE'
+  );
   $calendar->attr(class => 'calendar');
   $calendar->alldays->attr(class => 'day');
   my $num_span = HTML::Element->new('span', class => 'day_indicator');
@@ -421,23 +429,27 @@ sub calendar {
   $calendar->alldays->wrap_content($num_span);
   $calendar->allheaders->attr(class => 'headers');
 
-  my $start = DateTime->new( year   => $year,
-                             month  => $month,
-                             day    => 1,
-                             hour   => 0,
-                             minute => 0,
-                             second => 0,
-                             nanosecond => 0,
-                             time_zone => '-1700' )->epoch;
+  my $start = DateTime->new(
+    year   => $year,
+    month  => $month,
+    day    => 1,
+    hour   => 0,
+    minute => 0,
+    second => 0,
+    nanosecond => 0,
+    time_zone => '-1700'
+  )->epoch;
 
-  my $end   = DateTime->new( year   => $year,
-                             month  => $month,
-                             day    => $calendar->lastday,
-                             hour   => 23,
-                             minute => 59,
-                             second => 59,
-                             nanosecond => 0,
-                             time_zone => '-1700' )->epoch;
+  my $end   = DateTime->new(
+    year   => $year,
+    month  => $month,
+    day    => $calendar->lastday,
+    hour   => 23,
+    minute => 59,
+    second => 59,
+    nanosecond => 0,
+    time_zone  => '-1700'
+  )->epoch;
   
   my $entries = Rubric::DBI->db_Main->selectall_arrayref(
     "SELECT title, id, created 
@@ -445,7 +457,8 @@ sub calendar {
       WHERE id NOT IN (SELECT entry FROM entrytags WHERE tag = '\@private')
         AND created > '$start' 
         AND created < '$end' 
-   ORDER BY created");
+   ORDER BY created"
+  );
 
   foreach my $entry (@$entries) {
     my ($day) = (localtime($entry->[2]))[3];
@@ -455,7 +468,7 @@ sub calendar {
     $a->attr(title => $title);
     $a->attr(href  => '/rubric.cgi/entry/'.$entry->[1]);
     if (length $title > 20) {
-      $title = substr($title, 0, 20);
+      $title = elide($title, 0, 20);
     }
     $a->push_content($title);
     $div->push_content($a);
