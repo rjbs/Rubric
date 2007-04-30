@@ -468,7 +468,7 @@ sub calendar {
     $a->attr(title => $title);
     $a->attr(href  => '/rubric.cgi/entry/'.$entry->[1]);
     if (length $title > 20) {
-      $title = elide($title, 0, 20);
+      $title = elide($title, 20);
     }
     $a->push_content($title);
     $div->push_content($a);
