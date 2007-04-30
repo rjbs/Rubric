@@ -21,6 +21,7 @@ requires('Digest::MD5'      => 0.00);
 requires('Email::Address'   => 0.00);
 requires('Email::Send'      => 0.00);
 requires('Encode'           => 2.00);
+requires('String::Truncate' => 0.00);
 requires('Template'         => 2.00);
 requires('Time::Local'      => 0.00);
 requires('Time::Piece'      => 0.00);
