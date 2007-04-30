@@ -67,6 +67,10 @@ use CGI::Carp qw(fatalsToBrowser);
 use Digest::MD5 qw(md5_hex);
 use Encode qw(decode_utf8);
 
+use HTML::CalendarMonth;
+use HTML::TagCloud;
+use DateTime;
+
 use Email::Address;
 use Email::Send;
 
@@ -236,7 +240,7 @@ sub setup {
   if ($self->param('current_user') or not Rubric::Config->private_system) {
     $self->start_mode('entries');
     $self->run_modes([
-      qw(delete edit entries entry link logout post preferences)
+      qw(delete edit entries entry link logout post preferences tag_cloud calendar)
     ]);
   }
 
@@ -369,6 +373,100 @@ sub get_link {
   return unless %search;
   return unless my ($link) = Rubric::Link->search(\%search);
   $self->param('link', $link);
+}
+
+=head2 tag_cloud
+
+=cut
+
+sub tag_cloud {
+  my ($self, $options) = @_;
+    
+  my $tags = Rubric::DBI->db_Main->selectall_arrayref(
+     "SELECT tag, count(*) 
+        FROM entrytags 
+       WHERE tag not like '@%' 
+    GROUP BY tag 
+    ORDER BY tag");
+
+  my $cloud = HTML::TagCloud->new();
+  foreach my $tag (@$tags) {
+    my $href = Rubric::WebApp::URI->entries({tags => [ $tag->[0] ]});
+    $cloud->add($tag->[0], $href, $tag->[1]);
+  }
+
+  return $self->template('tag_cloud' => {
+    cloud => $cloud,
+    query_description => 'All Tags',
+  });
+
+}
+
+=head2 calendar
+
+=cut
+
+sub calendar {
+  my ($self, $options) = @_;
+
+  my ($month, $year) = (localtime)[4,5];
+  $month++;
+  $year += 1900;
+  my $calendar = HTML::CalendarMonth->new( month => $month, year => $year, full_days => 1);
+  $calendar->item($calendar->year, $calendar->month)->attr(style=> 'background-color: #EEEEEE');
+  $calendar->attr(class => 'calendar');
+  $calendar->alldays->attr(class => 'day');
+  my $num_span = HTML::Element->new('span', class => 'day_indicator');
+  $calendar->alldays->attr(class => 'day');
+  $calendar->alldays->wrap_content($num_span);
+  $calendar->allheaders->attr(class => 'headers');
+
+  my $start = DateTime->new( year   => $year,
+                             month  => $month,
+                             day    => 1,
+                             hour   => 0,
+                             minute => 0,
+                             second => 0,
+                             nanosecond => 0,
+                             time_zone => '-1700' )->epoch;
+
+  my $end   = DateTime->new( year   => $year,
+                             month  => $month,
+                             day    => $calendar->lastday,
+                             hour   => 23,
+                             minute => 59,
+                             second => 59,
+                             nanosecond => 0,
+                             time_zone => '-1700' )->epoch;
+  
+  my $entries = Rubric::DBI->db_Main->selectall_arrayref(
+    "SELECT title, id, created 
+       FROM entries 
+      WHERE id NOT IN (SELECT entry FROM entrytags WHERE tag = '\@private')
+        AND created > '$start' 
+        AND created < '$end' 
+   ORDER BY created");
+
+  foreach my $entry (@$entries) {
+    my ($day) = (localtime($entry->[2]))[3];
+    my $a = HTML::Element->new('a');
+    my $div = HTML::Element->new('div');
+    my $title = $entry->[0];
+    $a->attr(title => $title);
+    $a->attr(href  => '/rubric.cgi/entry/'.$entry->[1]);
+    if (length $title > 20) {
+      $title = substr($title, 0, 20);
+    }
+    $a->push_content($title);
+    $div->push_content($a);
+    $calendar->item($day)->push_content($div);
+  } 
+
+  return $self->template('calendar' => {
+    calendar => $calendar,
+    query_description => 'Calendar',
+  });
+
 }
 
 =head2 login

@@ -157,11 +157,36 @@ URI for new entry form
 
 sub post_entry { Rubric::Config->uri_root . "/post"; }
 
+=head2 by_date
+
+URI for by_date
+
+=cut
+
+sub by_date {
+	my ($class) = @_;
+	Rubric::Config->uri_root . "/calendar";
+}
+
+
+
+=head2 tag_cloud
+
+URI for all tags / tag cloud
+
+=cut
+
+sub tag_cloud { 
+	my ($class) = @_;
+	Rubric::Config->uri_root . "/tag_cloud";
+}
+
 =head2 preferences
 
 URI for preferences form
 
 =cut
+
 
 sub preferences { Rubric::Config->uri_root . "/preferences"; }
 

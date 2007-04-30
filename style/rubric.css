@@ -228,3 +228,68 @@ div[class~="markup:md"] h2 {
 div[class~="markup:md"] h3 {
   padding-left: 0;
 }
+
+#htmltagcloud {
+  text-align:  center; 
+  line-height: 2em; 
+}
+#htmltagcloud a {
+  padding: 0 .5em 0 .5em;
+}
+
+span.tagcloud0  { font-size: 100%;}
+span.tagcloud1  { font-size: 105%;}
+span.tagcloud2  { font-size: 110%;}
+span.tagcloud3  { font-size: 115%;}
+span.tagcloud4  { font-size: 120%;}
+span.tagcloud5  { font-size: 125%;}
+span.tagcloud6  { font-size: 130%;}
+span.tagcloud7  { font-size: 135%;}
+span.tagcloud8  { font-size: 140%;}
+span.tagcloud9  { font-size: 145%;}
+span.tagcloud10 { font-size: 149%;}
+span.tagcloud11 { font-size: 156%;}
+span.tagcloud12 { font-size: 163%;}
+span.tagcloud13 { font-size: 170%;}
+span.tagcloud14 { font-size: 177%;}
+span.tagcloud15 { font-size: 184%;}
+span.tagcloud16 { font-size: 191%;}
+span.tagcloud17 { font-size: 198%;}
+span.tagcloud18 { font-size: 205%;}
+span.tagcloud19 { font-size: 212%;}
+span.tagcloud20 { font-size: 219%;}
+span.tagcloud21 { font-size: 226%;}
+span.tagcloud22 { font-size: 233%;}
+span.tagcloud23 { font-size: 240%;}
+span.tagcloud24 { font-size: 247%;}
+
+table.calendar {
+  margin: 1em 1em 2em 1em;
+  width: 97%;
+  border-collapse: collapse;
+  border-color: #CCCCCC;
+}
+
+  table.calendar td.headers {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  table.calendar td {
+    padding: .25em;
+  }
+
+    table.calendar td.day {
+      text-align: left;
+      vertical-align: top;
+      height: 8em;
+      width: 14.3%;
+    }
+
+      table.calendar td.day span.day_indicator {
+        font-weight: bold;
+        font-size: 1.3em;
+        text-align: right; 
+        float: right;
+      }
+
