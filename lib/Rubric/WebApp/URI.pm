@@ -165,7 +165,14 @@ URI for by_date
 
 sub by_date {
 	my ($class) = @_;
-	Rubric::Config->uri_root . "/calendar";
+  shift;
+  my $year = shift;
+  my $month = shift;
+  my $uri = '/calendar';
+  $uri .= "/$year" if ($year);
+  $uri .= "/$month" if ($month);
+
+	Rubric::Config->uri_root . $uri;
 }
 
 
