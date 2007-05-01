@@ -412,8 +412,6 @@ sub calendar {
   my ($self, $options) = @_;
   my $path = $self->param('path');
 
-  my ($month, $year);
-
   my $year  = shift @$path;
   my $month = shift @$path;
 
