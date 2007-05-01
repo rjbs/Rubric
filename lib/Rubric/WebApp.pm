@@ -410,10 +410,18 @@ sub tag_cloud {
 
 sub calendar {
   my ($self, $options) = @_;
+  my $path = $self->param('path');
 
-  my ($month, $year) = (localtime)[4,5];
-  $month++;
-  $year += 1900;
+  my ($month, $year);
+
+  my $year  = shift @$path;
+  my $month = shift @$path;
+
+  if (not ($year or $month)) {
+    ($month, $year) = (localtime)[4,5];
+    $month++;
+    $year += 1900;
+  }
   my $calendar = HTML::CalendarMonth->new(
     month => $month,
     year  => $year,
@@ -467,16 +475,40 @@ sub calendar {
     my $title = $entry->[0];
     $a->attr(title => $title);
     $a->attr(href  => '/rubric.cgi/entry/'.$entry->[1]);
-    if (length $title > 20) {
-      $title = elide($title, 20);
-    }
+    $title = elide($title, 18);
     $a->push_content($title);
     $div->push_content($a);
     $calendar->item($day)->push_content($div);
   } 
 
+  my $prev_month = $month;
+  my $prev_year = $year;
+  $prev_month --;
+  if (not $prev_month) {
+    $prev_month = 12;
+    $prev_year--;
+  }
+
+  my $next_month = $month;
+  my $next_year = $year;
+  $next_month++;
+  if ($next_month > 12) {
+    $next_month = 1;
+    $next_year++;
+  }
+
+
+
   return $self->template('calendar' => {
     calendar => $calendar,
+    prev_link => { 
+      month => sprintf("%02d", $prev_month),
+      year  => $prev_year,
+    },
+    next_link => { 
+      month => sprintf("%02d", $next_month),
+      year  => $next_year,
+    },
     query_description => 'Calendar',
   });
 

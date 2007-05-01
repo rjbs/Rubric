@@ -264,7 +264,7 @@ span.tagcloud23 { font-size: 240%;}
 span.tagcloud24 { font-size: 247%;}
 
 table.calendar {
-  margin: 1em 1em 2em 1em;
+  margin: 1em;
   width: 97%;
   border-collapse: collapse;
   border-color: #CCCCCC;
@@ -293,3 +293,6 @@ table.calendar {
         float: right;
       }
 
+div#month_nav {
+  margin: 0 1em 1em 1em;
+}
