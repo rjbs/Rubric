@@ -7,6 +7,8 @@
 		[% END %]
 		</span>
 		<a href='[% uri.root %]'>(root)</a>
+		| <a href='[% uri.by_date %]'>by date</a>
+		| <a href='[% uri.tag_cloud %]'>tagcloud</a>
 		| <a href='[% uri.doc('help') %]'>help</a>
 		[% IF current_user %]
 		| <a href='[% uri.entries( user => current_user ) %]'>entries</a>
