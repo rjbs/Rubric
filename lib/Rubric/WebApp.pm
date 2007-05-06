@@ -457,22 +457,20 @@ sub calendar {
     time_zone  => '-1700'
   )->epoch;
   
-  my $entries = Rubric::DBI->db_Main->selectall_arrayref(
-    "SELECT title, id, created 
-       FROM entries 
+  my $entries = Rubric::Entry->retrieve_from_sql(qq{
       WHERE id NOT IN (SELECT entry FROM entrytags WHERE tag = '\@private')
         AND created > '$start' 
         AND created < '$end' 
-   ORDER BY created"
+   ORDER BY created}
   );
 
-  foreach my $entry (@$entries) {
-    my ($day) = (localtime($entry->[2]))[3];
+  while (my $entry = $entries->next) {
+    my ($day) = $entry->created->day_of_month;
     my $a = HTML::Element->new('a');
     my $div = HTML::Element->new('div');
-    my $title = $entry->[0];
+    my $title = $entry->title;
     $a->attr(title => $title);
-    $a->attr(href  => '/rubric.cgi/entry/'.$entry->[1]);
+    $a->attr(href  => Rubric::WebApp::URI->entry($entry));
     $title = elide($title, 18);
     $a->push_content($title);
     $div->push_content($a);
@@ -494,8 +492,6 @@ sub calendar {
     $next_month = 1;
     $next_year++;
   }
-
-
 
   return $self->template('calendar' => {
     calendar => $calendar,
