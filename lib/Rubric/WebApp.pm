@@ -1192,7 +1192,9 @@ sub style {
     ],
   });
 
-  $tt->process($file);
+  my $output;
+  $tt->process($file,  {}, \$output);
+  return $output;
 }
 
 =head1 TODO
