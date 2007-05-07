@@ -19,6 +19,7 @@ use strict;
 use warnings;
 
 use Carp;
+use File::ShareDir;
 use HTML::Widget::Factory;
 use Rubric;
 use Rubric::Config;
@@ -46,7 +47,10 @@ sub register_type {
   $renderer{$type} = $arg;
   $renderer{$type}{renderer} = Template->new({
     PROCESS      => ("template.$arg->{extension}"),
-    INCLUDE_PATH => Rubric::Config->template_path()
+    INCLUDE_PATH => [
+      File::ShareDir::dist_dir('Rubric'),
+      Rubric::Config->template_path,
+    ],
   });
 }
 

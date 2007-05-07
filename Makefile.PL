@@ -39,6 +39,8 @@ requires('CGI::Application::Plugin::Session' => 0);
 
 install_script('bin/rubric');
 
+install_share;
+
 my $files = '';
 find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
 
