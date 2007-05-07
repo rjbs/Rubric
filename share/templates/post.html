@@ -50,7 +50,7 @@
 				<tr>
 					<th>[% accessor %]</th>
           [% SET field_value = form.$param.join(" ")
-                            OR existing_entry.$accessor.join(" "); %]
+                            OR existing_entry.$accessor.list.join(" "); %]
 					<td>[%
             widget.input(
               name  => param,
