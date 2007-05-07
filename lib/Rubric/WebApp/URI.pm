@@ -31,11 +31,11 @@ sub root { Rubric::Config->uri_root }
 	
 =head2 stylesheet
 
-the URI for the stylesheet; taken from css_href in config
+the URI for the stylesheet
 
 =cut
 
-sub stylesheet { Rubric::Config->css_href; }
+sub stylesheet { Rubric::Config->uri_root . '/style/rubric.css'; }
 
 =head2 logout
 
