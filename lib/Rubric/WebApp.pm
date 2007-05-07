@@ -53,6 +53,7 @@ basic dispatch table looks something like this:
  /entries/Q   | find and display results for query Q      | entries
  /~USER/TAGS  | see a user's entries for given tags       | (in flux)
  /doc/PAGE    | view the named page in the documentation  | doc
+ /style/PAGE  | get the named style sheet                 | style 
 
 If the system is private and no user is logged in, the default action is to
 display a login screen.  If the system is public, or a user is logged in, the
@@ -237,7 +238,7 @@ sub setup {
   $self->mode_param(path_info => 1);
 
   $self->start_mode('login');
-  $self->run_modes([ qw(doc login newuser reset_password verify) ]);
+  $self->run_modes([ qw(style doc login newuser reset_password verify) ]);
 
   if ($self->param('current_user') or not Rubric::Config->private_system) {
     $self->start_mode('entries');
@@ -1168,6 +1169,23 @@ sub get_doc {
   my $doc_page = $self->next_path_part;
   return $doc_page =~ /^[\pL\d_]+$/ ? $self->param(doc_page => $doc_page)
                                     : ();
+}
+
+=head2 style
+
+This runmode sends the named stylesheet from the CSS path.
+
+=cut
+
+sub style {
+  my ($self) = @_;
+
+  my $sheet = $self->next_path_part;
+
+  my $file = File::Spec->catfile('style', $sheet);
+
+  $self->header_add(-type => 'text/css');
+  $self->template($file);
 }
 
 =head1 TODO
