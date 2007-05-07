@@ -68,7 +68,6 @@ use CGI::Carp qw(fatalsToBrowser);
 use Digest::MD5 qw(md5_hex);
 use Encode qw(decode_utf8);
 
-use HTML::CalendarMonth;
 use HTML::TagCloud;
 use DateTime;
 
@@ -412,6 +411,8 @@ sub tag_cloud {
 sub calendar {
   my ($self, $options) = @_;
   my $path = $self->param('path');
+
+  require HTML::CalendarMonth;
 
   my $year  = shift @$path;
   my $month = shift @$path;

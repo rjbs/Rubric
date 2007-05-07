@@ -18,7 +18,7 @@ is(
   "our root is what we said",
 );
 
-is($uri->stylesheet,         undef, "no stylesheet uri");
+is($uri->stylesheet, 'http://localhost:8080/style/rubric.css', "css uri");
 is($uri->login,      "$root/login", "login uri");
 is($uri->logout,     "$root/logout", "logout uri");
 

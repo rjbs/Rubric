@@ -20,14 +20,13 @@ Things you'll have to do to use it:
   1. install the modules with the usual "make install"
   2. put rubric.cgi and rubric.yml somewhere together in your docroot
      (start with the rubric.yml in etc/)
-  3. put the templates somewhere
-  4. create a location in which to put rubric.db
-  5. update rubric.yml (if you require verification, set email_from)
-  6. in the dir with rubric.yml, run "rubric db --setup" to generate rubric.db
-  7. set rubric.db +rw by the httpd user; set its location +rwx
-  8. create a user object for yourself (via the web or with adduser.pl)
-  9. (optional) set up .htaccess to prevent access to db, yml, and templates
-  A. go?
+  3. create a location in which to put rubric.db
+  4. update rubric.yml (if you require verification, set email_from)
+  5. in the dir with rubric.yml, run "rubric db --setup" to generate rubric.db
+  6. set rubric.db +rw by the httpd user; set its location +rwx
+  7. create a user object for yourself (via the web or with adduser.pl)
+  8. (optional) set up .htaccess to prevent access to db, yml, and templates
+  9. go?
 
 --- UPGRADING ---
 
