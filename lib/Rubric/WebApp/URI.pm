@@ -35,7 +35,11 @@ the URI for the stylesheet
 
 =cut
 
-sub stylesheet { Rubric::Config->uri_root . '/style/rubric.css'; }
+sub stylesheet {
+  my $href = Rubric::Config->css_href;
+  return $href if $href;
+  return Rubric::Config->uri_root . '/style/rubric.css';
+}
 
 =head2 logout
 
