@@ -1185,7 +1185,14 @@ sub style {
   my $file = File::Spec->catfile('style', $sheet);
 
   $self->header_add(-type => 'text/css');
-  $self->template($file);
+  my $tt = Template->new({
+    INCLUDE_PATH => [
+      Rubric::Config->template_path,
+      File::Spec->catdir(File::ShareDir::dist_dir('Rubric'), 'templates'),
+    ],
+  });
+
+  $tt->process($file);
 }
 
 =head1 TODO

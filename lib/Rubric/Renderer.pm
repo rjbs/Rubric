@@ -92,6 +92,8 @@ sub process {
   $stash->{xml_escape} = $xml_escape;
   $stash->{version}    = $Rubric::VERSION;
   $stash->{widget}     = HTML::Widget::Factory->new;
+  # 2007-05-07
+  # XXX: we only should create one factory per request, tops -- rjbs,
 
   $template .= '.' . $renderer{$type}{extension};
   $renderer{$type}{renderer}->process($template, $stash, \(my $output))
