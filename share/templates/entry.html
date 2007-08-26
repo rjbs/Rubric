@@ -1,14 +1,12 @@
 	<div class='entry'>
-		<div class='uri'>
+		<h2 class='uri'>
 			[% IF entry.link %]
         [% widget.link(class => "title", href => entry.link, text => entry.title) %]
 			[% ELSE %]
 				[% entry.title %]
 			[% END %]
-			[% UNLESS long_form %]
 			[% IF entry.body %]
         [% widget.link(href => uri.entry(entry), text => "(body)") %]
-      [% END %]
 			[% END %]
 			[% IF current_user %]
 			[% IF current_user == entry.user %]
@@ -17,7 +15,7 @@
 			<a href="[% uri.post_entry %]?uri=[% xml_escape(entry.link) %]&title=[% xml_escape(entry.title) %]">(copy)</a>
 			[% END %]
 			[% END %]
-		</div>
+		</h2>
 		[% IF entry.description %]
 		<div class='description'>[% entry.description %]</div>
 		[% END %]
@@ -40,11 +38,6 @@
 		<div class='other_entries'>
 			(<a href='[% uri.entries(urimd5 => entry.link.md5) %]'>[% entry.link.entry_count %]
       entries</a> for this link)
-		</div>
-		[% END %]
-		[% IF long_form AND entry.body %]
-		<div class='body'>
-		[% entry.body %]
 		</div>
 		[% END %]
 	</div>
