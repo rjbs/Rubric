@@ -14,6 +14,7 @@ requires('CGI::Application' => 3.00);
 requires('CGI::Carp'        => 0.00);
 requires('Class::DBI'       => 0.96);
 requires('Config::Auto'     => 0.11);
+requires('Crypt::CBC'       => 0); # min version unknown
 requires('DateTime'         => 0.00);
 requires('Date::Span'       => 1.12);
 requires('DBD::SQLite'      => 1.08);
@@ -21,8 +22,11 @@ requires('Digest::MD5'      => 0.00);
 requires('Email::Address'   => 0.00);
 requires('Email::Send'      => 0.00);
 requires('Encode'           => 2.00);
+requires('JSON::XS'         => 0); # min version unknown
 requires('File::ShareDir'   => 0); # min version unknown
+requires('MIME::Base64'     => 0); # min version unknown
 requires('String::Truncate' => 0.00);
+requires('Sub::Exporter'    => 0); # min version unknown
 requires('Template'         => 2.00);
 requires('Time::Local'      => 0.00);
 requires('Time::Piece'      => 0.00);
@@ -36,7 +40,6 @@ requires('Getopt::Long::Descriptive'  => '0.03');
 requires('Template::Plugin::Class'    => '0.12');
 requires('Test::HTTP::Server::Simple' => '0.02');
 requires('Test::WWW::Mechanize'       => '1.04');
-requires('CGI::Application::Plugin::Session' => 0);
 
 install_script('bin/rubric');
 
