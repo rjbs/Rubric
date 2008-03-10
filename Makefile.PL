@@ -15,6 +15,7 @@ requires('CGI::Carp'        => 0.00);
 requires('Class::DBI'       => 0.96);
 requires('Config::Auto'     => 0.11);
 requires('Crypt::CBC'       => 0); # min version unknown
+requires('Crypt::Rijndael'  => 0); # min version unknown
 requires('DateTime'         => 0.00);
 requires('Date::Span'       => 1.12);
 requires('DBD::SQLite'      => 1.08);
