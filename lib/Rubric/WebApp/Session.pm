@@ -3,10 +3,14 @@ use warnings;
 
 package Rubric::WebApp::Session;
 
+use Crypt::CBC;
 use JSON::XS ();
+use MIME::Base64;
 use Sub::Exporter -setup => {
   -as => '_import',
-  exports => [ qw(session get_cookie_payload set_cookie_payload) ],
+  exports => [
+    qw(session session_cipherer get_cookie_payload set_cookie_payload)
+  ],
   groups  => [ default => [ -all ] ],
 };
 
@@ -20,29 +24,51 @@ sub import {
 
 sub session {
   my ($self) = @_;
-  return $self->{__PACKAGE__}{session};
+  return $self->{__PACKAGE__}{session} ||= $self->get_cookie_payload;
 }
 
-my $COOKIE_NAME = 'RubricSession';
+my $COOKIE_NAME   = 'RubricSession';
+my $COOKIE_SECRET = 'FolgersCrystals';
+
+sub __empty { Rubric::WebApp::Session::Object->new({}) }
+
+sub session_cipherer {
+  my ($self) = @_;
+
+  $self->{__PACKAGE__}{cipherer} ||= Crypt::CBC->new(
+    -key    => $COOKIE_SECRET,
+    -cipher => 'Rijndael',
+    -padding => 'standard',
+  );
+}
 
 sub get_cookie_payload {
   my ($self) = @_;
 
-  my $cookie  = $self->query->cookie($COOKIE_NAME);
-  my $data = eval { JSON::XS->new->decode($cookie->value) } || {};
+  return __empty unless my $cookie_value = $self->query->cookie($COOKIE_NAME);
 
-  $self->{__PACKAGE__}{session} = Rubric::WebApp::Session::Object->new($data);
+  my $data = eval {
+    JSON::XS->new->utf8->decode(
+      $self->session_cipherer->decrypt(decode_base64($cookie_value))
+    );
+  };
+
+  my $session = $data ? Rubric::WebApp::Session::Object->new($data) : __empty;
 }
 
 sub set_cookie_payload {
   my ($self) = @_;
 
-  my $session = $self->session->as_hash;
-  my $payload = JSON::XS->new->encode($session);
+  my $cookie_value = eval {
+    my $json = JSON::XS->new->utf8->encode($self->session->as_hash);
+
+    encode_base64($self->session_cipherer->encrypt($json));
+  };
 
   my $cookie = CGI::Cookie->new(
-    -name  => $COOKIE_NAME,
-    -value => $payload,
+    -name    => $COOKIE_NAME,
+    -expires => '+30d',
+    -value   => $cookie_value,
   );
 
   $self->header_add(-cookie => [ $cookie ]);

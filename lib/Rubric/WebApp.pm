@@ -62,7 +62,6 @@ default action is to display entries.
 =cut
 
 use base qw(CGI::Application);
-# use CGI::Application::Plugin::Session;
 use CGI::Carp qw(fatalsToBrowser);
 
 use Digest::MD5 qw(md5_hex);
@@ -120,15 +119,6 @@ session configuration.
 
 sub cgiapp_init {
   my ($self) = @_;
-
-#  CGI::Session->name('rubric_session');
-#	
-#  $self->session_config(
-#    COOKIE_PARAMS => {
-#      -expires => '+30d',
-#      -name    => 'rubric_session'
-#    }
-#  );
 
   my $login_class = Rubric::Config->login_class;
 
