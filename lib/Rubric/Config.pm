@@ -60,6 +60,11 @@ level of debug output for DBI
 
 Where to send DBI debug output if dbi_trace_level
 
+=item * session_cipher_key
+
+The key to use to encrypt sessions, which are stored in user cookies.  This
+must be set.
+
 =item * uri_root
 
 the absolute URI for the root of the Rubric::WebApp install
@@ -197,6 +202,7 @@ my $default = {
   markup_formatter    => {},
 	one_entry_per_link  => 1,
 	registration_closed => undef,
+  session_cipher_key  => undef,
 	skip_newuser_verification => undef,
 };
 sub _default { $default }

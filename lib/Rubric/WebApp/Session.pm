@@ -17,6 +17,10 @@ use Sub::Exporter -setup => {
 sub import {
   my ($self) = @_;
   my $caller = caller;
+
+  Carp::croak "no session_cipher_key key set"
+    unless Rubric::Config->session_cipher_key;
+
   $caller->add_callback(init    => 'get_cookie_payload');
   $caller->add_callback(postrun => 'set_cookie_payload');
   $self->_import({ into => $caller });
@@ -28,7 +32,6 @@ sub session {
 }
 
 my $COOKIE_NAME   = 'RubricSession';
-my $COOKIE_SECRET = 'FolgersCrystals';
 
 sub __empty { Rubric::WebApp::Session::Object->new({}) }
 
@@ -36,7 +39,7 @@ sub session_cipherer {
   my ($self) = @_;
 
   $self->{__PACKAGE__}{cipherer} ||= Crypt::CBC->new(
-    -key    => $COOKIE_SECRET,
+    -key    => Rubric::Config->session_cipher_key,
     -cipher => 'Rijndael',
     -padding => 'standard',
   );
