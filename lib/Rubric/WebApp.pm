@@ -261,23 +261,6 @@ sub _entries_shortcut {
   $self->entries;
 }
 
-=head2 teardown
-
-This is called at the end of a request, and deletes the session of un-logged-in
-users.
-
-=cut
-
-sub teardown {
-  my ($self) = @_;
-
-  if (Rubric::Config->purge_anonymous_sessions) {
-    $self->session->delete unless $self->param('current_user')
-                               or $self->get_current_runmode eq 'login'
-                               or $self->get_current_runmode eq 'post';
-  }
-}
-
 =head2 entries
 
 This passes off responsibility to the class named in the C<entries_query_class>
