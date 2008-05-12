@@ -1213,8 +1213,4 @@ redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
 
-sub teardown {
-  CGI::initialize_globals();
-}
-
 1;

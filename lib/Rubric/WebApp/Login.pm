@@ -47,7 +47,7 @@ default) and L<Rubric::WebApp::Login::HTTP> serve as examples.
 
 sub check_for_login {
 	my ($self, $webapp) = @_;
-	
+
 	return unless my $username = $self->get_login_username($webapp);
 
 	$username = $self->map_username($username);
