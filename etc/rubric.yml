@@ -2,3 +2,4 @@ dsn: |-
   dbi:SQLite:dbname=rubric.db
 uri_root: |-
   http://server.name/rubric/rubric.cgi
+session_cipher_key: 1234
