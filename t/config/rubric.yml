@@ -2,3 +2,4 @@ uri_root: |-
   http://localhost:8080
 dsn: dbi:SQLite:dbname=t/db/rubric.db
 template_path: templates
+session_cipher_key: 1234
