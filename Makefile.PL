@@ -47,10 +47,7 @@ install_script('bin/rubric');
 
 install_share;
 
-my $files = '';
-find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
+tests_recursive;
+extra_tests;
 
-tests         ($files);
-
-auto_install;
 WriteAll();
