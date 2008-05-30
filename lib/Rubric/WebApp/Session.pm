@@ -3,6 +3,7 @@ use warnings;
 
 package Rubric::WebApp::Session;
 
+use CGI::Cookie;
 use Crypt::CBC;
 use JSON::XS ();
 use MIME::Base64;

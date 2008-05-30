@@ -5,6 +5,7 @@ use inc::Module::Install;
 use File::Find;
 
 name          ('Rubric');
+module_name   ('Rubric');
 author        ('Ricardo SIGNES <rjbs@cpan.org>');
 license       ('perl');
 version_from  ('lib/Rubric.pm');
