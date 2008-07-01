@@ -1,4 +1,7 @@
+use strict;
+use warnings;
 package Rubric::Entry::Formatter::Nil;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -6,7 +9,7 @@ Rubric::Entry::Formatter::Nil - format entries by formatting nearly not at all
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
@@ -15,9 +18,6 @@ Template::Filters' C<html_para> filter.  Paragraph breaks will be
 retained from plaintext into HTML, but nothing else will be done.
 
 =cut
-
-use strict;
-use warnings;
 
 use Template::Filters;
 

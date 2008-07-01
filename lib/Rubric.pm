@@ -1,6 +1,6 @@
-package Rubric;
 use strict;
 use warnings;
+package Rubric;
 
 =head1 NAME
 

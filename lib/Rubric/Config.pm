@@ -1,4 +1,8 @@
+use strict;
+use warnings;
 package Rubric::Config;
+use base qw(Class::Accessor);
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -6,7 +10,7 @@ Rubric::Config - the configuration data for a Rubric
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
@@ -20,10 +24,6 @@ module:
 
 =cut
 
-use strict;
-use warnings;
-
-use base qw(Class::Accessor);
 use Config::Auto;
 use YAML;
 

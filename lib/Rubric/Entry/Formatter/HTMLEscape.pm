@@ -1,4 +1,7 @@
+use strict;
+use warnings;
 package Rubric::Entry::Formatter::HTMLEscape;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -6,7 +9,7 @@ Rubric::Entry::Formatter::HTMLEscape - format into HTML by escaping entities
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
@@ -17,9 +20,6 @@ This is equivalent to filtering with Template::Filters' C<html> and
 C<html_para> filters.
 
 =cut
-
-use strict;
-use warnings;
 
 use Template::Filters;
 

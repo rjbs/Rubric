@@ -1,4 +1,7 @@
+use strict;
+use warnings;
 package Rubric::Entry::Formatter;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -6,7 +9,7 @@ Rubric::Entry::Formatter - a base class for entry body formatters
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
@@ -14,9 +17,6 @@ This class serves as a single point of dispatch for attempts to format entry
 bodies from their native format into rendered output.
 
 =cut
-
-use strict;
-use warnings;
 
 use Carp ();
 use Rubric::Config;

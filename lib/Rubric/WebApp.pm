@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-
 package Rubric::WebApp;
 
 =head1 NAME
@@ -9,13 +8,11 @@ Rubric::WebApp - the web interface to Rubric
 
 =head1 VERSION
 
-version 0.141
-
- $Id$
+version 0.143
 
 =cut
 
-our $VERSION = '0.141';
+our $VERSION = '0.143';
 
 =head1 SYNOPSIS
 
@@ -233,7 +230,6 @@ sub setup {
   if ($self->param('current_user') or not Rubric::Config->private_system) {
     $self->start_mode('entries');
     $self->run_modes([
-      'secret_temporary_dumper',
       qw(delete edit entries entry link logout post preferences tag_cloud calendar)
     ]);
   }
@@ -1171,20 +1167,6 @@ sub style {
   my $output;
   $tt->process($file,  {}, \$output);
   return $output;
-}
-
-sub secret_temporary_dumper {
-  my ($self) = @_;
-
-  require Data::Dumper;
-  require HTML::Entities;
-
-  $self->header_add(-type => 'text/plain');
-  local $Data::Dumper::Indent = 2;
-  return Data::Dumper::Dumper({
-    webapp => $self,
-    config => Rubric::Config->_read_config,
-  });
 }
 
 =head1 TODO

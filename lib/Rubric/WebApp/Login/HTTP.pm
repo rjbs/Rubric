@@ -1,8 +1,7 @@
-package Rubric::WebApp::Login::HTTP;
-use base qw(Rubric::WebApp::Login);
-
 use strict;
 use warnings;
+package Rubric::WebApp::Login::HTTP;
+use base qw(Rubric::WebApp::Login);
 
 =head1 NAME
 
@@ -10,13 +9,11 @@ Rubric::WebApp::Login::HTTP - process web login from HTTP authentication
 
 =head1 VERSION
 
-version 0.01
-
- $Id$
+version 0.143
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.143';
 
 =head1 DESCRIPTION
 

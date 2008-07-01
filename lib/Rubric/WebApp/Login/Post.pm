@@ -1,8 +1,7 @@
-package Rubric::WebApp::Login::Post;
-use base qw(Rubric::WebApp::Login);
-
 use strict;
 use warnings;
+package Rubric::WebApp::Login::Post;
+use base qw(Rubric::WebApp::Login);
 
 use Digest::MD5 qw(md5_hex);
 
@@ -12,13 +11,11 @@ Rubric::WebApp::Login::Post - process web login from query parameters
 
 =head1 VERSION
 
-version 0.01
-
- $Id$
+version 0.143
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.143';
 
 =head1 DESCRIPTION
 

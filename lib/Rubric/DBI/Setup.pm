@@ -1,7 +1,7 @@
 use strict;
 use warnings;
-
 package Rubric::DBI::Setup;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -9,13 +9,7 @@ Rubric::DBI::Setup - db initialization routines
 
 =head1 VERSION
 
-version 0.10
-
- $Id$
-
-=cut
-
-our $VERSION = '0.10';
+version 0.143
 
 =head1 SYNOPSIS
 
@@ -26,7 +20,6 @@ our $VERSION = '0.10';
  Rubric::DBI::Setup->setup_tables;
 
 =head1 DESCRIPTION
-
 
 =cut
 

@@ -1,5 +1,8 @@
+use strict;
+use warnings;
 package Rubric::CLI::Command::linkcheck;
 use base qw(Rubric::CLI::Command);
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -7,12 +10,9 @@ Rubric::CLI::Command::linkcheck - check validity of links in the database
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =cut
-
-use strict;
-use warnings;
 
 use LWP::Simple ();
 use Rubric::DBI::Setup;

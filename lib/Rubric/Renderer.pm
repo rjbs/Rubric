@@ -1,4 +1,7 @@
+use strict;
+use warnings;
 package Rubric::Renderer;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -6,7 +9,7 @@ Rubric::Renderer - the rendering interface for Rubric
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
@@ -14,9 +17,6 @@ Rubric::Renderer provides a simple interface for rendering entries, entry sets,
 and other things collected by Rubric::WebApp.
 
 =cut
-
-use strict;
-use warnings;
 
 use Carp;
 use File::ShareDir;

@@ -1,4 +1,7 @@
+use strict;
+use warnings;
 package Rubric::WebApp::URI;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -6,16 +9,13 @@ Rubric::WebApp::URI - URIs for Rubric web requests
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
 This module provides methods for generating the URIs for Rubric requests.
 
 =cut
-
-use strict;
-use warnings;
 
 use Rubric::Config;
 

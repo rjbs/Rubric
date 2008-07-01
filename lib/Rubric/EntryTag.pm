@@ -1,6 +1,7 @@
-package Rubric::EntryTag;
 use strict;
 use warnings;
+package Rubric::EntryTag;
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -8,7 +9,7 @@ Rubric::EntryTag - a tag on an entry
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 

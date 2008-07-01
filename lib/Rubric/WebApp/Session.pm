@@ -1,7 +1,8 @@
 use strict;
 use warnings;
-
 package Rubric::WebApp::Session;
+
+our $VERSION = '0.143';
 
 use CGI::Cookie;
 use Crypt::CBC;
@@ -27,6 +28,17 @@ sub import {
   $self->_import({ into => $caller });
 }
 
+=head1 METHODS
+
+These methods are imported into the using class and should be called on an
+object of that type -- here, a Rubric::WebApp.
+
+=head2 session
+
+This returns the session, a hashref.
+
+=cut
+
 sub session {
   my ($self) = @_;
   return $self->{__PACKAGE__}{session} ||= $self->get_cookie_payload;
@@ -35,6 +47,12 @@ sub session {
 my $COOKIE_NAME   = 'RubricSession';
 
 sub __empty { Rubric::WebApp::Session::Object->new({}) }
+
+=head2 session_cipherer
+
+This returns a Crypt::CBC object for handling ciphering.
+
+=cut
 
 sub session_cipherer {
   my ($self) = @_;
@@ -45,6 +63,12 @@ sub session_cipherer {
     -padding => 'standard',
   );
 }
+
+=head2 get_cookie_payload
+
+This gets the cookie and returns the payload as a R::WA::Session::Object.
+
+=cut
 
 sub get_cookie_payload {
   my ($self) = @_;
@@ -59,6 +83,12 @@ sub get_cookie_payload {
 
   my $session = $data ? Rubric::WebApp::Session::Object->new($data) : __empty;
 }
+
+=head2 set_cookie_payload
+
+This method writes the session data back out to a cookie entry.
+
+=cut
 
 sub set_cookie_payload {
   my ($self) = @_;
@@ -78,12 +108,29 @@ sub set_cookie_payload {
   $self->header_add(-cookie => [ $cookie ]);
 }
 
+=head1 SESSION OBJECT METHODS
+
+=cut
+
 package Rubric::WebApp::Session::Object;
+
+=head2 new
+
+This makes a new session object.  You don't need this.
+
+=cut
 
 sub new {
   my ($class, $data) = @_;
   bless $data => $class;
 }
+
+=head2 param
+
+  $obj->param('foo');        # get
+  $obj->param('foo', 'val'); # set
+
+=cut
 
 sub param {
   my $self = shift;
@@ -100,15 +147,37 @@ sub param {
   die "invalid number of args to session->param";
 }
 
+=head2 clear
+
+  $obj->clear('name');
+
+Clear the entry (delete it entirely) from the session.
+
+=cut
+
 sub clear {
   my ($self, $param) = @_;
   delete $self->{$param};
 }
 
+=head2 delete
+
+  $session->delete;
+
+Removes all data from the session.
+
+=cut
+
 sub delete {
   my ($self) = @_;
   %$self = ();
 }
+
+=head2 as_hash
+
+This returns a hashref containing the session data.
+
+=cut
 
 sub as_hash {
   return { %{ $_[0] } };

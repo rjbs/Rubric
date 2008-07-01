@@ -1,7 +1,8 @@
-package Rubric::Entry;
-
 use strict;
 use warnings;
+package Rubric::Entry;
+use base qw(Rubric::DBI);
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -9,7 +10,7 @@ Rubric::Entry - a single entry made by a user
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =head1 DESCRIPTION
 
@@ -18,7 +19,6 @@ Rubric::DBI, which is a Class::DBI class.
 
 =cut
 
-use base qw(Rubric::DBI);
 use Encode qw(_utf8_on);
 use Rubric::Entry::Formatter;
 use Time::Piece;

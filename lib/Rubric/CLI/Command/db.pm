@@ -1,5 +1,8 @@
+use strict;
+use warnings;
 package Rubric::CLI::Command::db;
 use base qw(Rubric::CLI::Command);
+our $VERSION = '0.143';
 
 =head1 NAME
 
@@ -7,12 +10,9 @@ Rubric::CLI::Command::db - database management
 
 =head1 VERSION
 
- $Id$
+version 0.143
 
 =cut
-
-use strict;
-use warnings;
 
 use Rubric::DBI::Setup;
 

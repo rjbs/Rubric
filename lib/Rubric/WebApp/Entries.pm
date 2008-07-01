@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-
 package Rubric::WebApp::Entries;
 
 =head1 NAME
@@ -9,13 +8,11 @@ Rubric::WebApp::Entries - process the /entries run method
 
 =head1 VERSION
 
-version 0.10
-
- $Id$
+version 0.143
 
 =cut
 
-our $VERSION = '0.10';
+our $VERSION = '0.143';
 
 =head1 DESCRIPTION
 
