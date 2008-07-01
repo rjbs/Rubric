@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::DBI;
-our $VERSION '0.143';
+our $VERSION = '0.143';
 
 =head1 NAME
 
