@@ -1,7 +1,10 @@
 Revision history for Rubric
 
-0.143   2006-11-06
+0.143   2007-07-01
         minor testing/packages updates
+        add calendar view (jcap)
+        add tag cloud (jcap)
+        do work to make things work under fcgi (rjbs)
 
 0.142   2006-09-05
         update install instructions

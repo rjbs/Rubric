@@ -10,8 +10,6 @@ Rubric - a notes and bookmarks manager with tagging
 
 version 0.143
 
- $Id$
-
 =cut
 
 our $VERSION = '0.143';
