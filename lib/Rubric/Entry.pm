@@ -21,6 +21,7 @@ Rubric::DBI, which is a Class::DBI class.
 
 use Encode qw(_utf8_on);
 use Rubric::Entry::Formatter;
+use String::TagString;
 use Time::Piece;
 
 __PACKAGE__->table('entries');
@@ -205,21 +206,7 @@ sub tags_from_string {
 
   return {} unless $tagstring and $tagstring =~ /\S/;
 
-  _utf8_on($tagstring);
-
-  # remove leading and trailing spaces
-  $tagstring =~ s/\A\s*//;
-
-  my %tags = map { (index($_, ':') > 0) ? split(/:/, $_, 2) : ($_ => undef) }
-                 split /(?:\+|\s)+/, $tagstring;
-
-  die "invalid characters in tagstring" 
-    if grep { defined $_ and $_ !~ /\A[@\pL\d_:.*][-\pL\d_:.*]*\z/ } keys %tags;
-
-  die "invalid characters in tagstring" 
-    if grep { defined $_ and $_ !~ /\A[-\pL\d:_.*]*\z/ } values %tags;
-
-  return \%tags;
+  String::TagString->tags_from_string($tagstring);
 }
 
 =head2 C< markup >
