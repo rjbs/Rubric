@@ -49,6 +49,5 @@ install_script('bin/rubric');
 install_share;
 
 tests_recursive;
-extra_tests;
 
 WriteAll();
