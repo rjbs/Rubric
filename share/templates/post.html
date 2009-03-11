@@ -43,12 +43,12 @@
       [%# Yup.  This is really, really ugly. %]
 			[% FOREACH param = [ "uri", "title", "description", "tags" ] %]
         [% IF param == "tags" %]
-          [% accessor = "entrytags" %]
+          [% accessor = "tagstring" %]
         [% ELSE %]
           [% accessor = param %]
         [% END %]
 				<tr>
-					<th>[% accessor %]</th>
+					<th>[% param %]</th>
           [% SET field_value = form.$param.join(" ")
                             OR existing_entry.$accessor.list.join(" "); %]
 					<td>[%

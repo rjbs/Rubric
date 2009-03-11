@@ -282,4 +282,11 @@ redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
 
+sub tagstring {
+  my ($self) = @_;
+  String::TagString->string_from_tags({
+    map {; $_->tag => $_->tag_value } $self->entrytags
+  });
+}
+
 1;
