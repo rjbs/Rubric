@@ -1,5 +1,8 @@
 Revision history for Rubric
 
+0.144   XXX
+        add entry title to <title> tag (bricas)
+
 0.143   2007-07-01
         minor testing/packages updates
         add calendar view (jcap)
