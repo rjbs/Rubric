@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Rubric::Entry;
 use base qw(Rubric::DBI);
-our $VERSION = '0.143';
+our $VERSION = '0.144';
 
 =head1 NAME
 
@@ -10,7 +10,7 @@ Rubric::Entry - a single entry made by a user
 
 =head1 VERSION
 
-version 0.143
+version 0.144
 
 =head1 DESCRIPTION
 
@@ -77,7 +77,7 @@ represent them.
 
 =cut
 
-__PACKAGE__->has_many(entrytags => 'Rubric::EntryTag' );
+__PACKAGE__->has_many(entrytags => 'Rubric::EntryTag');
 __PACKAGE__->has_many(tags => [ 'Rubric::EntryTag' => 'tag' ]);
 
 =head3 recent_tags_counted

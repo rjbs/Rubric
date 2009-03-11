@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::Renderer;
-our $VERSION = '0.143';
+our $VERSION = '0.144';
 
 =head1 NAME
 
@@ -9,7 +9,7 @@ Rubric::Renderer - the rendering interface for Rubric
 
 =head1 VERSION
 
-version 0.143
+version 0.144
 
 =head1 DESCRIPTION
 
