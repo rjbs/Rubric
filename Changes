@@ -1,7 +1,8 @@
 Revision history for Rubric
 
-0.144   XXX
+0.144   2009-03-11
         add entry title to <title> tag (bricas)
+        use String::TagString
 
 0.143   2007-07-01
         minor testing/packages updates
