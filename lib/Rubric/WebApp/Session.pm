@@ -9,24 +9,23 @@ use Crypt::CBC;
 use JSON::XS ();
 use MIME::Base64;
 use Sub::Exporter -setup => {
-  -as => '_import',
   exports => [
     qw(session session_cipherer get_cookie_payload set_cookie_payload)
   ],
   groups  => [ default => [ -all ] ],
 };
 
-sub import {
-  my ($self) = @_;
-  my $caller = caller;
-
-  Carp::croak "no session_cipher_key key set"
-    unless Rubric::Config->session_cipher_key;
-
-  $caller->add_callback(init    => 'get_cookie_payload');
-  $caller->add_callback(postrun => 'set_cookie_payload');
-  $self->_import({ into => $caller });
-}
+# sub import {
+#   my ($self) = @_;
+#   my $caller = caller;
+# 
+#   Carp::croak "no session_cipher_key key set"
+#     unless Rubric::Config->session_cipher_key;
+# 
+#   $caller->add_callback(init    => 'get_cookie_payload');
+#   $caller->add_callback(postrun => 'set_cookie_payload');
+#   $self->_import({ into => $caller });
+# }
 
 =head1 METHODS
 
