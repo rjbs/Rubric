@@ -1,6 +1,6 @@
 package Rubric::WebApp::Controller::Root;
 use Moose;
-extends 'Catalyst::Controller';
+BEGIN { extends 'Catalyst::Controller'; }
 
 use Digest::MD5 qw(md5_hex);
 use Encode qw(decode_utf8);
@@ -66,7 +66,9 @@ configuration option.  This option defaults to Rubric::WebApp::Entries.
 
 =cut
 
-sub entries {
+sub next_path_part { return }
+
+sub entries : Global {
   my ($self) = @_;
 
   my $entries_class = Rubric::Config->entries_query_class;

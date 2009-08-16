@@ -2,7 +2,10 @@
 use strict;
 use lib 'lib';
 
-BEGIN {  $ENV{CATALYST_ENGINE} = 'HTTP' }
+BEGIN {
+   $ENV{CATALYST_ENGINE} = 'HTTP';
+   $ENV{CATALYST_DEBUG}  = 1;
+}
 
 use Rubric::Config 't/config/rubric.yml';
 
