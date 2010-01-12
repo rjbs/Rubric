@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::DBI;
-our $VERSION = '0.144';
+our $VERSION = '0.145';
 
 =head1 NAME
 
@@ -9,7 +9,7 @@ Rubric::DBI - Rubric's subclass of Class::DBI
 
 =head1 VERSION
 
-version 0.144
+version 0.145
 
 =head1 DESCRIPTION
 

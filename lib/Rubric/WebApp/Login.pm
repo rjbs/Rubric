@@ -8,11 +8,11 @@ Rubric::WebApp::Login - web login processing
 
 =head1 VERSION
 
-version 0.144
+version 0.145
 
 =cut
 
-our $VERSION = '0.144';
+our $VERSION = '0.145';
 
 =head1 DESCRIPTION
 
