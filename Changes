@@ -1,5 +1,8 @@
 Revision history for Rubric
 
+0.145   2010-01-11
+        do not require users to have JSON::XS
+
 0.144   2009-03-11
         add entry title to <title> tag (bricas)
         use String::TagString

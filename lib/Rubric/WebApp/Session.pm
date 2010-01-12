@@ -6,7 +6,7 @@ our $VERSION = '0.144';
 
 use CGI::Cookie;
 use Crypt::CBC;
-use JSON::XS ();
+use JSON 2 ();
 use MIME::Base64;
 use Sub::Exporter -setup => {
   -as => '_import',
@@ -76,7 +76,7 @@ sub get_cookie_payload {
   return __empty unless my $cookie_value = $self->query->cookie($COOKIE_NAME);
 
   my $data = eval {
-    JSON::XS->new->utf8->decode(
+    JSON->new->utf8->decode(
       $self->session_cipherer->decrypt(decode_base64($cookie_value))
     );
   };
@@ -94,7 +94,7 @@ sub set_cookie_payload {
   my ($self) = @_;
 
   my $cookie_value = eval {
-    my $json = JSON::XS->new->utf8->encode($self->session->as_hash);
+    my $json = JSON->new->utf8->encode($self->session->as_hash);
 
     encode_base64($self->session_cipherer->encrypt($json));
   };
