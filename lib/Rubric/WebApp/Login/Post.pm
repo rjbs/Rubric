@@ -53,8 +53,6 @@ sub authenticate_login {
 		$webapp->session->param('current_user') and
 		$webapp->session->param('current_user') eq $user;
 
-  warn "trying to auth $user / " . $webapp->query->param('password');
-
 	my $password = $webapp->query->param('password');
 
 	return (md5_hex($password) eq $user->password);
