@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Rubric::WebApp::Session;
 
-our $VERSION = '0.145';
+our $VERSION = '0.146';
 
 use CGI::Cookie;
 use Crypt::CBC;

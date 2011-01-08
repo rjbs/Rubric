@@ -11,11 +11,11 @@ Rubric::WebApp::Login::Post - process web login from query parameters
 
 =head1 VERSION
 
-version 0.145
+version 0.146
 
 =cut
 
-our $VERSION = '0.145';
+our $VERSION = '0.146';
 
 =head1 DESCRIPTION
 

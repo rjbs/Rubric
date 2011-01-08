@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Rubric::CLI::Command::linkcheck;
 use base qw(Rubric::CLI::Command);
-our $VERSION = '0.145';
+our $VERSION = '0.146';
 
 =head1 NAME
 
@@ -10,7 +10,7 @@ Rubric::CLI::Command::linkcheck - check validity of links in the database
 
 =head1 VERSION
 
-version 0.145
+version 0.146
 
 =cut
 

@@ -93,8 +93,6 @@ t/config/rubric.yml
 t/config_custom.t
 t/config_default.t
 t/dataset/basic.yml
-t/db/basic.db
-t/db/rubric.db
 t/entry.t
 t/entry_format.t
 t/entry_query.t

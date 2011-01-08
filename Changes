@@ -1,5 +1,8 @@
 Revision history for Rubric
 
+0.146   2011-01-08
+        do not allow Encode to destructively process forms
+
 0.145   2010-01-11
         do not require users to have JSON::XS
 
