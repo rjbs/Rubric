@@ -1,5 +1,10 @@
 Revision history for Rubric
 
+0.147   2011-02-02
+
+        [MIGHT BREAK EVERYTHING]
+        remove Config::Auto and stop using it; might break everything!
+
 0.146   2011-01-08
         do not allow Encode to destructively process forms
 

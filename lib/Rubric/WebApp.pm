@@ -8,11 +8,11 @@ Rubric::WebApp - the web interface to Rubric
 
 =head1 VERSION
 
-version 0.146
+version 0.147
 
 =cut
 
-our $VERSION = '0.146';
+our $VERSION = '0.147';
 
 =head1 SYNOPSIS
 

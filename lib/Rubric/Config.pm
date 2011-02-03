@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Rubric::Config;
 use base qw(Class::Accessor);
-our $VERSION = '0.146';
+our $VERSION = '0.147';
 
 =head1 NAME
 
@@ -10,21 +10,19 @@ Rubric::Config - the configuration data for a Rubric
 
 =head1 VERSION
 
-version 0.146
+version 0.147
 
 =head1 DESCRIPTION
 
 Rubric::Config provides access to the configuration data for a Rubric.  The
-basic implementation stores its configuration in YAML in a text file found
-using Config::Auto's C<find_file> function.  By default, Rubric::Config looks
-for C<rubric.yml>, but an alternate filename may be passed when using the
-module:
+basic implementation stores its configuration in YAML in a text file in the
+current working directory.  By default, Rubric::Config looks for C<rubric.yml>,
+but an alternate filename may be passed when using the module:
 
  use Rubric::Config ".rubric_yml";
 
 =cut
 
-use Config::Auto;
 use YAML;
 
 my $config_filename = $ENV{RUBRIC_CONFIG_FILE} || 'rubric.yml';
@@ -170,7 +168,7 @@ my $config;
 sub _read_config {
 	return $config if $config;
 
-	my $config_file = Config::Auto::find_file($config_filename);
+	my $config_file = $config_filename;
 	$config = YAML::LoadFile($config_file);
 }
 

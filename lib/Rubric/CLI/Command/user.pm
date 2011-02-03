@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Rubric::CLI::Command::user;
 use base qw(Rubric::CLI::Command);
-our $VERSION = '0.146';
+our $VERSION = '0.147';
 
 =head1 NAME
 
@@ -10,7 +10,7 @@ Rubric::CLI::Command::user - Rubric user management commands
 
 =head1 VERSION
 
-version 0.146
+version 0.147
 
 =cut
 

@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::User;
-our $VERSION = 0.146;
+our $VERSION = 0.147;
 
 =head1 NAME
 
@@ -9,7 +9,7 @@ Rubric::User - a Rubric user
 
 =head1 VERSION
 
-version 0.146
+version 0.147
 
 =head1 DESCRIPTION
 

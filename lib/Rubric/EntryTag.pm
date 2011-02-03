@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::EntryTag;
-our $VERSION = '0.146';
+our $VERSION = '0.147';
 
 use String::TagString;
 
@@ -11,7 +11,7 @@ Rubric::EntryTag - a tag on an entry
 
 =head1 VERSION
 
-version 0.146
+version 0.147
 
 =head1 DESCRIPTION
 
