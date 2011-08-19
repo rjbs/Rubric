@@ -12,6 +12,7 @@ version_from  ('lib/Rubric.pm');
 
 requires('App::Cmd'          => 0.000);
 requires('CGI::Application'  => 3.00);
+requires('CGI::Application::PSGI' => 0);
 requires('CGI::Carp'         => 0.00);
 requires('Class::DBI'        => 0.96);
 requires('Crypt::CBC'        => 0); # min version unknown
