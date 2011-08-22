@@ -2,6 +2,8 @@
 use CGI::Application::PSGI;
 use Encode;
 
+use Plack::Builder;
+
 our $x;
 BEGIN { $x = `pwd`; chomp $x; }
 use Rubric::Config qq($x/rubric.yml);
@@ -17,3 +19,7 @@ my $handler = sub {
     return $res;
 };
 
+builder {
+  enable 'Plack::Middleware::ContentLength';
+  $handler;
+};
