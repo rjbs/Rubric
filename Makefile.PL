@@ -27,6 +27,7 @@ requires('Encode'            => 2.00);
 requires('JSON'              => 2); # min version unknown
 requires('File::ShareDir'    => 0); # min version unknown
 requires('MIME::Base64'      => 0); # min version unknown
+requires('Plack::Builder'    => 0); # min version unknown
 requires('String::TagString' => 0.00);
 requires('String::Truncate'  => 0.00);
 requires('Sub::Exporter'     => 0); # min version unknown

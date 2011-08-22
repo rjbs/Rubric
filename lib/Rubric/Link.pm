@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::Link;
-our $VERSION = '0.147';
+our $VERSION = '0.148';
 
 =head1 NAME
 
@@ -9,7 +9,7 @@ Rubric::Link - a link (URI) against which entries have been made
 
 =head1 VERSION
 
-version 0.147
+version 0.148
 
 =head1 DESCRIPTION
 

@@ -8,11 +8,11 @@ Rubric - a notes and bookmarks manager with tagging
 
 =head1 VERSION
 
-version 0.147
+version 0.148
 
 =cut
 
-our $VERSION = '0.147';
+our $VERSION = '0.148';
 
 =head1 DESCRIPTION
 

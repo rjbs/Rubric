@@ -4,6 +4,9 @@ Revision history for Rubric
 
         fix a bug that prevented `rubric user --new-user` from working
 
+        include everything needed to run under PSGI -- although app.psgi
+        is not currently installed anywhere
+
 0.147   2011-02-02
 
         [MIGHT BREAK EVERYTHING]

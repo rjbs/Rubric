@@ -8,11 +8,11 @@ Rubric::WebApp::Entries - process the /entries run method
 
 =head1 VERSION
 
-version 0.147
+version 0.148
 
 =cut
 
-our $VERSION = '0.147';
+our $VERSION = '0.148';
 
 =head1 DESCRIPTION
 
