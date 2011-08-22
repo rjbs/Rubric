@@ -15,6 +15,8 @@ Encode
 JSON
 File::ShareDir
 MIME::Base64
+Plack::Builder
+Plack::Middleware::ContentLength
 Rubric
 String::TagString
 String::Truncate
