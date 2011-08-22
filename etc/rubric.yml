@@ -1,4 +1,0 @@
-dsn: |-
-  dbi:SQLite:dbname=rubric.db
-uri_root: |-
-  http://server.name/rubric/rubric.cgi
