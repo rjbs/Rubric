@@ -1,3 +1,0 @@
-CGI::Application::PSGI
-Plack::Builder
-Rubric
