@@ -4,6 +4,8 @@ package Rubric::Entry;
 use base qw(Rubric::DBI);
 our $VERSION = '0.148';
 
+use Class::DBI::utf8;
+
 =head1 NAME
 
 Rubric::Entry - a single entry made by a user
@@ -42,6 +44,8 @@ __PACKAGE__->table('entries');
 __PACKAGE__->columns(
   All => qw(id link username title description body created modified)
 );
+
+__PACKAGE__->utf8_columns(qw( title description body ));
 
 =head1 RELATIONSHIPS
 
