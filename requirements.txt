@@ -21,7 +21,7 @@ Rubric
 String::TagString
 String::Truncate
 Sub::Exporter
-Template
+Template::
 Time::Local
 Time::Piece
 YAML
