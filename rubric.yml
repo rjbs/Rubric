@@ -1,0 +1,13 @@
+dsn: |-
+  dbi:SQLite:dbname=rubric.db
+uri_root: |-
+  http://rjbs.manxome.org/rubric
+smtp_server: localhost
+display_localtime: 1
+email_from: rubric@example.com
+registration_closed: 1
+session_cipher_key: 08ae0f8vv0dkeaa0faoee
+markup_formatter:
+  md:
+    class: Rubric::Entry::Formatter::Markdown
+    tab_width: 2

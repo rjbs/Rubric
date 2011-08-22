@@ -2,7 +2,9 @@
 use CGI::Application::PSGI;
 use Encode;
 
-use Rubric::Config qw(/home/rjbs/www/rjbs/rubric.yml);
+our $x;
+BEGIN { $x = `pwd`; chomp $x; }
+use Rubric::Config qq($x/rubric.yml);
 use Rubric::WebApp;
 
 my $handler = sub {
