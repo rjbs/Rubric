@@ -1,7 +1,7 @@
 dsn: |-
   dbi:SQLite:dbname=rubric.db
 uri_root: |-
-  http://rjbs.manxome.org/rubric
+  http://rubric.stackato.local
 smtp_server: localhost
 display_localtime: 1
 email_from: rubric@example.com
