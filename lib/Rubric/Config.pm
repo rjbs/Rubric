@@ -23,7 +23,7 @@ but an alternate filename may be passed when using the module:
 
 =cut
 
-use YAML;
+use YAML::XS ();
 
 my $config_filename = $ENV{RUBRIC_CONFIG_FILE} || 'rubric.yml';
 
@@ -169,7 +169,7 @@ sub _read_config {
 	return $config if $config;
 
 	my $config_file = $config_filename;
-	$config = YAML::LoadFile($config_file);
+	$config = YAML::XS::LoadFile($config_file);
 }
 
 =head2 _default

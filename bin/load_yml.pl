@@ -1,6 +1,6 @@
 #!/usr/bin/perl 
 
-use YAML;
+use YAML::XS;
 use Rubric::Link;
 use Rubric::User;
 
@@ -8,7 +8,7 @@ my $user = Rubric::User->retrieve(shift @ARGV || $ENV{USER});
 
 my $yaml;
 { local $/; $yaml = <>; }
-my $links = YAML::Load($yaml);
+my $links = Load($yaml);
 
 foreach (@$links) {
 	my $link = Rubric::Link->find_or_create({uri => $_->{link}});

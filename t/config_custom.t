@@ -6,9 +6,9 @@ use warnings;
 
 BEGIN { use_ok("Rubric::Config", 'etc/rubric.yml'); }
 
-use YAML;
+use YAML::XS qw(LoadFile);
 
-my $config = YAML::LoadFile("etc/rubric.yml");
+my $config = LoadFile("etc/rubric.yml");
 
 for (keys %{Rubric::Config->_default}) {
 	my $expected = exists $config->{$_} ? $config->{$_}

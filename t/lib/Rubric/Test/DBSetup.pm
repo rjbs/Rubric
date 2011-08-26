@@ -15,7 +15,7 @@ use File::Copy;
 use File::Spec;
 use File::Path qw(rmtree mkpath);
 use Rubric::DBI::Setup;
-use YAML;
+use YAML::XS qw(LoadFile);
 
 sub init_test_db_ok {
   mkpath("t/db");
@@ -43,7 +43,7 @@ sub tests_for_dataset {
   $tests += 1; # to initialize the database
 
   my $filename = "t/dataset/$dataset_name.yml";
-  my $data = YAML::LoadFile($filename);
+  my $data = LoadFile($filename);
 
   for my $user (values %{ $data->{users} }) {
     $tests += 1; # to load the user
@@ -68,8 +68,8 @@ sub load_test_data_ok {
   }
 
   init_test_db_ok;
-  
-  my $data = YAML::LoadFile($filename);
+
+  my $data = LoadFile($filename);
 
   eval {
     _load_users($data->{users});

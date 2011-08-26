@@ -5,7 +5,7 @@ use warnings;
 
 use Getopt::Long::Descriptive;
 use Rubric::User;
-use YAML;
+use YAML::XS;
 
 my ($opt, $usage) = describe_options(
   "rubric-dump %o <user>",
@@ -47,4 +47,4 @@ while (my $entry = $entry_iterator->next) {
   push @entries, entry_to_hash($entry);
 }
 
-print YAML::Dump(\@entries);
+print Dump(\@entries);
