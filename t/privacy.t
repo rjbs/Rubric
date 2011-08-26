@@ -1,5 +1,5 @@
 #!perl
-#!perl -T
+#!perl
 use strict;
 use warnings;
 

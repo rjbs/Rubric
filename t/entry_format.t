@@ -1,4 +1,4 @@
-#!perl -T
+#!perl
 
 use Test::More 'no_plan';
 
