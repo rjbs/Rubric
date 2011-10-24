@@ -992,11 +992,13 @@ sub _post_form_contents {
     for qw(entryid uri title description tags body);
 
   for (qw(uri title description body tags)) {
+    my $decoded;
     my $ok = eval {
-      decode_utf8($form{$_}, Encode::FB_CROAK | Encode::LEAVE_SRC);
+      $decoded = decode_utf8($form{$_}, Encode::FB_CROAK | Encode::LEAVE_SRC);
       1;
     };
     $error{$_} = "Invalid UTF-8 characters in $_." unless $ok;
+    $form{$_} = $decoded if $ok;
   }
 
   eval { $form{uri} = URI->new($form{uri})->canonical; };
