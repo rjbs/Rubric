@@ -15,6 +15,7 @@ requires('CGI::Application'  => 3.00);
 requires('CGI::Application::PSGI' => 0);
 requires('CGI::Carp'         => 0.00);
 requires('Class::DBI'        => 0.96);
+requires('Class::DBI::utf8'  => 0.2); # all I tested with
 requires('Crypt::CBC'        => 0); # min version unknown
 requires('Crypt::Rijndael'   => 0); # min version unknown
 requires('DateTime'          => 0.00);
