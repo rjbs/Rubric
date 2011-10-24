@@ -997,7 +997,7 @@ sub _post_form_contents {
       $decoded = decode_utf8($form{$_}, Encode::FB_CROAK | Encode::LEAVE_SRC);
       1;
     };
-    $error{$_} = "Invalid UTF-8 characters in $_." unless $ok;
+    $error{$_} = "Invalid characters in $_." unless $ok;
     $form{$_} = $decoded if $ok;
   }
 
