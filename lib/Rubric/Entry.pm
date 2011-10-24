@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Rubric::Entry;
 use base qw(Rubric::DBI);
-our $VERSION = '0.148';
+our $VERSION = '0.149';
 
 use Class::DBI::utf8;
 
@@ -12,7 +12,7 @@ Rubric::Entry - a single entry made by a user
 
 =head1 VERSION
 
-version 0.148
+version 0.149
 
 =head1 DESCRIPTION
 

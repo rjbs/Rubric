@@ -1,5 +1,10 @@
 Revision history for Rubric
 
+0.149   2011-10-23
+
+        more properly handle encoding for entry text/title/description -- still
+        a mess, but much, much more likely to just work, now
+
 0.148   2011-08-22
 
         fix a bug that prevented `rubric user --new-user` from working

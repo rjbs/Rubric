@@ -9,11 +9,11 @@ Rubric::WebApp::Login::HTTP - process web login from HTTP authentication
 
 =head1 VERSION
 
-version 0.148
+version 0.149
 
 =cut
 
-our $VERSION = '0.148';
+our $VERSION = '0.149';
 
 =head1 DESCRIPTION
 
