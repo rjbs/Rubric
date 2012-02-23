@@ -18,6 +18,7 @@ This module provides methods for generating the URIs for Rubric requests.
 =cut
 
 use Rubric::Config;
+use Scalar::Util ();
 
 =head1 METHODS
 
@@ -121,7 +122,7 @@ URI to view entry
 
 sub entry {
 	my ($class, $entry) = @_;
-	return unless UNIVERSAL::isa($entry,  'Rubric::Entry');
+	return unless blessed($entry) && $entry->isa('Rubric::Entry');
 
 	return Rubric::Config->uri_root . "/entry/" . $entry->id;
 }
@@ -135,7 +136,7 @@ URI to edit entry
 
 sub edit_entry {
 	my ($class, $entry) = @_;
-	return unless UNIVERSAL::isa($entry,  'Rubric::Entry');
+	return unless blessed($entry) && $entry->isa('Rubric::Entry');
 
 	return Rubric::Config->uri_root . "/edit/" . $entry->id;
 }
@@ -148,7 +149,7 @@ URI to delete entry
 
 sub delete_entry {
 	my ($class, $entry) = @_;
-	return unless UNIVERSAL::isa($entry,  'Rubric::Entry');
+	return unless blessed($entry) && $entry->isa('Rubric::Entry');
 
 	return Rubric::Config->uri_root . "/delete/" . $entry->id;
 }
