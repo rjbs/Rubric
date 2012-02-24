@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Rubric::EntryTag;
-# ABTRACT: a tag on an entry
+# ABSTRACT: a tag on an entry
 
 use String::TagString;
 
