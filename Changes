@@ -1,300 +1,304 @@
 Revision history for Rubric
 
 {{$NEXT}}
+          switched from YAML to YAML::XS
 
-0.148   2011-08-22
+          now built with Dist::Zilla; some docs may be a bit weird until I go
+          through them with a fine-toothed comb
 
-        fix a bug that prevented `rubric user --new-user` from working
+0.148     2011-08-22
 
-        include everything needed to run under PSGI -- although app.psgi
-        is not currently installed anywhere
+          fix a bug that prevented `rubric user --new-user` from working
 
-0.147   2011-02-02
+          include everything needed to run under PSGI -- although app.psgi
+          is not currently installed anywhere
 
-        [MIGHT BREAK EVERYTHING]
-        remove Config::Auto and stop using it; might break everything!
+0.147     2011-02-02
 
-0.146   2011-01-08
-        do not allow Encode to destructively process forms
+          [MIGHT BREAK EVERYTHING]
+          remove Config::Auto and stop using it; might break everything!
 
-0.145   2010-01-11
-        do not require users to have JSON::XS
+0.146     2011-01-08
+          do not allow Encode to destructively process forms
 
-0.144   2009-03-11
-        add entry title to <title> tag (bricas)
-        use String::TagString
+0.145     2010-01-11
+          do not require users to have JSON::XS
 
-0.143   2007-07-01
-        minor testing/packages updates
-        add calendar view (jcap)
-        add tag cloud (jcap)
-        do work to make things work under fcgi (rjbs)
+0.144     2009-03-11
+          add entry title to <title> tag (bricas)
+          use String::TagString
 
-0.142   2006-09-05
-        update install instructions
+0.143     2007-07-01
+          minor testing/packages updates
+          add calendar view (jcap)
+          add tag cloud (jcap)
+          do work to make things work under fcgi (rjbs)
 
-0.141   2006-09-02
-        freshen Module::Install
+0.142     2006-09-05
+          update install instructions
 
-0.140   2006-05-18
-        new version numbering, new release schedule: less stable, more often
-        fix a small RSS bug that bugged a large number Firefox users
-        lots of forgotten changes
+0.141     2006-09-02
+          freshen Module::Install
 
-0.12    2005-10-26 (long overdue)
-        some tiny test cleanups that might make tests... pass!
-        moved repository to svn
-        fixed stupid handling of repost to URIs with one-entry-per-uri config
-        delete unneeded sessions at teardown (lousy?)
-        work on unbreaking tags/facets
-        rolled back Data::FormValidator use
-        provide link on related tags to add/remove user constraint
-        show related tags even when no user selected
-        QUESTIONABLE DESCISION: @-prefix tags don't list in tagboxes
-        list user's name for "your tags" if user ne current_user
-        begin stubbing out pluggable body rendering
-        begin stubbing out facets
-        allow query for "/exact_tags/" to work (find untagged)
-        re-allow "+" as tag separator in tagstrings
+0.140     2006-05-18
+          new version numbering, new release schedule: less stable, more often
+          fix a small RSS bug that bugged a large number Firefox users
+          lots of forgotten changes
 
-0.10    2005-06-01
-        a little more and better testing
-        fixed broken 'help' runmode
+0.12      2005-10-26 (long overdue)
+          some tiny test cleanups that might make tests... pass!
+          moved repository to svn
+          fixed stupid handling of repost to URIs with one-entry-per-uri config
+          delete unneeded sessions at teardown (lousy?)
+          work on unbreaking tags/facets
+          rolled back Data::FormValidator use
+          provide link on related tags to add/remove user constraint
+          show related tags even when no user selected
+          QUESTIONABLE DESCISION: @-prefix tags don't list in tagboxes
+          list user's name for "your tags" if user ne current_user
+          begin stubbing out pluggable body rendering
+          begin stubbing out facets
+          allow query for "/exact_tags/" to work (find untagged)
+          re-allow "+" as tag separator in tagstrings
 
-0.09_09 2005-05-29
-        enable utf-8 tags
-        fix missing-title error on blank new post form
-        simplify updatedb script, eliminate vacuumdb script
-        display_localtime option
+0.10      2005-06-01
+          a little more and better testing
+          fixed broken 'help' runmode
 
-0.09_08 2005-05-28
-        private_tag implementation no longer completely disables public entries
-        expand/collapse link now preserves page number
-        help page's bookmarklet now uses encodeURIComponent, not escape
-        added an input box for searching
+0.09_09   2005-05-29
+          enable utf-8 tags
+          fix missing-title error on blank new post form
+          simplify updatedb script, eliminate vacuumdb script
+          display_localtime option
 
-0.09_07 2005-05-27
-        private_tag implementation no longer horribly breaks entry listing
-        fixes to work with DBD::SQLite 1.08, now required
+0.09_08   2005-05-28
+          private_tag implementation no longer completely disables public entries
+          expand/collapse link now preserves page number
+          help page's bookmarklet now uses encodeURIComponent, not escape
+          added an input box for searching
 
-0.09_06 2005-05-27
-        added private_tag - SO SETTLE DOWN, SSORICHE!
+0.09_07   2005-05-27
+          private_tag implementation no longer horribly breaks entry listing
+          fixes to work with DBD::SQLite 1.08, now required
 
-0.09_05 2005-05-25
-        fixed bug that snuck back into _04, reset_password was broken
-        introduced Rubric::DBI::Setup for db maintenance
+0.09_06   2005-05-27
+          added private_tag - SO SETTLE DOWN, SSORICHE!
 
-0.09_04 2005-05-24
-        refactor get_* to return property, not WebApp
-        add stubby password-reset functionality
+0.09_05   2005-05-25
+          fixed bug that snuck back into _04, reset_password was broken
+          introduced Rubric::DBI::Setup for db maintenance
 
-0.09_03 2005-05-02
-        fix tag-destroying bug
+0.09_04   2005-05-24
+          refactor get_* to return property, not WebApp
+          add stubby password-reset functionality
 
-0.09_02 2005-04-29
-        basic experimental searching
-        hyphens allowed as non-first char in tag
-        uri_root defaults to "" not undef
+0.09_03   2005-05-02
+          fix tag-destroying bug
 
-0.09_01 2005-04-12
-        describe queries (badly)
-        redirect to previous query after deleting a link
-        validate that post input is utf-8
-        add first_only query constraint
-        fix RSS more: use rdf:about attr as intended!
-        taglists tags are now "click to add" on post form
-        added "tags for this link"
-        if posting a non-unique uri, previous post defaults in (old bug?)
+0.09_02   2005-04-29
+          basic experimental searching
+          hyphens allowed as non-first char in tag
+          uri_root defaults to "" not undef
 
-0.08    2005-04-07
-        use normal must-login/redirect-on-login behavior for /preferences
-        honor requirement for verification on unverified users
-        use html_line_breaks in RSS feed for paragraphing
-        POD corrections
+0.09_01   2005-04-12
+          describe queries (badly)
+          redirect to previous query after deleting a link
+          validate that post input is utf-8
+          add first_only query constraint
+          fix RSS more: use rdf:about attr as intended!
+          taglists tags are now "click to add" on post form
+          added "tags for this link"
+          if posting a non-unique uri, previous post defaults in (old bug?)
 
-0.07_07 2005-04-04
-        added exact_tags query string
-        +/- filter on taglist centers on gecko; gecko bug must die
-        updated "related tags" taglist for clarity of add/remove tags
-        RSS should now validate and work everywhere (I think)
-        expand/collapse entry bodies on default entries templates
-        the numeric tag "0" now works
-        the (edit) links will now include a redirect to your previous query
-        /edit or /entry links to missing entries (or non-owned for edit)
-          produce better error messages
-        max/default entries per page is now configurable
+0.08      2005-04-07
+          use normal must-login/redirect-on-login behavior for /preferences
+          honor requirement for verification on unverified users
+          use html_line_breaks in RSS feed for paragraphing
+          POD corrections
 
-0.07_06 2005-04-02
-        duplicate tags are now dropped; they no longer break posting
-        report bad uri/tags at post-time and reproduce form
-        keep long_form param on next/prev page links
-        username and password for db connection can be specified in config
+0.07_07   2005-04-04
+          added exact_tags query string
+          +/- filter on taglist centers on gecko; gecko bug must die
+          updated "related tags" taglist for clarity of add/remove tags
+          RSS should now validate and work everywhere (I think)
+          expand/collapse entry bodies on default entries templates
+          the numeric tag "0" now works
+          the (edit) links will now include a redirect to your previous query
+          /edit or /entry links to missing entries (or non-owned for edit)
+            produce better error messages
+          max/default entries per page is now configurable
 
-0.07_05 2005-03-31
-        experimental javascript to filter by tag count
-        link to entries for a Link if it's got more than one
+0.07_06   2005-04-02
+          duplicate tags are now dropped; they no longer break posting
+          report bad uri/tags at post-time and reproduce form
+          keep long_form param on next/prev page links
+          username and password for db connection can be specified in config
 
-0.07_04 2005-03-30
-        one_entry_per_link option added
-        invalid tags no longer drop entire tag string
-        allowed_schemes added
-        fixed a few bugs in turning non-scalars into strings for display
-        add version display to html footer
+0.07_05   2005-03-31
+          experimental javascript to filter by tag count
+          link to entries for a Link if it's got more than one
 
-0.07_03 2005-03-26
-        /entries?uri=http://www.foo.com/ works again
+0.07_04   2005-03-30
+          one_entry_per_link option added
+          invalid tags no longer drop entire tag string
+          allowed_schemes added
+          fixed a few bugs in turning non-scalars into strings for display
+          add version display to html footer
 
-0.07_02 2005-03-20
-        fixed format arg to uri.entries (reported by Steve Mallett)
+0.07_03   2005-03-26
+          /entries?uri=http://www.foo.com/ works again
 
-0.07_01 2005-03-16
-        began adding (currently laughable) "API" format output for simple XML
-        added /~username/tags+othertags shortcut run mode
+0.07_02   2005-03-20
+          fixed format arg to uri.entries (reported by Steve Mallett)
 
-0.06    2005-01-25
-        fixed stupid bug in Rubric::User->quick_entry that prevented changing
-        of URI on an entry
-        fixed over-escaping of URIs
+0.07_01   2005-03-16
+          began adding (currently laughable) "API" format output for simple XML
+          added /~username/tags+othertags shortcut run mode
 
-0.05    2005-01-23
-        test coverage for non-web modules, fixing some obscure bugs-to-be
-        when_done=close for post, to close pop-up windows
+0.06      2005-01-25
+          fixed stupid bug in Rubric::User->quick_entry that prevented changing
+          of URI on an entry
+          fixed over-escaping of URIs
 
-0.04    2005-01-20
-        created stub of autocreate_user method on Login
-        updated tests to test compilability of all files
+0.05      2005-01-23
+          test coverage for non-web modules, fixing some obscure bugs-to-be
+          when_done=close for post, to close pop-up windows
 
-0.03_04 2005-01-20
-        updated post template to not fail when query contains an '
-        updated entries query bits to use undef for errors
+0.04      2005-01-20
+          created stub of autocreate_user method on Login
+          updated tests to test compilability of all files
 
-0.03_03 2005-01-18
-        must_login has been replaced with a smarter login runmode
-        if you try to /post or perform another operation without a login,
-        the login form will redirect you back to it once you're auth'd
+0.03_04   2005-01-20
+          updated post template to not fail when query contains an '
+          updated entries query bits to use undef for errors
 
-0.03_02 2005-01-15
-        restore recent tags listing to "root"
-        redirect to root when root failed caused loop; just die
-        eliminate numerous references to EntriesQuery;  AUGH!
+0.03_03   2005-01-18
+          must_login has been replaced with a smarter login runmode
+          if you try to /post or perform another operation without a login,
+          the login form will redirect you back to it once you're auth'd
 
-0.03_01 2005-01-15
-        refactored EntriesQuery.pm into two parts
+0.03_02   2005-01-15
+          restore recent tags listing to "root"
+          redirect to root when root failed caused loop; just die
+          eliminate numerous references to EntriesQuery;  AUGH!
 
-0.03    2005-01-14
-        use CGI::Carp qw(fatalsToBrowser)
-        die on Template problems
-        change entry.html template to link entry username
+0.03_01   2005-01-15
+          refactored EntriesQuery.pm into two parts
 
-0.02_04 2005-01-13
-        potentially finished with first round of EventQueries
-        (the path for the future is clear)
-        fixed a few small (but critical) bugs
-        it'll be 0.03 if nothing's broken
+0.03      2005-01-14
+          use CGI::Carp qw(fatalsToBrowser)
+          die on Template problems
+          change entry.html template to link entry username
 
-0.02_03 2005-01-10
-        EntriesQuery pretty much working, needs work
-        minor repairs to use of Time::Local
-        added some prereqs for Date::Span
+0.02_04   2005-01-13
+          potentially finished with first round of EventQueries
+          (the path for the future is clear)
+          fixed a few small (but critical) bugs
+          it'll be 0.03 if nothing's broken
 
-0.02_02 2005-01-03
-        added EntriesQuery
-        basic framework for EntriesQuery exists, but stinks
-        minor fixes to incorrect method calls
-        added pop-up to help docs; must add "close" to when_done options
+0.02_03   2005-01-10
+          EntriesQuery pretty much working, needs work
+          minor repairs to use of Time::Local
+          added some prereqs for Date::Span
 
-0.02_01 2004-12-20
-        added Rubric::WebApp::Login
-        added skip_newuser_verification option
+0.02_02   2005-01-03
+          added EntriesQuery
+          basic framework for EntriesQuery exists, but stinks
+          minor fixes to incorrect method calls
+          added pop-up to help docs; must add "close" to when_done options
 
-0.02    2004-12-17
-        0.00_25 introduced a bug with session cookies
-        this fixes it
+0.02_01   2004-12-20
+          added Rubric::WebApp::Login
+          added skip_newuser_verification option
 
-0.01    2004-12-16
-        released!
+0.02      2004-12-17
+          0.00_25 introduced a bug with session cookies
+          this fixes it
 
-0.00_30 2004-12-16
-        /preferences
+0.01      2004-12-16
+          released!
 
-0.00_25 2004-12-15
-        naive support for REMOTE_USER
+0.00_30   2004-12-16
+          /preferences
 
-0.00_24 2004-12-15
-        private_system implemented
-        Rubric::Renderer refactored
-        /doc uri handler added
+0.00_25   2004-12-15
+          naive support for REMOTE_USER
 
-0.00_23 2004-12-13
-        rss links on entries.html
-        rss announce in header.html
-        don't display new user registration link if closed
-        some more refactoring
+0.00_24   2004-12-15
+          private_system implemented
+          Rubric::Renderer refactored
+          /doc uri handler added
 
-0.00_22 2004-12-13
-        new user registration cleaned up somewhat
-        "registration_closed" option
-        /link runmode (primitive)
-        delete_entry runmode method is now delete
-        more refactoring
-        Rubric::Config methods built by Class::Accessor
+0.00_23   2004-12-13
+          rss links on entries.html
+          rss announce in header.html
+          don't display new user registration link if closed
+          some more refactoring
 
-0.00_20 2004-12-07
-        new user registration works, but is horribly coded
-        "copy" link to copy other users' links also works, but is ugly
+0.00_22   2004-12-13
+          new user registration cleaned up somewhat
+          "registration_closed" option
+          /link runmode (primitive)
+          delete_entry runmode method is now delete
+          more refactoring
+          Rubric::Config methods built by Class::Accessor
 
-0.00_13 2004-12-02
-        cvs had sticky-rev'd some files which were released despite being old
-        all files updated
+0.00_20   2004-12-07
+          new user registration works, but is horribly coded
+          "copy" link to copy other users' links also works, but is ugly
 
-0.00_12 2004-12-01
-        updatedb rewritten to actually, well, work
-        style and html structure cleaned up
-        html doctype added; validates
-        some refactoring, including tag validation
+0.00_13   2004-12-02
+          cvs had sticky-rev'd some files which were released despite being old
+          all files updated
 
-0.00_11 2004-11-29
-        put servername in uri_root in default config
-        awful temporary refactoring of rendering for RSS
+0.00_12   2004-12-01
+          updatedb rewritten to actually, well, work
+          style and html structure cleaned up
+          html doctype added; validates
+          some refactoring, including tag validation
 
-0.00_10 2004-11-28
-        all "url" things are now "uri"
-        important: your config should be updated to uri_root
-        much better body-handling
-        long-form entry display
-        ?link and ?body query parameters
+0.00_11   2004-11-29
+          put servername in uri_root in default config
+          awful temporary refactoring of rendering for RSS
 
-0.00_07 2004-11-25 Happy Thanksgiving!
-        eliminated &url_for, replaced with Rubric::WebApp::URI
-        rewrote template structure (use one master template via PROCESS)
-        added linkless entries
-        added body to entries
-        added updatedb.pl
+0.00_10   2004-11-28
+          all "url" things are now "uri"
+          important: your config should be updated to uri_root
+          much better body-handling
+          long-form entry display
+          ?link and ?body query parameters
 
-0.00_06 2004-11-19
-        added lots of documentation
+0.00_07   2004-11-25 Happy Thanksgiving!
+          eliminated &url_for, replaced with Rubric::WebApp::URI
+          rewrote template structure (use one master template via PROCESS)
+          added linkless entries
+          added body to entries
+          added updatedb.pl
 
-0.00_05 2004-11-18
-        logins and posts now redirect to new page, instead of rendering
-        post form for an already-entered url displays info
-        fixed return of tag counts to references for TT2's sake
-        numerous style cleanups
+0.00_06   2004-11-19
+          added lots of documentation
 
-0.00_04 2004-11-17
-        refactored paging, posting
-        store md5 of uri's for identification
-        tag counts
-        recently active tags on recent entry listing
+0.00_05   2004-11-18
+          logins and posts now redirect to new page, instead of rendering
+          post form for an already-entered url displays info
+          fixed return of tag counts to references for TT2's sake
+          numerous style cleanups
 
-0.00_03 2004-11-16
-        actually /use/ the template_path config data, thanks
-        when finding entry to update, include username in search
-        updated install instructions
-        added Entry->set_new_tags
-        updated WebApp->post to, well, work
+0.00_04   2004-11-17
+          refactored paging, posting
+          store md5 of uri's for identification
+          tag counts
+          recently active tags on recent entry listing
 
-0.00_01 2004-11-16
-        abstracted enough that it can be installed without hours of removing my
-        absolute URLs.
-        still awful.
+0.00_03   2004-11-16
+          actually /use/ the template_path config data, thanks
+          when finding entry to update, include username in search
+          updated install instructions
+          added Entry->set_new_tags
+          updated WebApp->post to, well, work
+
+0.00_01   2004-11-16
+          abstracted enough that it can be installed without hours of removing my
+          absolute URLs.
+          still awful.
 
