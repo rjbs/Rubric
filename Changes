@@ -2,6 +2,8 @@ Revision history for Rubric
 
 {{$NEXT}}
 
+0.151     2012-02-24 10:18:29 America/New_York
+
           switched from YAML to YAML::XS
 
           now built with Dist::Zilla; some docs may be a bit weird until I go
