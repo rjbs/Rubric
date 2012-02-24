@@ -1,5 +1,5 @@
 #!perl
-
+# PODNAME: rubric-dump
 use strict;
 use warnings;
 

@@ -2,8 +2,6 @@ use strict;
 use warnings;
 package Rubric::WebApp::Session;
 
-our $VERSION = '0.148';
-
 use CGI::Cookie;
 use Crypt::CBC;
 use JSON 2 ();

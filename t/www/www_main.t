@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 use Test::More 'no_plan';
-use Test::WWW::Mechanize;
+use Test::WWW::Mechanize 1.04;
 
 use lib 't/lib';
 BEGIN { use_ok("Rubric::Config", 't/config/rubric.yml'); }

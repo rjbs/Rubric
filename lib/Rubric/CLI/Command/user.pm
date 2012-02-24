@@ -2,17 +2,7 @@ use strict;
 use warnings;
 package Rubric::CLI::Command::user;
 use base qw(Rubric::CLI::Command);
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::CLI::Command::user - Rubric user management commands
-
-=head1 VERSION
-
-version 0.148
-
-=cut
+# ABSTRACT: Rubric user management commands
 
 use Digest::MD5 qw(md5_hex);
 use Rubric::User;

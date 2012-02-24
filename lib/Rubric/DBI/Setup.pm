@@ -1,15 +1,7 @@
 use strict;
 use warnings;
 package Rubric::DBI::Setup;
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::DBI::Setup - db initialization routines
-
-=head1 VERSION
-
-version 0.148
+# ABSTRACT: db initialization routines
 
 =head1 SYNOPSIS
 
@@ -69,13 +61,13 @@ attempts to convert the given sql syntax to the given DBD Driver's
 
 sub specialize_sql {
   my ($class, $query) = @_;
-  
+
   my $db_type = $class->determine_db_type;
-  
-  if ($db_type eq 'Pg') { 
+
+  if ($db_type eq 'Pg') {
     $query =~ s/(id\s*)integer/$1SERIAL/i;
   }
-  
+
   return $query;
 }
 
@@ -136,9 +128,9 @@ SQLite and Pg support only right now.
 
 sub determine_db_type {
 	my ($class) = @_;
-  
+
   Rubric::Config->dsn =~ /dbi:([^:]+):/;
-  
+
   my $db_type = $1;
 
   return $db_type;
@@ -565,7 +557,7 @@ $from{10} = sub {
     body                TEXT
   );
 
-  INSERT INTO entries 
+  INSERT INTO entries
     SELECT id, link, username, title, created, modified, description, body
       FROM new_entries;
 
@@ -581,7 +573,7 @@ $from{11} = undef;
 
 sub update_schema {
 	my ($class) = @_;
-  
+
 	while ($_ = $class->determine_version) {
 		die "no update path from schema version $_" unless exists $from{$_};
 		last unless defined $from{$_};
@@ -590,26 +582,6 @@ sub update_schema {
 	}
 	return $class->determine_version;
 }
-
-=head1 TODO
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004-2005, Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;
 

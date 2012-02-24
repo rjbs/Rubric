@@ -3,6 +3,8 @@ package Rubric::Test::Server;
 use strict;
 use warnings;
 
+use HTTP::Server::Simple 0.08 ();
+use Test::HTTP::Server::Simple 0.02 ();
 use base qw(Test::HTTP::Server::Simple HTTP::Server::Simple::CGI);
 use Rubric::WebApp;
 

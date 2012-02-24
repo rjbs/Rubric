@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+# PODNAME: rubric-entries
 use strict;
 use warnings;
 use Rubric::User;
@@ -13,7 +14,7 @@ GetOptions(
 );
 
 my @users = $all
-	? Rubric::User->retrieve_all 
+	? Rubric::User->retrieve_all
 	: Rubric::User->retrieve($uname || $ENV{USER});
 
 my $tags = [ grep /^\w+$/, @ARGV ] if @ARGV;

@@ -1,18 +1,7 @@
 use strict;
 use warnings;
 package Rubric;
-
-=head1 NAME
-
-Rubric - a notes and bookmarks manager with tagging
-
-=head1 VERSION
-
-version 0.148
-
-=cut
-
-our $VERSION = '0.148';
+# ABSTRACT: a notes and bookmarks manager with tagging
 
 =head1 DESCRIPTION
 
@@ -45,51 +34,20 @@ and upgrades.
 For now, consult the C<todo.html> template for future milestones, or check
 L<http://rjbs.manxome.org/rubric/docs/todo>.
 
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
 =head1 THANKS
 
 ...to a lot of people whom I will try to name, in time.  Among these helpful
 people are Ian Langworth, Shawn Sorichetti, John Cappiello, and Dave O'Neill.
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-You can also find some useful people on the #rubric channel on Freenode IRC or
-on the mailing list: L<http://www.listbox.com/subscribe/?listname=rubric>
-
 =head1 SEE ALSO
 
-=over
-
-=item * L<http://del.icio.us/>
-
+=for :list
+* L<http://del.icio.us/>
 one of my original inspirations
-
-=item * L<http://pubweb.northwestern.edu/~zps869/nv.html>
-
+* L<http://notational.net/>
 Notational Velocity, another of my inspirations
-
-=item * L<http://unalog.com/>
-
+* L<http://unalog.com/>
 a social bookmarks system, written in Python
-
-=item * L<http://www.tecknik.net/scuttle/>
-
-a social bookmarks system, written in PHP
-
-=back
-
-=head1 COPYRIGHT
-
-Copyright 2004-2006 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
 

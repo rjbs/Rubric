@@ -1,15 +1,7 @@
 use strict;
 use warnings;
 package Rubric::Link;
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::Link - a link (URI) against which entries have been made
-
-=head1 VERSION
-
-version 0.148
+# ABSTRACT: a link (URI) against which entries have been made
 
 =head1 DESCRIPTION
 
@@ -105,7 +97,7 @@ The uri column inflates to a URI object.
 __PACKAGE__->has_a(
 	uri => 'URI',
 	deflate => sub { (shift)->canonical->as_string }
-); 
+);
 
 =head1 METHODS
 
@@ -124,25 +116,5 @@ sub _set_md5 {
 	my ($self) = @_;
 	$self->_attribute_store(md5 => md5_hex("$self->{uri}"));
 }
-
-=head1 TODO
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;

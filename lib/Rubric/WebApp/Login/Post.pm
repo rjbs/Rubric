@@ -2,20 +2,9 @@ use strict;
 use warnings;
 package Rubric::WebApp::Login::Post;
 use base qw(Rubric::WebApp::Login);
+# ABSTRACT: process web login from query parameters
 
 use Digest::MD5 qw(md5_hex);
-
-=head1 NAME
-
-Rubric::WebApp::Login::Post - process web login from query parameters
-
-=head1 VERSION
-
-version 0.148
-
-=cut
-
-our $VERSION = '0.148';
 
 =head1 DESCRIPTION
 
@@ -48,7 +37,7 @@ stored password md5sum.
 
 sub authenticate_login {
 	my ($self, $webapp, $user) = @_;
-	
+
 	return 1 if
 		$webapp->session->param('current_user') and
 		$webapp->session->param('current_user') eq $user;
@@ -71,23 +60,5 @@ sub set_current_user {
 	$webapp->session->param(current_user => $user->username);
 	$self->SUPER::set_current_user($webapp, $user);
 }
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;

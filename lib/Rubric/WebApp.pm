@@ -1,18 +1,7 @@
 use strict;
 use warnings;
 package Rubric::WebApp;
-
-=head1 NAME
-
-Rubric::WebApp - the web interface to Rubric
-
-=head1 VERSION
-
-version 0.148
-
-=cut
-
-our $VERSION = '0.148';
+# ABSTRACT: the web interface to Rubric
 
 =head1 SYNOPSIS
 
@@ -50,7 +39,7 @@ basic dispatch table looks something like this:
  /entries/Q   | find and display results for query Q      | entries
  /~USER/TAGS  | see a user's entries for given tags       | (in flux)
  /doc/PAGE    | view the named page in the documentation  | doc
- /style/PAGE  | get the named style sheet                 | style 
+ /style/PAGE  | get the named style sheet                 | style
 
 If the system is private and no user is logged in, the default action is to
 display a login screen.  If the system is public, or a user is logged in, the
@@ -58,11 +47,12 @@ default action is to display entries.
 
 =cut
 
+use CGI::Application 3;
 use base qw(CGI::Application);
 use CGI::Carp qw(fatalsToBrowser);
 
 use Digest::MD5 qw(md5_hex);
-use Encode qw(decode_utf8);
+use Encode 2 qw(decode_utf8);
 
 use HTML::TagCloud;
 use DateTime;
@@ -129,13 +119,13 @@ sub cgiapp_init {
 
 This method is called before the selected runmode.  It checks for a login,
 checks for updates to result-set paging, and starts processing the request
-path. 
+path.
 
 =cut
 
 sub cgiapp_prerun {
   my ($self) = @_;
-  
+
   $self->check_pager_data;
 
   my @path = split '/', $self->query->path_info;
@@ -171,7 +161,7 @@ sub check_pager_data {
     || $self->session->param('per_page')
     || Rubric::Config->default_page_size
   ));
- 
+
   $self->session->param('per_page', Rubric::Config->max_page_size)
      if $self->session->param('per_page') > Rubric::Config->max_page_size;
 
@@ -356,12 +346,12 @@ sub get_link {
 
 sub tag_cloud {
   my ($self, $options) = @_;
-    
+
   my $tags = Rubric::DBI->db_Main->selectall_arrayref(
-     "SELECT tag, count(*) 
-        FROM entrytags 
-       WHERE tag not like '@%' 
-    GROUP BY tag 
+     "SELECT tag, count(*)
+        FROM entrytags
+       WHERE tag not like '@%'
+    GROUP BY tag
     ORDER BY tag");
 
   my $cloud = HTML::TagCloud->new();
@@ -431,11 +421,11 @@ sub calendar {
     nanosecond => 0,
     time_zone  => '-1700'
   )->epoch;
-  
+
   my $entries = Rubric::Entry->retrieve_from_sql(qq{
       WHERE id NOT IN (SELECT entry FROM entrytags WHERE tag = '\@private')
-        AND created > '$start' 
-        AND created < '$end' 
+        AND created > '$start'
+        AND created < '$end'
    ORDER BY created}
   );
 
@@ -450,7 +440,7 @@ sub calendar {
     $a->push_content($title);
     $div->push_content($a);
     $calendar->item($day)->push_content($div);
-  } 
+  }
 
   my $prev_month = $month;
   my $prev_year = $year;
@@ -470,11 +460,11 @@ sub calendar {
 
   return $self->template('calendar' => {
     calendar => $calendar,
-    prev_link => { 
+    prev_link => {
       month => sprintf("%02d", $prev_month),
       year  => $prev_year,
     },
-    next_link => { 
+    next_link => {
       month => sprintf("%02d", $next_month),
       year  => $next_year,
     },
@@ -578,8 +568,8 @@ settings may be changed.
 sub preferences {
   my ($self) = @_;
 
-  return $self->login unless $self->param('current_user');  
-  
+  return $self->login unless $self->param('current_user');
+
   return $self->template("preferences")
     unless my %prefs = $self->_get_prefs_form;
 
@@ -644,7 +634,7 @@ sub validate_prefs {
     },
     dependency_groups => { new_password => [qw(password_1 password_2)] }
   };
-  
+
   my $results = Data::FormValidator->check($prefs, $profile);
 }
 
@@ -701,7 +691,7 @@ sub newuser {
 
   return $self->redirect_root("Already logged in...")
     if $self->param('current_user');
-  
+
   my %newuser;
   $newuser{$_} = $self->query->param($_)
     for qw(username password_1 password_2 email);
@@ -734,7 +724,7 @@ sub validate_newuser_form {
     undef $newuser->{username};
     $errors{username_taken} = 1;
   }
-  
+
   unless ($newuser->{email}) {
     $errors{email_missing} = 1;
   } elsif ($newuser->{email} and $newuser->{email} !~ $Email::Address::addr_spec) {
@@ -972,7 +962,7 @@ sub edit {
 
   return $self->template('no_entry', { reason => 'missing' })
     unless $self->get_entry;
-  
+
   return $self->template('no_entry', { reason => 'access' })
     unless $self->param('entry')->user eq $self->param('current_user');
 
@@ -1025,7 +1015,7 @@ sub _post_form_contents {
   eval { Rubric::Entry->tags_from_string($form{tags}) };
   $error{tags} = "Tags may only contain letters, numbers, dot, colon, and asterisk." if $@;
 
-  $error{title} = "You must supply a title." if 
+  $error{title} = "You must supply a title." if
     $self->query->param('submit') and not length $form{title};
 
   if ($form{uri} and Rubric::Config->one_entry_per_link) {
@@ -1039,14 +1029,14 @@ sub _post_form_contents {
       }
     }
   }
-  
+
   return (\%form, \%error);
 }
 
 sub post {
   my ($self) = @_;
 
-  return $self->login unless my $user = $self->param('current_user');  
+  return $self->login unless my $user = $self->param('current_user');
 
   my ($form, $error) = $self->_post_form_contents;
 
@@ -1054,7 +1044,7 @@ sub post {
     if not $self->query->param('submit')
         or %$error
         or not my $entry = $self->param('current_user')->quick_entry($form);
-  
+
   my $when_done = $self->query->param('when_done');
   my $goto;
 
@@ -1102,7 +1092,7 @@ Either way, the user is redirected to his entry listing.
 sub delete {
   my ($self) = @_;
 
-  return $self->login unless my $user = $self->param('current_user');  
+  return $self->login unless my $user = $self->param('current_user');
 
   return $self->redirect_root("No such entry...")
     unless $self->get_entry;
@@ -1113,7 +1103,7 @@ sub delete {
   $self->param('entry')->delete;
 
   my $goto = $self->query->param('then_goto')
-           || Rubric::WebApp::URI->entries({ username => $user }); 
+           || Rubric::WebApp::URI->entries({ username => $user });
 
   return $self->redirect( $goto, "Deleted..." );
 }
@@ -1173,31 +1163,5 @@ sub style {
   $tt->process($file,  {}, \$output);
   return $output;
 }
-
-=head1 TODO
-
-=over 4
-
-=item * change email, password
-
-=back
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;

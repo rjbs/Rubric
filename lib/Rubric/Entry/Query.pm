@@ -1,15 +1,7 @@
 use strict;
 use warnings;
 package Rubric::Entry::Query;
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::Entry::Query - construct and execute a complex query
-
-=head1 VERSION
-
-version 0.148
+# ABSTRACT: construct and execute a complex query
 
 =head1 DESCRIPTION
 
@@ -45,7 +37,7 @@ sub _private_constraint {
 
 	return "id NOT IN (SELECT entry FROM entrytags WHERE tag=$priv_tag)"
 		unless $user;
-	
+
 	$user = Rubric::Entry->db_Main->quote($user);
 	return
 		"((username = $user) OR " .
@@ -62,11 +54,11 @@ sub query {
 
 	my @constraints = map { $self->get_constraint($_, $arg->{$_}) } keys %$arg;
 	@constraints = ("1 = 0") if grep { not defined } @constraints;
-	
+
   push @constraints, $self->_nolist_constraint;
 	push @constraints, $self->_private_constraint($context->{user})
 		if exists $context->{user};
-	
+
   ## no critic (ConditionalDeclarations)
 	my $order_by = "$context->{order_by} DESC"
 		if $context->{order_by}||'' =~ /\A(?:created|modified)\Z/;
@@ -282,7 +274,7 @@ The prepositions are as follows:
 
 sub _unit_from_string {
 	my ($datetime) = @_;
-	return unless my @unit = $datetime =~ 
+	return unless my @unit = $datetime =~
 		qr/^(\d{4})(?:-(\d{2})(?:-(\d{2})(?:(?:T|)(\d{2})(?::(\d{2}))?)?)?)?$/o;
 	$unit[1]-- if $unit[1];
 	return @unit;
@@ -310,23 +302,5 @@ sub _unit_from_string {
 		}
 	}
 }
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;

@@ -2,17 +2,7 @@ use strict;
 use warnings;
 package Rubric::CLI::Command::db;
 use base qw(Rubric::CLI::Command);
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::CLI::Command::db - database management
-
-=head1 VERSION
-
-version 0.148
-
-=cut
+# ABSTRACT: database management
 
 use Rubric::DBI::Setup;
 

@@ -1,15 +1,7 @@
 use strict;
 use warnings;
 package Rubric::Renderer;
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::Renderer - the rendering interface for Rubric
-
-=head1 VERSION
-
-version 0.148
+# ABSTRACT: the rendering interface for Rubric
 
 =head1 DESCRIPTION
 
@@ -21,10 +13,10 @@ and other things collected by Rubric::WebApp.
 use Carp;
 use File::ShareDir;
 use File::Spec;
-use HTML::Widget::Factory;
+use HTML::Widget::Factory 0.03;
 use Rubric;
 use Rubric::Config;
-use Template;
+use Template 2.00;
 use Template::Filters;
 
 =head1 METHODS
@@ -85,12 +77,12 @@ my $xml_escape = sub {
   }
 };
 
-sub process { 
+sub process {
   my ($class, $template, $type, $stash) = @_;
   return unless $renderer{$type};
 
   $stash->{xml_escape} = $xml_escape;
-  $stash->{version}    = $Rubric::VERSION;
+  $stash->{version}    = Rubric->VERSION || 0;
   $stash->{widget}     = HTML::Widget::Factory->new;
   # 2007-05-07
   # XXX: we only should create one factory per request, tops -- rjbs,
@@ -105,25 +97,5 @@ sub process {
     ? ($renderer{$type}{content_type}, $output)
     :  $output;
 }
-
-=head1 TODO
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;

@@ -1,15 +1,7 @@
 use strict;
 use warnings;
 package Rubric::Entry::Formatter;
-our $VERSION = '0.148';
-
-=head1 NAME
-
-Rubric::Entry::Formatter - a base class for entry body formatters
-
-=head1 VERSION
-
-version 0.148
+# ABSTRACT: a base class for entry body formatters
 
 =head1 DESCRIPTION
 
@@ -105,24 +97,6 @@ Rubric::Entry::Formatter.
 Actually, the method is found and called via C<can>, so a suitably programmed
 module can respond to C<can> to allow it to render into all the format it likes
 -- or at least to claim to.
-
-=head1 TODO
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2005 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
 

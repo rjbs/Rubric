@@ -1,15 +1,8 @@
 use strict;
 use warnings;
 package Rubric::DBI;
-our $VERSION = '0.148';
 
-=head1 NAME
-
-Rubric::DBI - Rubric's subclass of Class::DBI
-
-=head1 VERSION
-
-version 0.148
+# ABSTRACT: Rubric's subclass of Class::DBI
 
 =head1 DESCRIPTION
 
@@ -19,6 +12,7 @@ retrieved from Rubric::Config.
 =cut
 
 use Rubric::Config;
+use Class::DBI 0.96;
 use base qw(Class::DBI);
 
 use Class::DBI::AbstractSearch;
@@ -52,25 +46,5 @@ sub vacuum {
 		"DELETE FROM links WHERE id NOT IN ( SELECT link FROM entries )"
 	);
 }
-
-=head1 TODO
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-rubric@rt.cpan.org>, or
-through the web interface at L<http://rt.cpan.org>. I will be notified, and
-then you'll automatically be notified of progress on your bug as I make
-changes.
-
-=head1 COPYRIGHT
-
-Copyright 2004 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself.
-
-=cut
 
 1;

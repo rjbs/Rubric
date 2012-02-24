@@ -1,8 +1,7 @@
 #!perl
-
+# PODNAME: rubric
 use strict;
 use warnings;
 
 use Rubric::CLI;
-
 Rubric::CLI->new->run;

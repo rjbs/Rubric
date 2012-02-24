@@ -1,5 +1,5 @@
 #!/usr/bin/perl 
-
+# PODNAME: rubric-loadyml
 use YAML::XS;
 use Rubric::Link;
 use Rubric::User;
