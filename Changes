@@ -1,5 +1,7 @@
 Revision history for Rubric
 
+{{$NEXT}}
+
 0.148   2011-08-22
 
         fix a bug that prevented `rubric user --new-user` from working
