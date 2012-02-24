@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 package Rubric::WebApp::Session;
+# ABSTRACT: the Rubric session plugin
 
 use CGI::Cookie;
 use Crypt::CBC;

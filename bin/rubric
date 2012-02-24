@@ -1,5 +1,6 @@
 #!perl
-# PODNAME: rubric
+# PODNAME:  rubric
+# ABSTRACT: the Rubric command line interface
 use strict;
 use warnings;
 
