@@ -1,6 +1,8 @@
 Revision history for Rubric
 
 {{$NEXT}}
+
+0.152     2012-07-10 16:29:38 America/New_York
           add a missing prereq, stop losing errors doing session decrypt
           (thanks for the report, Jan Dubois!)
 
