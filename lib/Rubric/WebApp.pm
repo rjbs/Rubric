@@ -110,7 +110,7 @@ sub cgiapp_init {
   my $login_class = Rubric::Config->login_class;
 
   ## no critic (StringyEval)
-  eval "require $login_class";
+  eval("require $login_class; 1") or die;
   ## use critic
   $login_class->check_for_login($self);
 }

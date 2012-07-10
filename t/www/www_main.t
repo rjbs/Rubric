@@ -1,8 +1,8 @@
 #!perl
-#!perl
-
 use strict;
 use warnings;
+
+use Test::File::ShareDir -share => { -dist => { Rubric => 'share' } };
 
 use Test::More 'no_plan';
 use Test::WWW::Mechanize 1.04;
@@ -55,7 +55,8 @@ for my $iteration (1 .. 2) { # login/logout
     fields => { user => 'jjj', password => 'yellow' }
   );
 
-  $mech->content_contains("you are: jjj", "you are logged in");
+  $mech->content_contains("you are: jjj", "you are logged in")
+    or diag $mech->content;
 
   last if $iteration == 2;
 
