@@ -58,7 +58,7 @@ use HTML::TagCloud;
 use DateTime;
 
 use Email::Address;
-use Email::Send;
+use Email::Sender::Simple qw(sendmail);
 
 use Rubric::Config;
 use Rubric::Entry;
@@ -784,7 +784,8 @@ sub send_reset_email_to {
     { user => $user, email_from => Rubric::Config->email_from }
   );
 
-  send SMTP => $message => Rubric::Config->smtp_server;
+  # XXX: This now ignores the smtp_server config.
+  sendmail($message);
 }
 
 =head2 send_verification_email_to($user)
@@ -802,7 +803,8 @@ sub send_verification_email_to {
     { user => $user, email_from => Rubric::Config->email_from }
   );
 
-  send SMTP => $message => Rubric::Config->smtp_server;
+  # XXX: This now ignores the smtp_server config.
+  sendmail($message);
 }
 
 =head2 verify
