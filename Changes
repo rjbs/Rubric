@@ -2,6 +2,9 @@ Revision history for Rubric
 
 {{$NEXT}}
 
+0.154     2013-10-15 22:30:06 America/New_York
+          update bugtracker and repo links to point at GitHub
+
 0.153     2012-12-24 23:17:19 America/New_York
           use Email::Sender, not Email::Send (breaks smtp_server config
           for now)
