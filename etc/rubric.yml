@@ -2,3 +2,7 @@ dsn: |-
   dbi:SQLite:dbname=rubric.db
 uri_root: |-
   http://server.name/rubric/rubric.cgi
+
+# The session_cipher_key is a hunk of random used to encipher data in your
+# cookies, as there is no locally stored state!
+session_cipher_key: aoijasdofjasdofjadfias
