@@ -84,6 +84,7 @@ sub process {
   $stash->{xml_escape} = $xml_escape;
   $stash->{version}    = Rubric->VERSION || 0;
   $stash->{widget}     = HTML::Widget::Factory->new;
+  $stash->{basename}   = Rubric::Config->basename;
   # 2007-05-07
   # XXX: we only should create one factory per request, tops -- rjbs,
 

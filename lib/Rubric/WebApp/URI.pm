@@ -119,7 +119,6 @@ sub entry {
 	return Rubric::Config->uri_root . "/entry/" . $entry->id;
 }
 
-
 =head2 edit_entry($entry)
 
 URI to edit entry

@@ -1,12 +1,12 @@
 [% USE uri = Class('Rubric::WebApp::URI') %]
 <html>
 <head>
-	<title>Rubric</title>
+	<title>[% basename %]</title>
 	<link href='[% uri.stylesheet %]' rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<h1>
-		rubric
+		<a href="[% uri.root %]">[% uri.basename %]</a>
 	</h1>
 	[% PROCESS "toolbar.html" %]
 

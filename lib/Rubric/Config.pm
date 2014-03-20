@@ -63,6 +63,11 @@ the absolute URI for the root of the Rubric::WebApp install
 
 the absolute URI for the stylesheet to be used by Rubric::WebApp pages
 
+=item * basename
+
+This is the text to display as the name of this Rubric instance.  It defaults
+to "Rubric".
+
 =item * template_path
 
 the INCLUDE_PATH passed to Template when creating the template renderers
@@ -171,6 +176,7 @@ This method returns the default configuration has a hashref.
 =cut
 
 my $default = {
+	basename    => 'Rubric',
 	css_href    => undef,
 	db_user     => undef,
 	db_pass     => undef,

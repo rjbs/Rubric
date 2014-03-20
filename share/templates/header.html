@@ -3,7 +3,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-	<title>Rubric[% ": " _ query_description IF query_description %]</title>
+	<title>[% basename %][% ": " _ query_description IF query_description %]</title>
   [% IF uri.stylesheet %]
 	<link href='[% uri.stylesheet %]' rel='stylesheet' type='text/css' />
   [% END %]
@@ -14,5 +14,5 @@
 </head>
 <body>
 	<h1>
-		Rubric
+		[% basename %]
 	</h1>
