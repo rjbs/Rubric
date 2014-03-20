@@ -12,13 +12,13 @@
 	[% END %]
 	[% END %]
 	<div class='loginform'>
-		<form id='loginform' action='[% uri.login %]' method='POST'>
+		<form id='loginform' action='[% uri.login %]' method='post'>
 			<table>
 				<tr>
-          <th>username</th><td>[% widget.input(name => 'user', value=> user) %] 
+          <th>username</th><td>[% widget.input(name => 'user', value=> user) %]</td>
         </tr>
 				<tr>
-          <th>password</th><td>[% widget.password(name => 'password') %]
+          <th>password</th><td>[% widget.password(name => 'password') %]</td>
         </tr>
 				<tr><td class='submit' colspan='2'>
 					<input type='submit' name='submit' value='login' />

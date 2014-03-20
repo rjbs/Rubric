@@ -58,7 +58,7 @@
 	<h2 class='query'>[% query_description %]</h2>
 	<div class='rss'><a href='[% uri.entries(user => user, tags => tags, has_link => has_link, has_body => has_body, format => "rss" ) %]'>RSS</a> available
 	for this query</div>
-	<div class='expandcollapse'><a href='?long_form=[% long_form ? 0 : 1 %]&page=[%page%]'>[%
+	<div class='expandcollapse'><a href='?long_form=[% long_form ? 0 : 1 %]&amp;page=[%page%]'>[%
 	long_form ? "collapse" : "expand"
 	%]</a> entry bodies</div>
 	<div class='entries'>

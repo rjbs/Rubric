@@ -38,7 +38,7 @@
 	<h2>new entry</h2>
 	[% END %]
 	<div class='entryform'>
-		<form id='entryform' action="[% xml_escape(uri.post_entry) %]" method='POST'>
+		<form id='entryform' action="[% xml_escape(uri.post_entry) %]" method='post'>
 			<table>
       [%# Yup.  This is really, really ugly. %]
 			[% FOREACH param = [ "uri", "title", "description", "tags" ] %]
