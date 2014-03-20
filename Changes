@@ -2,6 +2,10 @@ Revision history for Rubric
 
 {{$NEXT}}
 
+0.155     2014-03-20 18:48:28-04:00 America/New_York
+        - improve chances of producing valid XHTML
+        - allow the instance to be renamed with "basename"
+
 0.154     2013-10-15 22:30:06 America/New_York
           update bugtracker and repo links to point at GitHub
 
