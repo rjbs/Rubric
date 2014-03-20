@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::CLI::Command::user;
-use base qw(Rubric::CLI::Command);
 # ABSTRACT: Rubric user management commands
+
+use parent qw(Rubric::CLI::Command);
 
 use Digest::MD5 qw(md5_hex);
 use Rubric::User;

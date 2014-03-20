@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::WebApp::Login::Post;
-use base qw(Rubric::WebApp::Login);
 # ABSTRACT: process web login from query parameters
+
+use parent qw(Rubric::WebApp::Login);
 
 use Digest::MD5 qw(md5_hex);
 

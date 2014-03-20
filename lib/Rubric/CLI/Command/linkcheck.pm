@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::CLI::Command::linkcheck;
-use base qw(Rubric::CLI::Command);
 # ABSTRACT: check validity of links in the database
+
+use parent qw(Rubric::CLI::Command);
 
 use LWP::Simple ();
 use Rubric::DBI::Setup;

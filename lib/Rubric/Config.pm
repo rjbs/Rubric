@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::Config;
-use base qw(Class::Accessor);
 # ABSTRACT: the configuration data for a Rubric
+
+use parent qw(Class::Accessor);
 
 =head1 DESCRIPTION
 

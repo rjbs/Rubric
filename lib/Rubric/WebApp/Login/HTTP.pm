@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::WebApp::Login::HTTP;
-use base qw(Rubric::WebApp::Login);
 # ABSTRACT: process web login from HTTP authentication
+
+use parent qw(Rubric::WebApp::Login);
 
 =head1 DESCRIPTION
 

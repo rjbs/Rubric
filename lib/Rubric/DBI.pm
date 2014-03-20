@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 package Rubric::DBI;
-
 # ABSTRACT: Rubric's subclass of Class::DBI
 
 =head1 DESCRIPTION

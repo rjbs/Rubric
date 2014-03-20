@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::CLI::Command::db;
-use base qw(Rubric::CLI::Command);
 # ABSTRACT: database management
+
+use parent qw(Rubric::CLI::Command);
 
 use Rubric::DBI::Setup;
 

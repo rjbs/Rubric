@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Rubric::Entry;
-use base qw(Rubric::DBI);
 # ABSTRACT: a single entry made by a user
+
+use parent qw(Rubric::DBI);
 
 use Class::DBI::utf8;
 
