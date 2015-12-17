@@ -101,9 +101,11 @@ sub set_cookie_payload {
   };
 
   my $cookie = CGI::Cookie->new(
-    -name    => $COOKIE_NAME,
-    -expires => '+30d',
-    -value   => $cookie_value,
+    -name     => $COOKIE_NAME,
+    -expires  => '+30d',
+    -value    => $cookie_value,
+    -secure   => Rubric::Config->cookie_secure,
+    -httponly => Rubric::Config->cookie_httponly,
   );
 
   $self->header_add(-cookie => [ $cookie ]);

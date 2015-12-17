@@ -494,6 +494,13 @@ sub login {
     $self->query->param('then_goto', $self->query->self_url);
   }
 
+  if (Rubric::Config->secure_login) {
+    if ($self->query->env->{'psgi.url_scheme'} ne 'https') {
+      my $goto = Rubric::WebApp::URI->login;
+      return $self->redirect($goto, "Logged in...");
+    }
+  }
+
   $self->template('login' => {
     note      => $note,
     then_goto => scalar $self->query->param('then_goto'),

@@ -48,7 +48,11 @@ URI to form for log in
 
 =cut
 
-sub login { Rubric::Config->uri_root . '/login' }
+sub login {
+  my $uri = Rubric::Config->uri_root . '/login';
+  $uri =~ s/^http:/https:/i if Rubric::Config->secure_login;
+  return $uri;
+}
 
 =head2 reset_password
 

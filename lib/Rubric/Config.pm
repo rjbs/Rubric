@@ -56,6 +56,19 @@ Where to send DBI debug output if dbi_trace_level
 The key to use to encrypt sessions, which are stored in user cookies.  This
 must be set.
 
+=item * cookie_secure
+
+If true, secure cookie are used. Defaults to false.
+
+=item * cookie_httponly
+
+If true, HTTP only cookies are used.  Defaults to false.
+
+=item * secure_login
+
+If true, login should only be done via secure means.  The login URI will be
+https, and loading the login page on an insecure connection will redirect.
+
 =item * uri_root
 
 the absolute URI for the root of the Rubric::WebApp install
@@ -182,8 +195,11 @@ my $default = {
 	db_user     => undef,
 	db_pass     => undef,
 	dsn         => undef,
+	cookie_httponly => 0,
+	cookie_secure   => 0,
 	dbi_trace_level => 0,
 	dbi_trace_file  => undef,
+	secure_login    => 0,
 	email_from  => undef,
 	login_class => 'Rubric::WebApp::Login::Post',
 	smtp_server => undef,
