@@ -1,6 +1,8 @@
 Revision history for Rubric
 
 {{$NEXT}}
+        - add cookie_secure, cookie_httponly, and secure_login
+          to make it easier to keep your Rubric login data out of the clear
 
 0.155     2014-03-20 18:48:28-04:00 America/New_York
         - improve chances of producing valid XHTML
