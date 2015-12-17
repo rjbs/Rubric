@@ -1,0 +1,48 @@
+
+# README for Rubric 0.148
+
+Rubric is a note-keeping system that also serves as a bookmark manager.
+Users store entries, which are small (or large) notes with a set of
+categorizing "tags."  Entries may also refer to URIs.
+
+## WARNING
+
+This is young software, likely to have bugs and likely to change in strange
+ways.  I will try to keep the documented API stable, but not if it makes
+writing Rubric too inconvenient.
+
+Basically, just take note that this software works, but it's still very much
+under construction.
+
+## INSTALLING
+
+Things you'll have to do to use it:
+
+1. install the modules with the usual "make install"
+2. put rubric.cgi and rubric.yml somewhere together in your docroot (start with the rubric.yml in etc/)
+3. create a location in which to put rubric.db
+4. update rubric.yml (if you require verification, set `email_from`)
+5. in the dir with rubric.yml, run "rubric db --setup" to generate rubric.db
+6. set rubric.db +rw by the httpd user; set its location +rwx
+7. create a user object for yourself (via the web or with adduser.pl)
+8. (optional) set up .htaccess to prevent access to db, yml, and templates
+9. go?
+
+## UPGRADING
+
+Things you'll have to do:
+
+1. install the new templates (and probably the css)
+2. install the modules
+3. run rubric db --update (from the location of rubric.cgi/.yml)
+4. update your config
+
+## OTHER INFORMATION
+
+To import your bookmarks from del.icio.us:
+
+1. get my delicious-backup script (on the CPAN)
+2. dump your bookmarks to YAML (delbackup -y)
+3. run:  load_yml USERNAME < bookmarks.yml
+
+
