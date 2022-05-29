@@ -1,6 +1,7 @@
 Revision history for Rubric
 
 {{$NEXT}}
+        - update metadata: dist no longer supported by author
 
 0.156     2015-12-16 21:48:57-05:00 America/New_York
         - add cookie_secure, cookie_httponly, and secure_login
